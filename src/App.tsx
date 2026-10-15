@@ -9,10 +9,11 @@ import { Footer } from './components/Footer';
 import { Preloader } from './components/Preloader';
 import { Cursor } from './components/Cursor';
 import { ResumeModal } from './components/ResumeModal';
+import { MobileCosmos } from './components/MobileCosmos';
 import { initSmoothScroll, observeScenes } from './lib/scroll';
 import { useAppStore } from './store';
 
-// Lazy loading da cena 3D (Three.js/R3F) para performance inicial máxima
+// Lazy loading da cena 3D (Three.js/R3F) para performance inicial máxima no desktop
 const Scene3D = lazy(() => import('./three/Scene'));
 
 export function App() {
@@ -37,7 +38,10 @@ export function App() {
       {/* Cursor Contextual Customizado */}
       <Cursor />
 
-      {/* Fundo 3D Interativo: Three.js + React Three Fiber com Física de Molas */}
+      {/* Céu Cósmico Estrelado, Parallax ao Rolar, Meteoros & Constelações Exclusivo para Mobile */}
+      <MobileCosmos />
+
+      {/* Fundo 3D Interativo: Three.js + React Three Fiber com Física de Molas (Desktop) */}
       {webgl && (
         <Suspense fallback={null}>
           <Scene3D />
