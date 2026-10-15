@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-interface Star {
+interface SkyStar {
   x: number;
   y: number;
   radius: number;
@@ -22,30 +22,33 @@ interface Meteor {
   size: number;
 }
 
-interface Stardust {
-  angle: number;
-  distance: number;
-  speed: number;
-  radius: number;
+interface StardustParticle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  baseRadius: number;
   alpha: number;
-  phase: number;
+  decay: number;
   color: string;
+  seed: number;
 }
 
 /**
- * As 5 estrelas astronômicas do Cruzeiro do Sul (Símbolo do Brasil 🇧🇷):
- * - Gamma Crucis (Rubídea / Gacrux): topo da cruz, gigante vermelho-dourada
- * - Alpha Crucis (Acrux / Estrela de Magalhães): base da cruz, a mais brilhante
- * - Beta Crucis (Mimosa): braço esquerdo, branco-azulada brilhante
- * - Delta Crucis (Pálida / Imai): braço direito
- * - Epsilon Crucis (Intrometida): a 5ª estrela, menor, posicionada à direita do eixo
+ * Constelação Cruzeiro do Sul (Símbolo do Brasil 🇧🇷):
+ * 5 estrelas principais, agora em escala maior, centralizadas e com tons neutros equilibrados:
+ * - Gamma Crucis (Rubídea / Gacrux): topo da cruz, tom marfim/dourado sutil
+ * - Alpha Crucis (Acrux / Estrela de Magalhães): base da cruz, branca pura e luminosa
+ * - Beta Crucis (Mimosa): braço esquerdo, branco-cristal
+ * - Delta Crucis (Pálida / Imai): braço direito, branca com leve toque esmeralda
+ * - Epsilon Crucis (Intrometida): menor, posicionada discretamente à direita do eixo
  */
 const CRUX_STARS = [
-  { id: 'gamma', name: 'Rubídea', rx: 0, ry: -0.48, size: 4.6, color: '#FFAA5C', glow: '#FF8833', label: 'γ' },
-  { id: 'alpha', name: 'Acrux', rx: 0.02, ry: 0.48, size: 5.4, color: '#FFFFFF', glow: '#C6FF3D', label: 'α' },
-  { id: 'beta', name: 'Mimosa', rx: -0.42, ry: -0.06, size: 5.0, color: '#E0F2FE', glow: '#38BDF8', label: 'β' },
-  { id: 'delta', name: 'Pálida', rx: 0.40, ry: -0.02, size: 4.2, color: '#E2FAD0', glow: '#C6FF3D', label: 'δ' },
-  { id: 'epsilon', name: 'Intrometida', rx: 0.18, ry: 0.18, size: 3.4, color: '#FFFFFF', glow: '#C6FF3D', label: 'ε' },
+  { id: 'gamma', name: 'Rubídea', rx: 0, ry: -0.48, size: 3.6, color: '#FEF3C7', glow: 'rgba(254, 243, 199, 0.22)' },
+  { id: 'alpha', name: 'Acrux', rx: 0.02, ry: 0.48, size: 4.2, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.28)' },
+  { id: 'beta', name: 'Mimosa', rx: -0.42, ry: -0.06, size: 3.8, color: '#F8FAFC', glow: 'rgba(248, 250, 252, 0.24)' },
+  { id: 'delta', name: 'Pálida', rx: 0.40, ry: -0.02, size: 3.2, color: '#DCFCE7', glow: 'rgba(198, 255, 61, 0.2)' },
+  { id: 'epsilon', name: 'Intrometida', rx: 0.18, ry: 0.18, size: 2.2, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.2)' },
 ];
 
 export const MobileCosmos: React.FC = () => {
@@ -81,56 +84,59 @@ export const MobileCosmos: React.FC = () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. Céu Estrelado com Parallax
-    const starCount = 120;
-    const stars: Star[] = [];
-    const starColors = ['#FFFFFF', '#EDEDE6', '#C6FF3D', '#E2FAD0', '#38BDF8', '#FFD23D'];
+    // 1. Céu Estrelado Equilibrado: maioria brancas/neutras, algumas verdes discretas
+    const skyStarCount = 110;
+    const skyStars: SkyStar[] = [];
+    const neutralColors = ['#FFFFFF', '#F1F5F9', '#E2E8F0', '#EDEDE6'];
 
-    for (let i = 0; i < starCount; i++) {
-      const isNeon = Math.random() < 0.18;
-      const isGold = !isNeon && Math.random() < 0.1;
-      const isCyan = !isNeon && !isGold && Math.random() < 0.1;
-      const color = isNeon ? '#C6FF3D' : isGold ? '#FFD23D' : isCyan ? '#38BDF8' : starColors[Math.floor(Math.random() * 2)];
+    for (let i = 0; i < skyStarCount; i++) {
+      // 18% em verde sutil (#C6FF3D), o restante em tons brancos/neutros elegantes
+      const isGreen = Math.random() < 0.18;
+      const color = isGreen ? '#C6FF3D' : neutralColors[Math.floor(Math.random() * neutralColors.length)];
 
       const layer = Math.random();
-      const speed = layer < 0.5 ? 0.08 : layer < 0.85 ? 0.22 : 0.45;
-      const radius = layer < 0.5 ? 0.8 + Math.random() * 0.5 : layer < 0.85 ? 1.2 + Math.random() * 0.6 : 1.7 + Math.random() * 0.9;
+      const speed = layer < 0.5 ? 0.06 : layer < 0.85 ? 0.18 : 0.38;
+      const radius = layer < 0.5 ? 0.7 + Math.random() * 0.4 : layer < 0.85 ? 1.0 + Math.random() * 0.5 : 1.4 + Math.random() * 0.7;
 
-      stars.push({
+      skyStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
         radius,
-        baseAlpha: 0.35 + Math.random() * 0.6,
-        twinkleSpeed: 0.02 + Math.random() * 0.04,
+        baseAlpha: 0.25 + Math.random() * 0.55,
+        twinkleSpeed: 0.018 + Math.random() * 0.032,
         phase: Math.random() * Math.PI * 2,
         speed,
         color,
       });
     }
 
-    // 2. Partículas Elementais de Poeira Cósmica para o Grand Finale
-    const stardustCount = 42;
-    const stardusts: Stardust[] = [];
-    for (let i = 0; i < stardustCount; i++) {
-      stardusts.push({
-        angle: Math.random() * Math.PI * 2,
-        distance: 20 + Math.random() * 120,
-        speed: (0.006 + Math.random() * 0.014) * (Math.random() < 0.5 ? 1 : -1),
-        radius: 0.8 + Math.random() * 1.8,
-        alpha: 0.35 + Math.random() * 0.65,
-        phase: Math.random() * Math.PI * 2,
-        color: Math.random() < 0.55 ? '#C6FF3D' : Math.random() < 0.8 ? '#FFD23D' : '#38BDF8',
+    // 2. Partículas Elementais para o Grand Finale (dispersão orgânica e fluida)
+    const particlePoolCount = 65;
+    const particles: StardustParticle[] = [];
+    const particleColors = ['#FFFFFF', '#F8FAFC', '#C6FF3D', '#E2FAD0', '#FEF08A'];
+
+    for (let i = 0; i < particlePoolCount; i++) {
+      particles.push({
+        x: 0,
+        y: 0,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        baseRadius: 0.6 + Math.random() * 1.4,
+        alpha: 0.2 + Math.random() * 0.6,
+        decay: 0.003 + Math.random() * 0.005,
+        color: particleColors[Math.floor(Math.random() * particleColors.length)],
+        seed: Math.random() * 100,
       });
     }
 
-    // 3. Meteoros (Estrelas Cadentes)
+    // 3. Meteoros Suaves (Estrelas Cadentes)
     const meteors: Meteor[] = [];
 
     const spawnMeteor = () => {
       if (prefersReducedMotion) return;
-      const startX = Math.random() * (width * 1.3) - width * 0.15;
-      const startY = Math.random() * (height * 0.35) - 40;
-      const speed = 12 + Math.random() * 7;
+      const startX = Math.random() * (width * 1.2) - width * 0.1;
+      const startY = Math.random() * (height * 0.35) - 30;
+      const speed = 11 + Math.random() * 6;
       const angle = (Math.PI / 180) * (36 + Math.random() * 12);
 
       meteors.push({
@@ -138,20 +144,20 @@ export const MobileCosmos: React.FC = () => {
         y: startY,
         vx: -Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
-        length: 80 + Math.random() * 70,
-        alpha: 0.98,
-        decay: 0.015 + Math.random() * 0.012,
-        size: 1.8 + Math.random() * 1.2,
+        length: 70 + Math.random() * 60,
+        alpha: 0.85,
+        decay: 0.016 + Math.random() * 0.01,
+        size: 1.4 + Math.random() * 1.0,
       });
     };
 
     let meteorTimer = setInterval(() => {
-      if (Math.random() < 0.8) {
+      if (Math.random() < 0.75) {
         spawnMeteor();
       }
-    }, 2800);
+    }, 3200);
 
-    // 4. Scroll Tracking calibrado: 100% ao atingir o #contato (e não no rodapé!)
+    // 4. Scroll Tracking: 100% ao atingir o início da seção de Contato
     let currentScrollY = window.scrollY || 0;
     let targetScrollY = currentScrollY;
     let currentProgress = 0;
@@ -160,12 +166,12 @@ export const MobileCosmos: React.FC = () => {
       targetScrollY = window.scrollY || 0;
       const contatoEl = document.getElementById('contato');
       if (contatoEl) {
-        // Quando o topo de #contato entra na viewport (ou fica 180px antes), atinge 1.0 (100%)!
+        // Ao chegar perto da seção #contato, o progresso atinge 100%
         const contatoTop = contatoEl.offsetTop;
         const triggerDistance = Math.max(contatoTop - window.innerHeight * 0.45, 1);
         return Math.min(Math.max(targetScrollY / triggerDistance, 0), 1);
       }
-      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight - 350, 1);
+      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight - 300, 1);
       return Math.min(Math.max(targetScrollY / maxScroll, 0), 1);
     };
 
@@ -176,14 +182,14 @@ export const MobileCosmos: React.FC = () => {
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Função para desenhar segmento de linha progressiva com ponto de luz
-    const drawProgressiveBeam = (
+    // Função para desenhar linhas de conexão BRANCAS puras e elegantes
+    const drawWhiteConnection = (
       x1: number,
       y1: number,
       x2: number,
       y2: number,
       progress: number,
-      color: string,
+      alpha: number,
       lineWidth: number
     ) => {
       if (progress <= 0) return;
@@ -191,33 +197,32 @@ export const MobileCosmos: React.FC = () => {
       const curX = x1 + (x2 - x1) * p;
       const curY = y1 + (y2 - y1) * p;
 
-      // Linha do feixe
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.lineTo(curX, curY);
-      ctx.strokeStyle = color;
+      // Linha estritamente branca, fina e sutil
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
       ctx.lineWidth = lineWidth;
       ctx.stroke();
 
-      // Centelha de luz na ponta que avança
+      // Ponto suave de luz que viaja na ponta da conexão
       if (p > 0.02 && p < 0.99) {
         ctx.beginPath();
-        ctx.arc(curX, curY, 3.2, 0, Math.PI * 2);
+        ctx.arc(curX, curY, 2.2, 0, Math.PI * 2);
         ctx.fillStyle = '#FFFFFF';
-        ctx.shadowColor = '#C6FF3D';
-        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+        ctx.shadowBlur = 6;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
     };
 
-    // Função para desenhar raios de estrela (diffraction spikes)
-    const drawStarRays = (cx: number, cy: number, length: number, alpha: number, color: string) => {
+    // Função para desenhar raios de estrela (diffraction spikes) finos e discretos
+    const drawSubtleSpikes = (cx: number, cy: number, length: number, alpha: number) => {
       if (alpha <= 0) return;
       ctx.save();
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 1.1;
-      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.lineWidth = 0.8;
 
       ctx.beginPath();
       ctx.moveTo(cx - length, cy);
@@ -232,23 +237,23 @@ export const MobileCosmos: React.FC = () => {
       ctx.restore();
     };
 
-    // Loop de Renderização 60fps
+    // Loop de Renderização Principal 60fps
     let animationId: number;
     let time = 0;
 
     const render = () => {
-      time += 0.025;
+      time += 0.02;
 
-      // Interpolação suave do scroll e do progresso de rolagem
-      currentScrollY += (targetScrollY - currentScrollY) * 0.1;
-      currentProgress += (targetProgress - currentProgress) * 0.08;
+      // Interpolação fluida do scroll e do progresso
+      currentScrollY += (targetScrollY - currentScrollY) * 0.09;
+      currentProgress += (targetProgress - currentProgress) * 0.07;
 
       ctx.clearRect(0, 0, width, height);
 
-      // --- 1. Céu Estrelado com Parallax ---
-      stars.forEach((star) => {
+      // --- 1. Céu Estrelado Neutro & Verde com Parallax ---
+      skyStars.forEach((star) => {
         star.phase += star.twinkleSpeed;
-        const twinkle = 0.65 + 0.35 * Math.sin(star.phase);
+        const twinkle = 0.7 + 0.3 * Math.sin(star.phase);
         const alpha = star.baseAlpha * twinkle;
 
         const scrollOffset = currentScrollY * star.speed;
@@ -258,25 +263,20 @@ export const MobileCosmos: React.FC = () => {
         ctx.beginPath();
         ctx.arc(star.x, y, star.radius, 0, Math.PI * 2);
         ctx.fillStyle = star.color;
-        ctx.globalAlpha = Math.max(0.12, Math.min(1, alpha));
+        ctx.globalAlpha = Math.max(0.1, Math.min(0.9, alpha));
         ctx.fill();
-
-        if (star.radius > 1.3 && alpha > 0.55) {
-          ctx.beginPath();
-          ctx.arc(star.x, y, star.radius * 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = star.color === '#C6FF3D' ? 'rgba(198, 255, 61, 0.22)' : 'rgba(255, 255, 255, 0.16)';
-          ctx.fill();
-        }
       });
       ctx.globalAlpha = 1;
 
-      // --- 2. CRUZEIRO DO SUL (Conexão ao Longo do Scroll & Conclusão no Contato) ---
-      // Posição no céu mobile: terço superior direito, bem visível com respiro
-      const cruxCenterX = width * 0.58;
-      const cruxCenterY = Math.min(height * 0.23, 175);
-      const cruxSpan = Math.min(width * 0.38, 140);
+      // --- 2. CRUZEIRO DO SUL: CENTRALIZADO, MAIOR, EM SEGUNDO PLANO ---
+      // Centralizado horizontalmente no meio da tela (width * 0.5)
+      const cruxCenterX = width * 0.5;
+      // Posicionado de forma equilibrada no terço superior, com suave parallax
+      const cruxCenterY = Math.min(height * 0.32, 230) + currentProgress * 20;
+      // Maior envergadura para presença celestial majestosa
+      const cruxSpan = Math.min(width * 0.65, 240);
 
-      // Posições das 5 estrelas em coordenadas de tela
+      // Posições das 5 estrelas em pixels
       const starPositions = CRUX_STARS.map((s) => ({
         ...s,
         px: cruxCenterX + s.rx * cruxSpan,
@@ -289,36 +289,35 @@ export const MobileCosmos: React.FC = () => {
       const delta = starPositions[3]; // Direita
       const epsilon = starPositions[4]; // Intrometida
 
-      // Ponto central da cruz
+      // Ponto central de interseção da cruz
       const interX = (gamma.px + alphaStar.px) * 0.5;
       const interY = (beta.py + delta.py) * 0.5;
 
-      // Fases das conexões:
-      // Linha 1 (Eixo Vertical: Gamma -> Alpha): 0.05 até 0.45 (Hero -> Sobre)
+      // Progressão das conexões sincronizadas com o scroll:
+      // Linha 1 (Eixo Vertical: Gamma -> Alpha): 0.05 a 0.45 (Hero -> Sobre)
       const pLine1 = Math.min(Math.max((currentProgress - 0.04) / 0.4, 0), 1);
-      // Linha 2 (Eixo Horizontal: Beta -> Delta): 0.40 até 0.75 (Sobre -> Projetos -> Stack)
-      const pLine2 = Math.min(Math.max((currentProgress - 0.38) / 0.36, 0), 1);
-      // Linha 3 (Centro -> Intrometida): 0.70 até 0.90 (Chegando em Contato)
+      // Linha 2 (Eixo Horizontal: Beta -> Delta): 0.38 a 0.75 (Sobre -> Projetos -> Stack)
+      const pLine2 = Math.min(Math.max((currentProgress - 0.36) / 0.37, 0), 1);
+      // Linha 3 (Centro -> Intrometida / Epsilon): 0.70 a 0.90 (Chegando em Contato)
       const pLine3 = Math.min(Math.max((currentProgress - 0.68) / 0.22, 0), 1);
 
-      // Grand Finale Elemental: atinge esplendor máximo ao chegar no #contato (0.85 a 1.0)
-      const finaleBloom = Math.min(Math.max((currentProgress - 0.82) / 0.18, 0), 1);
+      // Fator de Grand Finale ao entrar na seção de Contato (0.85 a 1.0)
+      const finaleBloom = Math.min(Math.max((currentProgress - 0.85) / 0.15, 0), 1);
 
-      // --- GRAND FINALE ELEMENTAL AO ENTRAR NO CONTATO ---
-      if (finaleBloom > 0.02) {
-        // 1. Grande Nebulosa Cósmica Radiante (Emerald & Teal & Gold)
-        const nebulaRadius = cruxSpan * (1.3 + Math.sin(time * 1.4) * 0.12);
+      // --- EFEITO FINAL ELEMENTAL PROFISSIONAL (PARTÍCULAS & NÉVOA CÓSMICA) ---
+      if (finaleBloom > 0.01) {
+        // 1. Resplendor de Fundo Suave e Discreto (Sem formas geométricas rígidas)
+        const nebulaRadius = cruxSpan * (1.15 + Math.sin(time * 0.8) * 0.08);
         const nebulaGrad = ctx.createRadialGradient(
           cruxCenterX,
           cruxCenterY,
-          15,
+          10,
           cruxCenterX,
           cruxCenterY,
           nebulaRadius
         );
-        nebulaGrad.addColorStop(0, `rgba(198, 255, 61, ${finaleBloom * 0.22})`);
-        nebulaGrad.addColorStop(0.35, `rgba(56, 189, 248, ${finaleBloom * 0.15})`);
-        nebulaGrad.addColorStop(0.7, `rgba(44, 107, 90, ${finaleBloom * 0.08})`);
+        nebulaGrad.addColorStop(0, `rgba(198, 255, 61, ${finaleBloom * 0.08})`);
+        nebulaGrad.addColorStop(0.4, `rgba(255, 255, 255, ${finaleBloom * 0.04})`);
         nebulaGrad.addColorStop(1, 'rgba(6, 7, 9, 0)');
 
         ctx.beginPath();
@@ -326,133 +325,76 @@ export const MobileCosmos: React.FC = () => {
         ctx.fillStyle = nebulaGrad;
         ctx.fill();
 
-        // 2. Halo Estelar Concéntrico
-        ctx.beginPath();
-        ctx.arc(cruxCenterX, cruxCenterY, cruxSpan * 0.82, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(198, 255, 61, ${finaleBloom * 0.25 + Math.sin(time * 2) * 0.08})`;
-        ctx.lineWidth = 1.2;
-        ctx.setLineDash([5, 6]);
-        ctx.stroke();
-        ctx.setLineDash([]);
+        // 2. Partículas Elementais Flutuantes & Poeira Cósmica
+        particles.forEach((p, idx) => {
+          // Movimento fluido e orgânico baseado em ruído harmônico
+          const angle = time * 0.3 + idx * 0.35 + p.seed;
+          const distVariation = Math.sin(time * 0.5 + idx) * 20;
+          const targetDist = (cruxSpan * 0.35) + (idx % 4) * (cruxSpan * 0.18) + distVariation;
 
-        // 3. Poeira Estelar Elemental Orbitante
-        stardusts.forEach((dust) => {
-          dust.angle += dust.speed;
-          dust.phase += 0.035;
-          const curDist = dust.distance * (0.85 + finaleBloom * 0.4);
-          const dx = cruxCenterX + Math.cos(dust.angle) * curDist;
-          const dy = cruxCenterY + Math.sin(dust.angle) * curDist * 1.15;
-          const dAlpha = dust.alpha * finaleBloom * (0.65 + 0.35 * Math.sin(dust.phase));
+          p.x = cruxCenterX + Math.cos(angle) * targetDist;
+          p.y = cruxCenterY + Math.sin(angle) * (targetDist * 1.1);
+
+          const pAlpha = p.alpha * finaleBloom * (0.6 + 0.4 * Math.sin(time * 2 + p.seed));
 
           ctx.beginPath();
-          ctx.arc(dx, dy, dust.radius * (1 + finaleBloom * 0.4), 0, Math.PI * 2);
-          ctx.fillStyle = dust.color;
-          ctx.globalAlpha = Math.max(0, Math.min(1, dAlpha));
+          ctx.arc(p.x, p.y, p.baseRadius * (1 + finaleBloom * 0.25), 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0, Math.min(0.85, pAlpha));
           ctx.fill();
-
-          if (dust.radius > 1.2) {
-            ctx.shadowColor = dust.color;
-            ctx.shadowBlur = 8;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-          }
         });
         ctx.globalAlpha = 1;
       }
 
-      // --- LINHAS FEIXE DA CONSTELAÇÃO PROGRESSIVAS ---
-      const baseLineAlpha = 0.35 + finaleBloom * 0.45 + Math.sin(time * 1.8) * 0.08;
-      const lineColor = `rgba(198, 255, 61, ${baseLineAlpha})`;
+      // --- LINHAS DE CONEXÃO BRANCAS, FINAS E ELEGANTES ---
+      // Opacidade comedida para permanecer em segundo plano sem brigar com o texto
+      const lineAlpha = 0.28 + finaleBloom * 0.35 + Math.sin(time * 1.5) * 0.05;
+      const lineWidth = finaleBloom > 0.5 ? 1.4 : 1.1;
 
       // 1. Linha Vertical (Gamma -> Alpha)
-      drawProgressiveBeam(
-        gamma.px,
-        gamma.py,
-        alphaStar.px,
-        alphaStar.py,
-        pLine1,
-        lineColor,
-        finaleBloom > 0.4 ? 2.4 : 1.8
-      );
+      drawWhiteConnection(gamma.px, gamma.py, alphaStar.px, alphaStar.py, pLine1, lineAlpha, lineWidth);
 
       // 2. Linha Horizontal (Beta -> Delta)
-      drawProgressiveBeam(
-        beta.px,
-        beta.py,
-        delta.px,
-        delta.py,
-        pLine2,
-        lineColor,
-        finaleBloom > 0.4 ? 2.4 : 1.8
-      );
+      drawWhiteConnection(beta.px, beta.py, delta.px, delta.py, pLine2, lineAlpha, lineWidth);
 
-      // 3. Linha da Intrometida (Centro -> Epsilon)
-      drawProgressiveBeam(
-        interX,
-        interY,
-        epsilon.px,
-        epsilon.py,
-        pLine3,
-        `rgba(255, 255, 255, ${baseLineAlpha * 0.9})`,
-        finaleBloom > 0.4 ? 2.0 : 1.5
-      );
+      // 3. Linha para a Intrometida (Centro -> Epsilon)
+      drawWhiteConnection(interX, interY, epsilon.px, epsilon.py, pLine3, lineAlpha * 0.85, lineWidth * 0.9);
 
-      // --- AS 5 ESTRELAS VIBRANTES DO CRUZEIRO DO SUL ---
+      // --- AS 5 ESTRELAS DO CRUZEIRO DO SUL (LEVES, EQUILIBRADAS E SUTIS) ---
       starPositions.forEach((star, idx) => {
-        const starTwinkle = 0.85 + 0.15 * Math.sin(time * 2.5 + idx * 1.3);
+        const starTwinkle = 0.9 + 0.1 * Math.sin(time * 2 + idx * 1.3);
         const isConnected =
           (idx <= 1 && pLine1 > 0.95) ||
           (idx >= 2 && idx <= 3 && pLine2 > 0.95) ||
           (idx === 4 && pLine3 > 0.95);
 
-        const currentStarSize = star.size * (1 + (isConnected ? 0.25 : 0) + finaleBloom * 0.4) * starTwinkle;
+        const currentStarSize = star.size * (1 + (isConnected ? 0.2 : 0) + finaleBloom * 0.25) * starTwinkle;
 
-        // Halo de luz estelar
+        // Halo suave de segundo plano (opacidade contida para não cegar ou atravessar as letras)
         ctx.beginPath();
-        ctx.arc(star.px, star.py, currentStarSize * (2.8 + finaleBloom * 1.8), 0, Math.PI * 2);
+        ctx.arc(star.px, star.py, currentStarSize * (2.2 + finaleBloom * 0.8), 0, Math.PI * 2);
         ctx.fillStyle = star.glow;
-        ctx.globalAlpha = 0.25 + finaleBloom * 0.45 + (isConnected ? 0.15 : 0);
         ctx.fill();
 
-        // Núcleo sólido brilhante
+        // Núcleo nítido e elegante da estrela
         ctx.beginPath();
         ctx.arc(star.px, star.py, currentStarSize, 0, Math.PI * 2);
         ctx.fillStyle = star.color;
-        ctx.globalAlpha = 1;
-        ctx.shadowColor = star.glow;
-        ctx.shadowBlur = 10 + finaleBloom * 15;
+        ctx.globalAlpha = 0.95;
+        ctx.shadowColor = star.color;
+        ctx.shadowBlur = 6 + finaleBloom * 8;
         ctx.fill();
         ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
 
-        // Raios de Luz (Diffraction Spikes) no Grand Finale em Contato
-        if (finaleBloom > 0.12) {
-          const spikeLen = (currentStarSize * 4.2 + 6) * finaleBloom;
-          drawStarRays(star.px, star.py, spikeLen, finaleBloom * 0.85, star.color);
+        // Raios sutis de difração estelar no final (finos e misteriosos)
+        if (finaleBloom > 0.15) {
+          const spikeLen = (currentStarSize * 3 + 3) * finaleBloom;
+          drawSubtleSpikes(star.px, star.py, spikeLen, finaleBloom * 0.55);
         }
       });
 
-      // --- LEGENDA POÉTICA NO CONTATO ---
-      if (finaleBloom > 0.25) {
-        ctx.save();
-        ctx.globalAlpha = Math.min(1, (finaleBloom - 0.25) * 1.35);
-        ctx.textAlign = 'center';
-
-        ctx.font = '700 11.5px "Space Grotesk", sans-serif';
-        ctx.fillStyle = '#EDEDE6';
-        ctx.letterSpacing = '0.24em';
-        ctx.fillText('CRUZEIRO DO SUL', cruxCenterX, cruxCenterY + cruxSpan * 0.76);
-
-        ctx.font = '600 9.5px "JetBrains Mono", monospace';
-        ctx.fillStyle = '#C6FF3D';
-        ctx.shadowColor = '#C6FF3D';
-        ctx.shadowBlur = 8;
-        ctx.fillText('✦ BRASIL ✦', cruxCenterX, cruxCenterY + cruxSpan * 0.89);
-        ctx.shadowBlur = 0;
-
-        ctx.restore();
-      }
-
-      // --- 3. METEOROS (Estrelas Cadentes com Cauda Luminosa) ---
+      // --- 3. METEOROS SUAVES NO FUNDO ---
       for (let i = meteors.length - 1; i >= 0; i--) {
         const m = meteors[i];
         m.x += m.vx;
@@ -468,26 +410,18 @@ export const MobileCosmos: React.FC = () => {
         const tailY = m.y - (m.vy / Math.hypot(m.vx, m.vy)) * m.length;
 
         const grad = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
-        grad.addColorStop(0, `rgba(255, 255, 255, ${m.alpha})`);
-        grad.addColorStop(0.2, `rgba(198, 255, 61, ${m.alpha * 0.95})`);
-        grad.addColorStop(0.7, `rgba(44, 107, 90, ${m.alpha * 0.4})`);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${m.alpha * 0.85})`);
+        grad.addColorStop(0.25, `rgba(198, 255, 61, ${m.alpha * 0.7})`);
+        grad.addColorStop(0.75, `rgba(44, 107, 90, ${m.alpha * 0.3})`);
         grad.addColorStop(1, 'rgba(198, 255, 61, 0)');
 
         ctx.beginPath();
         ctx.moveTo(m.x, m.y);
         ctx.lineTo(tailX, tailY);
         ctx.strokeStyle = grad;
-        ctx.lineWidth = m.size * (1 + finaleBloom * 0.35);
+        ctx.lineWidth = m.size;
         ctx.lineCap = 'round';
         ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(m.x, m.y, m.size * 1.3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${m.alpha})`;
-        ctx.shadowColor = '#C6FF3D';
-        ctx.shadowBlur = 10;
-        ctx.fill();
-        ctx.shadowBlur = 0;
       }
 
       animationId = requestAnimationFrame(render);
@@ -518,7 +452,7 @@ export const MobileCosmos: React.FC = () => {
       ref={canvasRef}
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 block md:hidden"
-      style={{ width: '100%', height: '100%' }}
+      style={{ width: '100vw', height: '100vh', opacity: 0.9 }}
     />
   );
 };
