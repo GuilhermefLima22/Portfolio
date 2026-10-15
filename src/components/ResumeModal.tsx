@@ -191,6 +191,13 @@ export const ResumeModal: React.FC = () => {
                     n8n, Webhooks, APIs em FastAPI, Git/GitHub e servidores em nuvem.
                   </p>
                 </div>
+
+                <div>
+                  <div className="font-mono text-xs font-semibold text-paper mb-0.5">Fundamentos & Hardware</div>
+                  <p className="text-muted leading-relaxed">
+                    Circuitos Digitais (Logisim e Mapa de Karnaugh) e Arduino IoT.
+                  </p>
+                </div>
               </div>
             </section>
 
@@ -319,10 +326,13 @@ export const ResumeModal: React.FC = () => {
                       Projetos da Faculdade (Mackenzie)
                     </span>
                     <span className="font-mono text-[11px] text-signal">
-                      Linguagem C • Arduino
+                      Linguagem C • Logisim • Arduino
                     </span>
                   </div>
                   <ul className="text-xs text-paper/80 space-y-1 leading-relaxed list-disc list-inside">
+                    <li>
+                      <strong>Display de 7 Segmentos:</strong> Decodificador BCD (0 a 9) montado no Logisim, utilizando Mapas de Karnaugh em cada segmento para simplificar as expressões e otimizar as portas lógicas.
+                    </li>
                     <li>
                       <strong>Jogo Termo em C:</strong> Recriei o jogo Termo para rodar no terminal em C puro, praticando ponteiros, arquivos e controle de memória.
                     </li>

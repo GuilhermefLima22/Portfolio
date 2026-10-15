@@ -200,6 +200,33 @@ export const projects: Project[] = [
     featured: false,
     color: '#FFD23D',
   },
+  {
+    id: 'display7seg',
+    title: 'Display de 7 Segmentos (BCD)',
+    tagline: 'Projeto acadêmico no Mackenzie · Circuitos Digitais & Logisim',
+    category: 'iot',
+    status: 'Concluído',
+    description:
+      'Projeto desenvolvido na faculdade (Mackenzie): decodificador BCD para display de 7 segmentos de 0 a 9, com tabela-verdade, simplificação por Mapa de Karnaugh e circuito no Logisim.',
+    longDescription:
+      'Desenvolvido na disciplina de Circuitos Digitais na Universidade Presbiteriana Mackenzie. O projeto consistiu em projetar e implementar um decodificador BCD (Binary Coded Decimal) de 4 bits para acionar um display de 7 segmentos e representar os números de 0 a 9. Para cada um dos 7 segmentos (a até g), foi construída a tabela-verdade e aplicado o Mapa de Karnaugh para simplificação das expressões booleanas, minimizando o número de portas lógicas antes da montagem e simulação funcional no Logisim.',
+    highlights: [
+      'Desenvolvido na disciplina de Circuitos Digitais (Universidade Presbiteriana Mackenzie)',
+      'Conversão de 4 bits de entrada BCD para controle individual dos 7 segmentos (a até g)',
+      'Simplificação lógica de expressões booleanas usando Mapa de Karnaugh para cada segmento',
+      'Montagem, otimização e simulação do circuito digital completo no Logisim',
+    ],
+    techStack: ['Logisim', 'Circuitos Digitais', 'Mapa de Karnaugh', 'Lógica Booleana', 'Mackenzie'],
+    facts: [
+      { label: 'Contexto', value: 'Faculdade (Mackenzie)' },
+      { label: 'Disciplina', value: 'Circuitos Digitais' },
+      { label: 'Ambiente', value: 'Logisim Simulator' },
+      { label: 'Entradas / Saídas', value: '4 bits BCD → 7 Segmentos (0-9)' },
+    ],
+    githubUrl: '',
+    featured: false,
+    color: '#38BDF8',
+  },
 ];
 
 export const skillGroups: SkillGroup[] = [
@@ -211,6 +238,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Python', usedIn: ['dentinho'] },
       { name: 'Linguagem C (Terminal & Memória)', usedIn: ['termo'] },
       { name: 'Linguagem C (Hardware & Sensores Arduino)', usedIn: ['estufa'] },
+      { name: 'Circuitos Digitais & Logisim', usedIn: ['display7seg'] },
       { name: 'Matemática Discreta & Combinatória', learning: true },
     ],
   },

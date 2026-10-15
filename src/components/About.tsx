@@ -28,7 +28,7 @@ export const About: React.FC = () => {
               Estudo <strong>Ciência da Computação no Mackenzie</strong> (2º semestre) e fiz o ensino médio no <strong>Colégio Objetivo</strong>. Sempre tive curiosidade por tecnologia e raciocínio lógico, o que me fez querer entender como as coisas realmente funcionam por baixo dos panos.
             </p>
             <p className="text-paper/75 text-sm md:text-base leading-relaxed">
-              Em vez de ficar só na teoria, gosto de testar as coisas na prática: desenvolvi chatbots inteligentes com IA (Gemini), criei automações em nuvem e, na faculdade (Mackenzie), desenvolvi projetos práticos como a estufa com Arduino e a versão do jogo Termo em C no terminal para exercitar estruturas de dados, ponteiros e controle de memória.
+              Em vez de ficar só na teoria, gosto de testar as coisas na prática: desenvolvi chatbots inteligentes com IA (Gemini), criei automações em nuvem e, na faculdade (Mackenzie), desenvolvi projetos práticos como o decodificador para display de 7 segmentos no Logisim (otimizado com Mapa de Karnaugh), a estufa com Arduino e a versão do jogo Termo em C no terminal para exercitar estruturas de dados, ponteiros e controle de memória.
             </p>
           </div>
 
