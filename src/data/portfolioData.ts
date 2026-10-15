@@ -21,7 +21,7 @@ export const personalInfo = {
     'Hoje meu foco principal é a área de Dados e Inteligência Artificial. Busco um estágio onde eu possa aprender no dia a dia com a equipe, colocar a mão na massa e ajudar a resolver problemas de verdade.',
   ],
   email: 'contato.gui2206@gmail.com',
-  github: '', // TODO: https://github.com/seu-usuario
+  github: 'https://github.com/GuilhermefLima22',
   linkedin: '', // TODO: https://linkedin.com/in/seu-usuario
   whatsapp: '5511989568771',
   whatsappDisplay: '+55 (11) 98956-8771',
