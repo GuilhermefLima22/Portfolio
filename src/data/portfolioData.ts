@@ -8,7 +8,7 @@ import type { Project, SkillGroup, EducationItem, CourseItem, CertificationItem 
  */
 export const personalInfo = {
   name: 'Guilherme',
-  fullName: 'Guilherme Freitas Lima',
+  fullName: 'Guilherme Lima Freitas',
   headline: 'Ciência da Computação · Mackenzie · Dados & IA',
   status: 'Buscando estágio em Dados / IA',
   university: 'Universidade Presbiteriana Mackenzie',
