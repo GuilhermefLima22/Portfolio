@@ -122,22 +122,23 @@ export const MobileCosmos: React.FC = () => {
     }
 
     // 2. Faixa da Via Láctea (Rio de poeira cósmica e micro-estrelas que desce preenchendo a metade de baixo)
-    const milkyWayStarCount = 150;
+    const milkyWayStarCount = 220;
     const milkyWayStars: MilkyWayStar[] = [];
-    const mwColors = ['#FFFFFF', '#F8FAFC', '#E2E8F0', '#DCFCE7', '#FEF3C7', '#C6FF3D'];
+    const mwColors = ['#FFFFFF', '#F8FAFC', '#E2E8F0', '#DCFCE7', '#FEF3C7', '#C6FF3D', '#A7F3D0'];
 
     for (let i = 0; i < milkyWayStarCount; i++) {
-      // 68% das estrelas posicionadas na metade inferior (t de 0.35 a 1.0) para enriquecer a área antes vazia!
-      const t = Math.random() < 0.68 ? 0.35 + Math.random() * 0.65 : Math.random() * 0.35;
+      // 72% das estrelas na metade média/inferior (t de 0.35 a 1.05) para preencher a área antes vazia!
+      const t = Math.random() < 0.72 ? 0.35 + Math.random() * 0.70 : Math.random() * 0.35;
       const offsetNorm = (Math.random() - 0.5) + (Math.random() - 0.5);
 
-      const isMint = Math.random() < 0.16;
+      const isMint = Math.random() < 0.22;
       const color = isMint ? '#C6FF3D' : mwColors[Math.floor(Math.random() * mwColors.length)];
-      const radius = 0.45 + Math.random() * 0.8;
-      const baseAlpha = 0.16 + Math.random() * 0.48;
-      const twinkleSpeed = 0.014 + Math.random() * 0.032;
+      // Estrelas com espessura e nitidez reais
+      const radius = 0.6 + Math.random() * 1.1;
+      const baseAlpha = 0.26 + Math.random() * 0.52;
+      const twinkleSpeed = 0.016 + Math.random() * 0.035;
       const phase = Math.random() * Math.PI * 2;
-      const speed = 0.07 + Math.random() * 0.24;
+      const speed = 0.07 + Math.random() * 0.22;
 
       milkyWayStars.push({
         t,
@@ -152,9 +153,9 @@ export const MobileCosmos: React.FC = () => {
     }
 
     const getMilkyWayCenter = (tNorm: number, w: number) => {
-      // Trajetória diagonal suave: nasce no topo direito (~0.82w),
-      // passa pelo Cruzeiro do Sul (~0.60w) e desce pela metade inferior cobrindo o centro (~0.44w a 0.36w)
-      return w * (0.82 - 0.78 * tNorm + 0.32 * (tNorm * tNorm));
+      // Trajetória diagonal suave do braço espiral: nasce no topo direito (~0.85w),
+      // passa pelo Cruzeiro do Sul (~0.58w) e desce pela metade inferior cobrindo o centro (~0.44w a 0.34w)
+      return w * (0.85 - 0.82 * tNorm + 0.34 * (tNorm * tNorm));
     };
 
     // 3. Partículas Elementais para o Grand Finale (dispersão orgânica pelo Cruzeiro e pela Via Láctea)
@@ -331,26 +332,79 @@ export const MobileCosmos: React.FC = () => {
       });
       ctx.globalAlpha = 1;
 
-      // --- 2. FAIXA DA VIA LÁCTEA (NEBULAR HAZE & RIO ESTELAR NO FUNDO) ---
-      // Preenche toda a tela, especialmente a metade inferior, com atmosfera cósmica profunda
-      const mwBandWidth = width * 0.52;
+      // --- 2. O BRAÇO CÓSMICO DA VIA LÁCTEA (FAIXA CONTÍNUA & RIO ESTELAR) ---
+      const mwBandWidth = width * 0.50;
+
+      // A) FAIXA CONTÍNUA DO BRAÇO ESPIRAL (SPINE RIBBON)
+      const ribbonSteps = 16;
+      const spinePoints: { x: number; y: number }[] = [];
+      for (let s = 0; s <= ribbonSteps; s++) {
+        const t = (s / ribbonSteps) * 1.15 - 0.08;
+        const cx = getMilkyWayCenter(t, width);
+        const cy = t * height;
+        spinePoints.push({ x: cx, y: cy });
+      }
+
+      ctx.save();
+      // 1. Camada difusa externa (gás esmeralda profundo)
+      ctx.beginPath();
+      ctx.moveTo(spinePoints[0].x, spinePoints[0].y);
+      for (let s = 1; s < spinePoints.length - 1; s++) {
+        const xc = (spinePoints[s].x + spinePoints[s + 1].x) * 0.5;
+        const yc = (spinePoints[s].y + spinePoints[s + 1].y) * 0.5;
+        ctx.quadraticCurveTo(spinePoints[s].x, spinePoints[s].y, xc, yc);
+      }
+      ctx.lineTo(spinePoints[spinePoints.length - 1].x, spinePoints[spinePoints.length - 1].y);
+      ctx.strokeStyle = `rgba(16, 185, 129, ${0.08 + finaleBloom * 0.04})`;
+      ctx.lineWidth = width * 0.52;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.stroke();
+
+      // 2. Camada média do braço (brilho verde-limão e jade suave)
+      ctx.beginPath();
+      ctx.moveTo(spinePoints[0].x, spinePoints[0].y);
+      for (let s = 1; s < spinePoints.length - 1; s++) {
+        const xc = (spinePoints[s].x + spinePoints[s + 1].x) * 0.5;
+        const yc = (spinePoints[s].y + spinePoints[s + 1].y) * 0.5;
+        ctx.quadraticCurveTo(spinePoints[s].x, spinePoints[s].y, xc, yc);
+      }
+      ctx.lineTo(spinePoints[spinePoints.length - 1].x, spinePoints[spinePoints.length - 1].y);
+      ctx.strokeStyle = `rgba(198, 255, 61, ${0.06 + finaleBloom * 0.04})`;
+      ctx.lineWidth = width * 0.26;
+      ctx.stroke();
+
+      // 3. Eixo central estelar (luz pura do rio galáctico)
+      ctx.beginPath();
+      ctx.moveTo(spinePoints[0].x, spinePoints[0].y);
+      for (let s = 1; s < spinePoints.length - 1; s++) {
+        const xc = (spinePoints[s].x + spinePoints[s + 1].x) * 0.5;
+        const yc = (spinePoints[s].y + spinePoints[s + 1].y) * 0.5;
+        ctx.quadraticCurveTo(spinePoints[s].x, spinePoints[s].y, xc, yc);
+      }
+      ctx.lineTo(spinePoints[spinePoints.length - 1].x, spinePoints[spinePoints.length - 1].y);
+      ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 + finaleBloom * 0.04})`;
+      ctx.lineWidth = width * 0.10;
+      ctx.stroke();
+      ctx.restore();
+
+      // B) BOLSÕES NEBULARES AO LONGO DO BRAÇO (Luminosidade real no meio e base da tela)
       const mwNodes = [
-        { t: 0.15, r: 160, alpha: 0.04 },
-        { t: 0.35, r: 190, alpha: 0.05 },
-        { t: 0.55, r: 210, alpha: 0.065 }, // Meio da tela
-        { t: 0.72, r: 235, alpha: 0.075 }, // Região dos botões de contato
-        { t: 0.92, r: 250, alpha: 0.065 }, // Base da tela
+        { t: 0.18, r: 170, alpha: 0.10 },
+        { t: 0.42, r: 200, alpha: 0.12 },
+        { t: 0.68, r: 230, alpha: 0.14 }, // Região dos botões de contato
+        { t: 0.92, r: 250, alpha: 0.12 }, // Base da tela
       ];
 
       mwNodes.forEach((node) => {
         const cx = getMilkyWayCenter(node.t, width);
         const cy = node.t * height;
-        const currentAlpha = (node.alpha + finaleBloom * 0.035) * (0.85 + 0.15 * Math.sin(time * 0.9 + node.t * 3));
+        const currentAlpha = (node.alpha + finaleBloom * 0.05) * (0.85 + 0.15 * Math.sin(time * 0.8 + node.t * 3));
 
         const nebGrad = ctx.createRadialGradient(cx, cy, 10, cx, cy, node.r);
-        nebGrad.addColorStop(0, `rgba(44, 107, 90, ${currentAlpha * 0.85})`);
-        nebGrad.addColorStop(0.35, `rgba(198, 255, 61, ${currentAlpha * 0.4})`);
-        nebGrad.addColorStop(0.7, `rgba(255, 255, 255, ${currentAlpha * 0.18})`);
+        nebGrad.addColorStop(0, `rgba(44, 107, 90, ${currentAlpha * 0.95})`);
+        nebGrad.addColorStop(0.35, `rgba(16, 185, 129, ${currentAlpha * 0.55})`);
+        nebGrad.addColorStop(0.7, `rgba(198, 255, 61, ${currentAlpha * 0.22})`);
         nebGrad.addColorStop(1, 'rgba(6, 7, 9, 0)');
 
         ctx.beginPath();
@@ -359,10 +413,10 @@ export const MobileCosmos: React.FC = () => {
         ctx.fill();
       });
 
-      // Micro-estrelas densas da Via Láctea com cintilação e parallax
+      // C) MICRO-ESTRELAS DENSAS DO BRAÇO CÓSMICO
       milkyWayStars.forEach((star) => {
         star.phase += star.twinkleSpeed;
-        const twinkle = 0.65 + 0.35 * Math.sin(star.phase);
+        const twinkle = 0.7 + 0.3 * Math.sin(star.phase);
         const alpha = star.baseAlpha * twinkle * (1 + finaleBloom * 0.25);
 
         const scrollOffset = currentScrollY * star.speed;
@@ -376,8 +430,16 @@ export const MobileCosmos: React.FC = () => {
         ctx.beginPath();
         ctx.arc(x, y, star.radius, 0, Math.PI * 2);
         ctx.fillStyle = star.color;
-        ctx.globalAlpha = Math.max(0.08, Math.min(0.85, alpha));
+        ctx.globalAlpha = Math.max(0.12, Math.min(0.95, alpha));
         ctx.fill();
+
+        // Halo suave nas estrelas de maior destaque do braço
+        if (star.radius > 1.25) {
+          ctx.beginPath();
+          ctx.arc(x, y, star.radius * 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = star.color === '#C6FF3D' ? 'rgba(198, 255, 61, 0.2)' : 'rgba(255, 255, 255, 0.2)';
+          ctx.fill();
+        }
       });
       ctx.globalAlpha = 1;
 
