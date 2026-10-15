@@ -34,20 +34,9 @@ interface StardustParticle {
   seed: number;
 }
 
-interface MilkyWayStar {
-  t: number;
-  offsetNorm: number;
-  radius: number;
-  baseAlpha: number;
-  twinkleSpeed: number;
-  phase: number;
-  speed: number;
-  color: string;
-}
-
 /**
  * Constelação Cruzeiro do Sul (Símbolo do Brasil 🇧🇷):
- * 5 estrelas principais, agora em escala maior, centralizadas e com tons neutros equilibrados:
+ * 5 estrelas principais em escala ampliada, imponente e centralizada:
  * - Gamma Crucis (Rubídea / Gacrux): topo da cruz, tom marfim/dourado sutil
  * - Alpha Crucis (Acrux / Estrela de Magalhães): base da cruz, branca pura e luminosa
  * - Beta Crucis (Mimosa): braço esquerdo, branco-cristal
@@ -55,11 +44,11 @@ interface MilkyWayStar {
  * - Epsilon Crucis (Intrometida): menor, posicionada discretamente à direita do eixo
  */
 const CRUX_STARS = [
-  { id: 'gamma', name: 'Rubídea', rx: 0, ry: -0.48, size: 3.6, color: '#FEF3C7', glow: 'rgba(254, 243, 199, 0.22)' },
-  { id: 'alpha', name: 'Acrux', rx: 0.02, ry: 0.48, size: 4.2, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.28)' },
-  { id: 'beta', name: 'Mimosa', rx: -0.42, ry: -0.06, size: 3.8, color: '#F8FAFC', glow: 'rgba(248, 250, 252, 0.24)' },
-  { id: 'delta', name: 'Pálida', rx: 0.40, ry: -0.02, size: 3.2, color: '#DCFCE7', glow: 'rgba(198, 255, 61, 0.2)' },
-  { id: 'epsilon', name: 'Intrometida', rx: 0.18, ry: 0.18, size: 2.2, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.2)' },
+  { id: 'gamma', name: 'Rubídea', rx: 0, ry: -0.48, size: 4.5, color: '#FEF3C7', glow: 'rgba(254, 243, 199, 0.22)' },
+  { id: 'alpha', name: 'Acrux', rx: 0.02, ry: 0.48, size: 5.2, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.28)' },
+  { id: 'beta', name: 'Mimosa', rx: -0.42, ry: -0.06, size: 4.6, color: '#F8FAFC', glow: 'rgba(248, 250, 252, 0.24)' },
+  { id: 'delta', name: 'Pálida', rx: 0.40, ry: -0.02, size: 4.0, color: '#DCFCE7', glow: 'rgba(198, 255, 61, 0.2)' },
+  { id: 'epsilon', name: 'Intrometida', rx: 0.18, ry: 0.18, size: 2.8, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.2)' },
 ];
 
 export const MobileCosmos: React.FC = () => {
@@ -121,45 +110,8 @@ export const MobileCosmos: React.FC = () => {
       });
     }
 
-    // 2. Faixa da Via Láctea (Rio de poeira cósmica e micro-estrelas que desce preenchendo a metade de baixo)
-    const milkyWayStarCount = 220;
-    const milkyWayStars: MilkyWayStar[] = [];
-    const mwColors = ['#FFFFFF', '#F8FAFC', '#E2E8F0', '#DCFCE7', '#FEF3C7', '#C6FF3D', '#A7F3D0'];
-
-    for (let i = 0; i < milkyWayStarCount; i++) {
-      // 72% das estrelas na metade média/inferior (t de 0.35 a 1.05) para preencher a área antes vazia!
-      const t = Math.random() < 0.72 ? 0.35 + Math.random() * 0.70 : Math.random() * 0.35;
-      const offsetNorm = (Math.random() - 0.5) + (Math.random() - 0.5);
-
-      const isMint = Math.random() < 0.22;
-      const color = isMint ? '#C6FF3D' : mwColors[Math.floor(Math.random() * mwColors.length)];
-      // Estrelas com espessura e nitidez reais
-      const radius = 0.6 + Math.random() * 1.1;
-      const baseAlpha = 0.26 + Math.random() * 0.52;
-      const twinkleSpeed = 0.016 + Math.random() * 0.035;
-      const phase = Math.random() * Math.PI * 2;
-      const speed = 0.07 + Math.random() * 0.22;
-
-      milkyWayStars.push({
-        t,
-        offsetNorm,
-        radius,
-        baseAlpha,
-        twinkleSpeed,
-        phase,
-        speed,
-        color,
-      });
-    }
-
-    const getMilkyWayCenter = (tNorm: number, w: number) => {
-      // Trajetória diagonal suave do braço espiral: nasce no topo direito (~0.85w),
-      // passa pelo Cruzeiro do Sul (~0.58w) e desce pela metade inferior cobrindo o centro (~0.44w a 0.34w)
-      return w * (0.85 - 0.82 * tNorm + 0.34 * (tNorm * tNorm));
-    };
-
-    // 3. Partículas Elementais para o Grand Finale (dispersão orgânica pelo Cruzeiro e pela Via Láctea)
-    const particlePoolCount = 75;
+    // 2. Partículas Elementais para o Grand Finale (dispersão cósmica fluida ao redor da cruz)
+    const particlePoolCount = 65;
     const particles: StardustParticle[] = [];
     const particleColors = ['#FFFFFF', '#F8FAFC', '#C6FF3D', '#E2FAD0', '#FEF08A'];
 
@@ -332,124 +284,13 @@ export const MobileCosmos: React.FC = () => {
       });
       ctx.globalAlpha = 1;
 
-      // --- 2. O BRAÇO CÓSMICO DA VIA LÁCTEA (FAIXA CONTÍNUA & RIO ESTELAR) ---
-      const mwBandWidth = width * 0.50;
-
-      // A) FAIXA CONTÍNUA DO BRAÇO ESPIRAL (SPINE RIBBON)
-      const ribbonSteps = 16;
-      const spinePoints: { x: number; y: number }[] = [];
-      for (let s = 0; s <= ribbonSteps; s++) {
-        const t = (s / ribbonSteps) * 1.15 - 0.08;
-        const cx = getMilkyWayCenter(t, width);
-        const cy = t * height;
-        spinePoints.push({ x: cx, y: cy });
-      }
-
-      ctx.save();
-      // 1. Camada difusa externa (gás esmeralda profundo)
-      ctx.beginPath();
-      ctx.moveTo(spinePoints[0].x, spinePoints[0].y);
-      for (let s = 1; s < spinePoints.length - 1; s++) {
-        const xc = (spinePoints[s].x + spinePoints[s + 1].x) * 0.5;
-        const yc = (spinePoints[s].y + spinePoints[s + 1].y) * 0.5;
-        ctx.quadraticCurveTo(spinePoints[s].x, spinePoints[s].y, xc, yc);
-      }
-      ctx.lineTo(spinePoints[spinePoints.length - 1].x, spinePoints[spinePoints.length - 1].y);
-      ctx.strokeStyle = `rgba(16, 185, 129, ${0.08 + finaleBloom * 0.04})`;
-      ctx.lineWidth = width * 0.52;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.stroke();
-
-      // 2. Camada média do braço (brilho verde-limão e jade suave)
-      ctx.beginPath();
-      ctx.moveTo(spinePoints[0].x, spinePoints[0].y);
-      for (let s = 1; s < spinePoints.length - 1; s++) {
-        const xc = (spinePoints[s].x + spinePoints[s + 1].x) * 0.5;
-        const yc = (spinePoints[s].y + spinePoints[s + 1].y) * 0.5;
-        ctx.quadraticCurveTo(spinePoints[s].x, spinePoints[s].y, xc, yc);
-      }
-      ctx.lineTo(spinePoints[spinePoints.length - 1].x, spinePoints[spinePoints.length - 1].y);
-      ctx.strokeStyle = `rgba(198, 255, 61, ${0.06 + finaleBloom * 0.04})`;
-      ctx.lineWidth = width * 0.26;
-      ctx.stroke();
-
-      // 3. Eixo central estelar (luz pura do rio galáctico)
-      ctx.beginPath();
-      ctx.moveTo(spinePoints[0].x, spinePoints[0].y);
-      for (let s = 1; s < spinePoints.length - 1; s++) {
-        const xc = (spinePoints[s].x + spinePoints[s + 1].x) * 0.5;
-        const yc = (spinePoints[s].y + spinePoints[s + 1].y) * 0.5;
-        ctx.quadraticCurveTo(spinePoints[s].x, spinePoints[s].y, xc, yc);
-      }
-      ctx.lineTo(spinePoints[spinePoints.length - 1].x, spinePoints[spinePoints.length - 1].y);
-      ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 + finaleBloom * 0.04})`;
-      ctx.lineWidth = width * 0.10;
-      ctx.stroke();
-      ctx.restore();
-
-      // B) BOLSÕES NEBULARES AO LONGO DO BRAÇO (Luminosidade real no meio e base da tela)
-      const mwNodes = [
-        { t: 0.18, r: 170, alpha: 0.10 },
-        { t: 0.42, r: 200, alpha: 0.12 },
-        { t: 0.68, r: 230, alpha: 0.14 }, // Região dos botões de contato
-        { t: 0.92, r: 250, alpha: 0.12 }, // Base da tela
-      ];
-
-      mwNodes.forEach((node) => {
-        const cx = getMilkyWayCenter(node.t, width);
-        const cy = node.t * height;
-        const currentAlpha = (node.alpha + finaleBloom * 0.05) * (0.85 + 0.15 * Math.sin(time * 0.8 + node.t * 3));
-
-        const nebGrad = ctx.createRadialGradient(cx, cy, 10, cx, cy, node.r);
-        nebGrad.addColorStop(0, `rgba(44, 107, 90, ${currentAlpha * 0.95})`);
-        nebGrad.addColorStop(0.35, `rgba(16, 185, 129, ${currentAlpha * 0.55})`);
-        nebGrad.addColorStop(0.7, `rgba(198, 255, 61, ${currentAlpha * 0.22})`);
-        nebGrad.addColorStop(1, 'rgba(6, 7, 9, 0)');
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, node.r, 0, Math.PI * 2);
-        ctx.fillStyle = nebGrad;
-        ctx.fill();
-      });
-
-      // C) MICRO-ESTRELAS DENSAS DO BRAÇO CÓSMICO
-      milkyWayStars.forEach((star) => {
-        star.phase += star.twinkleSpeed;
-        const twinkle = 0.7 + 0.3 * Math.sin(star.phase);
-        const alpha = star.baseAlpha * twinkle * (1 + finaleBloom * 0.25);
-
-        const scrollOffset = currentScrollY * star.speed;
-        let y = (star.t * height - scrollOffset) % height;
-        if (y < 0) y += height;
-
-        const tNorm = y / height;
-        const cx = getMilkyWayCenter(tNorm, width);
-        const x = cx + star.offsetNorm * (mwBandWidth * 0.5);
-
-        ctx.beginPath();
-        ctx.arc(x, y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = star.color;
-        ctx.globalAlpha = Math.max(0.12, Math.min(0.95, alpha));
-        ctx.fill();
-
-        // Halo suave nas estrelas de maior destaque do braço
-        if (star.radius > 1.25) {
-          ctx.beginPath();
-          ctx.arc(x, y, star.radius * 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = star.color === '#C6FF3D' ? 'rgba(198, 255, 61, 0.2)' : 'rgba(255, 255, 255, 0.2)';
-          ctx.fill();
-        }
-      });
-      ctx.globalAlpha = 1;
-
-      // --- 3. CRUZEIRO DO SUL: CENTRALIZADO, MAIOR, EM SEGUNDO PLANO ---
+      // --- 2. CRUZEIRO DO SUL: CENTRALIZADO, AMPLIADO E MAJESTOSO ---
       // Centralizado horizontalmente no meio da tela (width * 0.5)
       const cruxCenterX = width * 0.5;
-      // Posicionado de forma equilibrada no terço superior, com suave parallax
-      const cruxCenterY = Math.min(height * 0.32, 230) + currentProgress * 20;
-      // Maior envergadura para presença celestial majestosa
-      const cruxSpan = Math.min(width * 0.65, 240);
+      // Posicionado de forma ampla para cobrir o centro da tela
+      const cruxCenterY = Math.min(height * 0.38, 290) + currentProgress * 25;
+      // Envergadura significativamente ampliada para preencher o espaço vertical e horizontal
+      const cruxSpan = Math.min(width * 0.82, 340);
 
       // Posições das 5 estrelas em pixels
       const starPositions = CRUX_STARS.map((s) => ({
@@ -525,25 +366,14 @@ export const MobileCosmos: React.FC = () => {
         ctx.fillStyle = nebulaGrad;
         ctx.fill();
 
-        // 2. Partículas Elementais Flutuantes & Poeira Cósmica (Topo e Meio/Base)
+        // 2. Partículas Elementais Flutuantes & Poeira Cósmica em volta da Cruz
         particles.forEach((p, idx) => {
-          const isLower = idx >= 34;
-          if (!isLower) {
-            // Em volta do Cruzeiro do Sul (topo)
-            const angle = time * 0.3 + idx * 0.35 + p.seed;
-            const distVariation = Math.sin(time * 0.5 + idx) * 20;
-            const targetDist = cruxSpan * 0.35 + (idx % 4) * (cruxSpan * 0.18) + distVariation;
-            p.x = cruxCenterX + Math.cos(angle) * targetDist;
-            p.y = cruxCenterY + Math.sin(angle) * (targetDist * 1.1);
-          } else {
-            // Flutuando organicamente ao longo da Via Láctea na metade inferior
-            const lowerT = 0.42 + ((idx - 34) / 41) * 0.52; // de 42% a 94% da altura da tela!
-            const baseCx = getMilkyWayCenter(lowerT, width);
-            const driftX = Math.sin(time * 0.35 + p.seed) * (width * 0.22);
-            const driftY = Math.cos(time * 0.28 + p.seed) * 25;
-            p.x = baseCx + driftX;
-            p.y = lowerT * height + driftY;
-          }
+          const angle = time * 0.3 + idx * 0.35 + p.seed;
+          const distVariation = Math.sin(time * 0.5 + idx) * 25;
+          const targetDist = cruxSpan * 0.32 + (idx % 4) * (cruxSpan * 0.16) + distVariation;
+
+          p.x = cruxCenterX + Math.cos(angle) * targetDist;
+          p.y = cruxCenterY + Math.sin(angle) * (targetDist * 1.15);
 
           const pAlpha = p.alpha * finaleBloom * (0.6 + 0.4 * Math.sin(time * 2 + p.seed));
 
