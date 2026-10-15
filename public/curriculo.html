@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículo · Guilherme Freitas Lima</title>
+  <meta name="description" content="Currículo de Guilherme Freitas Lima - Estudante de Ciência da Computação no Mackenzie buscando estágio em Dados e IA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090E;
+      --card-bg: #0D121D;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-sub: #64748B;
+      --accent: #C6FF3D;
+      --accent-soft: rgba(198, 255, 61, 0.12);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 16px 60px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Barra Superior de Ações */
+    .top-actions {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 18px;
+      background: rgba(13, 18, 29, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .top-actions-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-print {
+      background: var(--accent);
+      color: #07090E;
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 14px rgba(198, 255, 61, 0.2);
+    }
+
+    .btn-print:hover {
+      background: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Folha Principal */
+    .cv-sheet {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 44px 48px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Cabeçalho */
+    .cv-header {
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .candidate-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      line-height: 1.15;
+    }
+
+    .candidate-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--accent);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .contact-item:hover {
+      color: var(--accent);
+    }
+
+    /* Layout em 2 Colunas */
+    .cv-body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* Títulos de Seção */
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-section {
+      margin-bottom: 26px;
+    }
+
+    .cv-section:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Coluna Lateral */
+    .side-block {
+      margin-bottom: 18px;
+    }
+
+    .side-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .side-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.3;
+    }
+
+    .side-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .side-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--text-sub);
+      margin-top: 1px;
+    }
+
+    .side-detail {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    /* Categorias de Habilidades */
+    .skills-category {
+      margin-bottom: 12px;
+    }
+
+    .skills-category:last-child {
+      margin-bottom: 0;
+    }
+
+    .skills-cat-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+    }
+
+    .skills-cat-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Cursos */
+    .course-mini {
+      margin-bottom: 9px;
+    }
+
+    .course-mini:last-child {
+      margin-bottom: 0;
+    }
+
+    .course-name {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .course-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-sub);
+      margin-top: 1px;
+    }
+
+    /* Coluna Direita (Sobre mim & Projetos) */
+    .summary-box {
+      font-size: 13px;
+      color: #CBD5E1;
+      line-height: 1.6;
+      margin-bottom: 26px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+    }
+
+    .project-card {
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .project-card:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .project-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .project-stack {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    .project-bullets {
+      list-style: none;
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .project-bullets li {
+      font-size: 12px;
+      color: #CBD5E1;
+      position: relative;
+      padding-left: 14px;
+      line-height: 1.45;
+    }
+
+    .project-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* Impressão Limpa em A4 */
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm 15mm;
+      }
+
+      body {
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
+        padding: 0 !important;
+      }
+
+      .top-actions {
+        display: none !important;
+      }
+
+      .cv-sheet {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .candidate-name {
+        color: #0F172A !important;
+        font-size: 22px !important;
+      }
+
+      .candidate-tagline {
+        color: #0F766E !important;
+        font-size: 11px !important;
+      }
+
+      .contact-row {
+        margin-top: 8px !important;
+        gap: 12px !important;
+      }
+
+      .contact-item {
+        color: #475569 !important;
+        font-size: 10px !important;
+      }
+
+      .cv-header {
+        border-bottom: 1.5px solid #0F172A !important;
+        padding-bottom: 10px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .cv-body {
+        grid-template-columns: 220px 1fr !important;
+        gap: 24px !important;
+      }
+
+      .section-title {
+        color: #0F172A !important;
+        border-bottom: 1px solid #0F172A !important;
+        font-size: 10.5px !important;
+        margin-bottom: 8px !important;
+      }
+
+      .side-title {
+        color: #0F172A !important;
+        font-size: 11px !important;
+      }
+
+      .side-subtitle {
+        color: #0F766E !important;
+        font-size: 9.5px !important;
+      }
+
+      .side-date {
+        color: #64748B !important;
+        font-size: 9px !important;
+      }
+
+      .side-detail {
+        color: #334155 !important;
+        font-size: 9.5px !important;
+      }
+
+      .skills-cat-title {
+        color: #0F172A !important;
+        font-size: 10px !important;
+      }
+
+      .skills-cat-desc {
+        color: #334155 !important;
+        font-size: 9.5px !important;
+      }
+
+      .course-name {
+        color: #0F172A !important;
+        font-size: 10px !important;
+      }
+
+      .course-meta {
+        color: #64748B !important;
+        font-size: 8.5px !important;
+      }
+
+      .summary-box {
+        background: #F8FAFC !important;
+        border-left: 2px solid #0F766E !important;
+        color: #334155 !important;
+        font-size: 10.5px !important;
+        padding: 8px 12px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .project-card {
+        border-bottom: 1px solid #E2E8F0 !important;
+        margin-bottom: 12px !important;
+        padding-bottom: 12px !important;
+        page-break-inside: avoid;
+      }
+
+      .project-name {
+        color: #0F172A !important;
+        font-size: 11.5px !important;
+      }
+
+      .project-stack {
+        color: #0F766E !important;
+        font-size: 9.5px !important;
+      }
+
+      .project-bullets li {
+        color: #334155 !important;
+        font-size: 10px !important;
+        line-height: 1.4 !important;
+      }
+
+      .project-bullets li::before {
+        color: #0F766E !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cv-sheet {
+        padding: 24px 18px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+
+      .cv-body {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .candidate-name {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Ações (Oculta na Impressão) -->
+  <div class="top-actions">
+    <div class="top-actions-status">
+      <span class="status-dot"></span>
+      <span>Disponível para estágio • Mackenzie</span>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <a href="/" class="action-btn btn-back">
+        ← Voltar ao Portfólio
+      </a>
+      <button onclick="window.print()" class="action-btn btn-print">
+        🖨️ Imprimir / Salvar em PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Folha Principal -->
+  <main class="cv-sheet">
+    
+    <!-- Cabeçalho -->
+    <header class="cv-header">
+      <h1 class="candidate-name">GUILHERME FREITAS LIMA</h1>
+      <p class="candidate-tagline">Estudante de Ciência da Computação · Universidade Presbiteriana Mackenzie</p>
+
+      <div class="contact-row">
+        <span class="contact-item">📍 São Paulo, SP</span>
+        <a href="mailto:contato.gui2206@gmail.com" class="contact-item">✉️ contato.gui2206@gmail.com</a>
+        <a href="https://wa.me/5511989568771" target="_blank" rel="noopener noreferrer" class="contact-item">💬 (11) 98956-8771</a>
+      </div>
+    </header>
+
+    <!-- Corpo do Currículo -->
+    <div class="cv-body">
+
+      <!-- Coluna Esquerda: Formação, Habilidades & Cursos -->
+      <aside>
+        
+        <!-- Formação Acadêmica -->
+        <section class="cv-section">
+          <h2 class="section-title">Formação</h2>
+
+          <div class="side-block">
+            <div class="side-title">Ciência da Computação</div>
+            <div class="side-subtitle">Universidade Presbiteriana Mackenzie</div>
+            <div class="side-date">2026 — Em andamento (2º Semestre)</div>
+            <p class="side-detail">Lógica de programação, linguagem C, estruturas de dados e matemática.</p>
+          </div>
+
+          <div class="side-block">
+            <div class="side-title">Ensino Médio Completo</div>
+            <div class="side-subtitle">Colégio Objetivo</div>
+            <div class="side-date">Concluído</div>
+            <p class="side-detail">Boa base em exatas, raciocínio lógico e resolução de problemas.</p>
+          </div>
+        </section>
+
+        <!-- O que eu sei usar -->
+        <section class="cv-section">
+          <h2 class="section-title">O que eu uso</h2>
+
+          <div class="skills-category">
+            <div class="skills-cat-title">Linguagens</div>
+            <div class="skills-cat-desc">Python (scripts, dados e APIs) e Linguagem C (faculdade, terminal e Arduino).</div>
+          </div>
+
+          <div class="skills-category">
+            <div class="skills-cat-title">Dados</div>
+            <div class="skills-cat-desc">Pandas (tabelas e filtros), estatística básica e Google Colab.</div>
+          </div>
+
+          <div class="skills-category">
+            <div class="skills-cat-title">Inteligência Artificial</div>
+            <div class="skills-cat-desc">API do Gemini (Google), criação de instruções para bots e contexto de conversa.</div>
+          </div>
+
+          <div class="skills-category">
+            <div class="skills-cat-title">Automação & Ferramentas</div>
+            <div class="skills-cat-desc">n8n, Webhooks, APIs em FastAPI, Git/GitHub e servidores em nuvem.</div>
+          </div>
+        </section>
+
+        <!-- Cursos & Certificações -->
+        <section class="cv-section">
+          <h2 class="section-title">Cursos & Certificações</h2>
+
+          <div class="course-mini">
+            <div class="course-name">IA Generativa para Fluxos de Dados</div>
+            <div class="course-meta">Google Cloud Skills Boost · 12h</div>
+          </div>
+
+          <div class="course-mini">
+            <div class="course-name">Implantação e Modelos de IA (MLOps)</div>
+            <div class="course-meta">Google Cloud Skills Boost · 18h</div>
+          </div>
+
+          <div class="course-mini">
+            <div class="course-name">Gemini para Análise de Dados</div>
+            <div class="course-meta">Google Cloud Skills Boost</div>
+          </div>
+
+          <div class="course-mini">
+            <div class="course-name">Pacote Office & Windows 11</div>
+            <div class="course-meta">Excel para planilhas e análise no dia a dia</div>
+          </div>
+        </section>
+
+      </aside>
+
+      <!-- Coluna Direita: Sobre mim & Projetos práticos -->
+      <section>
+
+        <!-- Resumo Pessoal / Objetivo -->
+        <div class="summary-box">
+          Estudo Ciência da Computação no Mackenzie e gosto de aprender construindo projetos práticos. Desenvolvi bots com IA para WhatsApp, automações que rodam 24h na nuvem e projetos em Python e linguagem C na faculdade. Busco uma oportunidade de <strong>estágio em Dados ou Inteligência Artificial</strong> para aprender com a equipe, colocar a mão na massa no dia a dia e evoluir profissionalmente.
+        </div>
+
+        <!-- Projetos Práticos -->
+        <div class="cv-section">
+          <h2 class="section-title">Projetos Práticos que Criei</h2>
+
+          <!-- Dentinho -->
+          <article class="project-card">
+            <div class="project-header">
+              <span class="project-name">Dentinho — Bot de WhatsApp com IA & Painel</span>
+              <span class="project-stack">Python · Gemini · FastAPI · SQLite</span>
+            </div>
+            <ul class="project-bullets">
+              <li>Bot inteligente para WhatsApp que tira dúvidas e ajuda a marcar horários, lembrando do contexto da conversa.</li>
+              <li>Terminal de controle para acompanhar o atendimento em tempo real e testar as respostas da IA.</li>
+              <li>API em FastAPI com banco de dados para salvar os pedidos e agendamentos com segurança.</li>
+            </ul>
+          </article>
+
+          <!-- Portuguinha -->
+          <article class="project-card">
+            <div class="project-header">
+              <span class="project-name">Portuguinha Lava-Rápido — Atendimento Automático</span>
+              <span class="project-stack">n8n · Gemini · Evolution API · Planilhas</span>
+            </div>
+            <ul class="project-bullets">
+              <li>Fluxo no n8n rodando direto em servidor na nuvem 24 horas por dia para atender clientes no WhatsApp.</li>
+              <li>Já atendeu mais de 320 contatos e processou mais de 1.100 mensagens reais.</li>
+              <li>Salva novos agendamentos automaticamente no Google Sheets e avisa a equipe no mesmo instante.</li>
+            </ul>
+          </article>
+
+          <!-- D&SKY -->
+          <article class="project-card">
+            <div class="project-header">
+              <span class="project-name">D&SKY — Automação de Postagens & Afiliados</span>
+              <span class="project-stack">Python · Automação</span>
+            </div>
+            <ul class="project-bullets">
+              <li>Script em Python que ajuda a programar e postar vídeos automaticamente com links de produtos para gerar vendas.</li>
+            </ul>
+          </article>
+
+          <!-- Projetos da Faculdade -->
+          <article class="project-card">
+            <div class="project-header">
+              <span class="project-name">Projetos da Faculdade (Mackenzie)</span>
+              <span class="project-stack">Linguagem C · Arduino</span>
+            </div>
+            <ul class="project-bullets">
+              <li><strong>Jogo Termo em C:</strong> Recriei o jogo Termo para rodar no terminal em C puro, praticando ponteiros, arquivos e controle de memória.</li>
+              <li><strong>Estufa com Arduino:</strong> Circuito com sensores para medir temperatura e umidade e cuidar das plantas de forma automática.</li>
+            </ul>
+          </article>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
