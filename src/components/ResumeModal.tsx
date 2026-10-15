@@ -210,18 +210,13 @@ export const ResumeModal: React.FC = () => {
 
               <div className="space-y-2.5 text-xs">
                 <div>
-                  <div className="font-medium text-paper">IA Generativa para Fluxos de Dados</div>
-                  <div className="font-mono text-[10.5px] text-muted">Google Cloud Skills Boost · 12h</div>
-                </div>
-
-                <div>
-                  <div className="font-medium text-paper">Implantação e Modelos de IA (MLOps)</div>
-                  <div className="font-mono text-[10.5px] text-muted">Google Cloud Skills Boost · 18h</div>
+                  <div className="font-medium text-paper">Trilha de IA Generativa & MLOps</div>
+                  <div className="font-mono text-[10.5px] text-muted">Google Cloud Skills Boost · 30h (Fluxos de dados e modelos)</div>
                 </div>
 
                 <div>
                   <div className="font-medium text-paper">Gemini para Análise de Dados</div>
-                  <div className="font-mono text-[10.5px] text-muted">Google Cloud Skills Boost</div>
+                  <div className="font-mono text-[10.5px] text-muted">Google Cloud Skills Boost · Análise e relatórios</div>
                 </div>
 
                 <div>

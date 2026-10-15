@@ -308,34 +308,19 @@ export const education: EducationItem[] = [
 
 export const currentCourses: CourseItem[] = [
   {
-    title: 'Integrate Generative AI Into Your Data Workflow',
-    provider: 'Google Cloud Skills Boost / Data & AI Path',
+    title: 'Trilha de IA Generativa & MLOps',
+    provider: 'Google Cloud Skills Boost / Data & MLOps',
     status: 'Em andamento',
-    category: 'Data & GenAI',
-    hours: '12h 20m',
-    description: 'Trilha voltada a profissionais de dados que desejam integrar IA Generativa e LLMs diretamente aos fluxos de processamento e análise analítica.',
-  },
-  {
-    title: 'Deploy and Manage Generative AI Models',
-    provider: 'Google Cloud Skills Boost / MLOps Path',
-    status: 'Em andamento',
-    category: 'MLOps & IA',
-    hours: '18h 30m',
-    description: 'Fundamentos de MLOps: ciclo de vida, implantação em produção, escalabilidade e monitoramento de modelos generativos.',
-  },
-  {
-    title: 'Build and Modernize Applications With Generative AI',
-    provider: 'Google Cloud Skills Boost / Developer Path',
-    status: 'Em andamento',
-    category: 'Engenharia de Software & IA',
-    hours: '19h 01m',
-    description: 'Desenvolvimento e modernização de arquiteturas de software potencializadas por modelos de linguagem e orquestração de IA.',
+    category: 'GenAI & MLOps',
+    hours: '30h',
+    description: 'Integração de IA Generativa em fluxos de trabalho e fundamentos de ciclo de vida e implantação de modelos.',
   },
   {
     title: 'Gemini for Data Scientists and Analysts',
     provider: 'Google Cloud Skills Boost / Data Science',
     status: 'Em andamento',
     category: 'Data Science',
+    hours: '10h',
     description: 'Uso prático do Gemini como copiloto e motor de análise exploratória, SQL e geração de insights para cientistas de dados.',
   },
 ];
