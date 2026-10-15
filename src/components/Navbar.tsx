@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { SCENES } from '../store';
 import { scrollToId } from '../lib/scroll';
 import { useAppStore } from '../store';
+import { personalInfo } from '../data/portfolioData';
 import { Magnetic } from './Magnetic';
+import { GithubIcon, LinkedinIcon } from './BrandIcons';
 
 export const Navbar: React.FC = () => {
   const currentScene = useAppStore((s) => s.scene);
@@ -46,8 +48,34 @@ export const Navbar: React.FC = () => {
         })}
       </nav>
 
-      {/* CTA Buttons */}
-      <div className="hidden sm:flex items-center gap-3">
+      {/* Social Links & CTA Buttons */}
+      <div className="hidden sm:flex items-center gap-2.5">
+        <Magnetic strength={0.25}>
+          <a
+            href={personalInfo.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/10 hover:border-signal/40 text-paper/70 hover:text-signal transition-all flex items-center justify-center"
+            title="GitHub (@GuilhermefLima22)"
+            aria-label="GitHub de Guilherme"
+          >
+            <GithubIcon className="w-4 h-4" />
+          </a>
+        </Magnetic>
+
+        <Magnetic strength={0.25}>
+          <a
+            href={personalInfo.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/10 hover:border-signal/40 text-paper/70 hover:text-signal transition-all flex items-center justify-center"
+            title="LinkedIn (Guilherme Freitas)"
+            aria-label="LinkedIn de Guilherme"
+          >
+            <LinkedinIcon className="w-4 h-4" />
+          </a>
+        </Magnetic>
+
         <button
           onClick={() => setCvModalOpen(true)}
           className="px-3.5 py-2 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/10 hover:border-signal/40 text-paper text-xs font-mono tracking-wider transition-all"
@@ -79,7 +107,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-ink-900 border-b border-white/10 px-6 py-6 flex flex-col gap-4 md:hidden shadow-2xl animate-in slide-in-from-top-2">
+        <div className="absolute top-full left-0 right-0 bg-ink-900 border-b border-white/10 px-6 py-6 flex flex-col gap-3.5 md:hidden shadow-2xl animate-in slide-in-from-top-2">
           {SCENES.map((item) => (
             <button
               key={item.id}
@@ -87,7 +115,7 @@ export const Navbar: React.FC = () => {
                 scrollToId(item.id);
                 setMobileMenuOpen(false);
               }}
-              className="text-left py-2 font-mono text-sm tracking-wider text-paper/80 hover:text-signal"
+              className="text-left py-1.5 font-mono text-sm tracking-wider text-paper/80 hover:text-signal"
             >
               {item.label}
             </button>
@@ -106,10 +134,32 @@ export const Navbar: React.FC = () => {
               scrollToId('contato');
               setMobileMenuOpen(false);
             }}
-            className="mt-1 w-full py-2.5 rounded-lg bg-signal text-ink-950 font-mono text-xs font-bold text-center"
+            className="w-full py-2.5 rounded-lg bg-signal text-ink-950 font-mono text-xs font-bold text-center"
           >
             Entrar em Contato
           </button>
+
+          {/* Redes Sociais no Mobile */}
+          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/[0.08]">
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 px-3 rounded-lg border border-white/10 bg-white/[0.03] text-paper/80 font-mono text-xs flex items-center justify-center gap-2 hover:border-signal/40 hover:text-signal transition-colors"
+            >
+              <GithubIcon className="w-4 h-4" />
+              <span>GitHub</span>
+            </a>
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 px-3 rounded-lg border border-white/10 bg-white/[0.03] text-paper/80 font-mono text-xs flex items-center justify-center gap-2 hover:border-signal/40 hover:text-signal transition-colors"
+            >
+              <LinkedinIcon className="w-4 h-4" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
         </div>
       )}
     </header>

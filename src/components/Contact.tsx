@@ -4,7 +4,7 @@ import { useAppStore } from '../store';
 import { SectionHeading } from './Reveal';
 import { Magnetic } from './Magnetic';
 import { Mail, Copy, Check, FileText } from 'lucide-react';
-import { WhatsAppIcon } from './BrandIcons';
+import { WhatsAppIcon, GithubIcon, LinkedinIcon } from './BrandIcons';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -81,6 +81,28 @@ export const Contact: React.FC = () => {
             </button>
           </div>
 
+          {/* Social Quick Chips */}
+          <div className="flex flex-wrap items-center gap-2.5 pt-1">
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/10 hover:border-signal/40 text-paper/80 hover:text-signal text-xs font-mono transition-all"
+            >
+              <GithubIcon className="w-3.5 h-3.5" />
+              <span>@GuilhermefLima22</span>
+            </a>
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-[#0A66C2]/15 hover:border-[#0A66C2]/50 text-paper/80 hover:text-[#0A66C2] text-xs font-mono transition-all"
+            >
+              <LinkedinIcon className="w-3.5 h-3.5" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
+
           <div className="pt-6 border-t border-white/[0.08] flex flex-wrap gap-6 text-xs font-mono text-muted">
             <div>
               <span className="block text-paper font-semibold mb-1">Localização</span>
@@ -94,7 +116,7 @@ export const Contact: React.FC = () => {
         </div>
 
         {/* Right Column: Connection Cards */}
-        <div className="lg:col-span-5 space-y-4">
+        <div className="lg:col-span-5 space-y-3.5">
           {/* E-mail Card */}
           <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-ink-900/80 border border-white/10 backdrop-blur-md">
             <div className="flex items-center justify-between text-xs font-mono text-muted mb-2">
@@ -136,6 +158,57 @@ export const Contact: React.FC = () => {
               </a>
             </div>
           )}
+
+          {/* Social Cards: LinkedIn & GitHub */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            {/* LinkedIn Card */}
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 sm:p-5 rounded-2xl bg-ink-900/80 border border-white/10 hover:border-[#0A66C2]/50 hover:bg-[#0A66C2]/[0.05] backdrop-blur-md flex items-center justify-between group transition-all"
+              title="Acessar perfil no LinkedIn"
+            >
+              <div>
+                <div className="flex items-center gap-1.5 text-xs font-mono text-[#0A66C2] mb-1">
+                  <span>LINKEDIN</span>
+                </div>
+                <div className="font-display font-semibold text-paper text-sm group-hover:text-white transition-colors">
+                  Guilherme Freitas
+                </div>
+                <div className="text-[11px] text-muted font-mono mt-0.5">
+                  Conectar na rede
+                </div>
+              </div>
+              <div className="p-2.5 rounded-full bg-white/[0.05] group-hover:bg-[#0A66C2] group-hover:text-white text-[#0A66C2] transition-all">
+                <LinkedinIcon className="w-4 h-4" />
+              </div>
+            </a>
+
+            {/* GitHub Card */}
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 sm:p-5 rounded-2xl bg-ink-900/80 border border-white/10 hover:border-signal/50 hover:bg-signal/[0.04] backdrop-blur-md flex items-center justify-between group transition-all"
+              title="Acessar repositórios no GitHub"
+            >
+              <div>
+                <div className="flex items-center gap-1.5 text-xs font-mono text-signal mb-1">
+                  <span>GITHUB</span>
+                </div>
+                <div className="font-display font-semibold text-paper text-sm group-hover:text-signal transition-colors">
+                  @GuilhermefLima22
+                </div>
+                <div className="text-[11px] text-muted font-mono mt-0.5">
+                  Repositórios & código
+                </div>
+              </div>
+              <div className="p-2.5 rounded-full bg-white/[0.05] group-hover:bg-signal group-hover:text-ink-950 text-paper/80 transition-all">
+                <GithubIcon className="w-4 h-4" />
+              </div>
+            </a>
+          </div>
 
           {/* Curriculo / CV Card */}
           <div 

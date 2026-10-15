@@ -22,7 +22,7 @@ export const personalInfo = {
   ],
   email: 'contato.gui2206@gmail.com',
   github: 'https://github.com/GuilhermefLima22',
-  linkedin: '', // TODO: https://linkedin.com/in/seu-usuario
+  linkedin: 'https://www.linkedin.com/in/guilherme-freitas-3b8883381',
   whatsapp: '5511989568771',
   whatsappDisplay: '+55 (11) 98956-8771',
   cvUrl: '/curriculo.html',
