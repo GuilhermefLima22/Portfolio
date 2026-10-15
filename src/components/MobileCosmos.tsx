@@ -308,6 +308,9 @@ export const MobileCosmos: React.FC = () => {
       currentScrollY += (targetScrollY - currentScrollY) * 0.09;
       currentProgress += (targetProgress - currentProgress) * 0.07;
 
+      // Fator de Grand Finale ao entrar na seção de Contato (0.85 a 1.0)
+      const finaleBloom = Math.min(Math.max((currentProgress - 0.85) / 0.15, 0), 1);
+
       ctx.clearRect(0, 0, width, height);
 
       // --- 1. Céu Estrelado Neutro & Verde com Parallax ---
@@ -410,9 +413,6 @@ export const MobileCosmos: React.FC = () => {
       const pLine2 = Math.min(Math.max((currentProgress - 0.36) / 0.37, 0), 1);
       // Linha 3 (Centro -> Intrometida / Epsilon): 0.70 a 0.90 (Chegando em Contato)
       const pLine3 = Math.min(Math.max((currentProgress - 0.68) / 0.22, 0), 1);
-
-      // Fator de Grand Finale ao entrar na seção de Contato (0.85 a 1.0)
-      const finaleBloom = Math.min(Math.max((currentProgress - 0.85) / 0.15, 0), 1);
 
       // --- CHUVA DE METEOROS NO GRAND FINALE (AO CHEGAR NO CONTATO) ---
       if (!prefersReducedMotion) {
