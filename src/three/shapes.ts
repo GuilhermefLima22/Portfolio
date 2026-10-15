@@ -55,8 +55,36 @@ function chaosShape(n: number, L: Layout, dim: number, opacity: number): Shape {
   return { pos, col, opacity };
 }
 
-/** 1 · Hero: os dados se organizam e formam o nome. */
+/** 1 · Hero: no desktop os dados formam o nome; no celular criam um campo de dados dinâmico e sutil ao fundo sem sobrepor o texto. */
 function nameShape(n: number, L: Layout, text: string): Shape {
+  if (L.mobile) {
+    // No celular, uma nuvem elegante de dados dinâmicos emoldura a tela sem colidir com os textos do centro
+    const pos = new Float32Array(n * 3);
+    const col = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const r = L.w * (0.34 + Math.random() * 0.48);
+      const x = Math.cos(angle) * r;
+      // Alonga no eixo vertical para acompanhar o formato do smartphone
+      const y = Math.sin(angle) * (r * 1.55) + (Math.random() - 0.5) * 1.2;
+      const z = (Math.random() - 0.5) * 6 - 0.5;
+      put(pos, i, x, y, z);
+      const isSignal = Math.random() < 0.12;
+      putColor(col, i, isSignal ? SIGNAL : PAPER, isSignal ? 0.6 : 0.25);
+    }
+    const animate = (out: Float32Array, t: number) => {
+      for (let i = 0; i < n; i++) {
+        const x = pos[i * 3];
+        const y = pos[i * 3 + 1];
+        const z = pos[i * 3 + 2];
+        out[i * 3] = x + Math.sin(t * 0.35 + y * 0.6) * 0.12;
+        out[i * 3 + 1] = y + Math.cos(t * 0.28 + x * 0.6) * 0.15;
+        out[i * 3 + 2] = z;
+      }
+    };
+    return { pos, col, opacity: 0.4, animate };
+  }
+
   const cw = 1400;
   const ch = 360;
   const canvas = document.createElement('canvas');
@@ -82,9 +110,9 @@ function nameShape(n: number, L: Layout, text: string): Shape {
     }
   }
 
-  const worldW = L.w * (L.mobile ? 0.9 : 0.84);
+  const worldW = L.w * 0.84;
   const scale = worldW / textW;
-  const yOffset = L.h * (L.mobile ? 0.14 : 0.12);
+  const yOffset = L.h * 0.12;
   const pos = new Float32Array(n * 3);
   const col = new Float32Array(n * 3);
   const count = samples.length / 2;
@@ -130,7 +158,7 @@ function clusterShape(n: number, L: Layout): Shape {
     put(pos, i, centers[c][0] + gauss() * sigma, centers[c][1] + gauss() * sigma, centers[c][2] + gauss() * sigma * 1.3);
     putColor(col, i, colors[c], 0.65 + Math.random() * 0.35);
   }
-  return { pos, col, opacity: 0.95 };
+  return { pos, col, opacity: L.mobile ? 0.65 : 0.95 };
 }
 
 /** 3 · Projetos: um "terreno de dados" vivo, ao fundo dos cards. */
@@ -216,7 +244,7 @@ function networkShape(n: number, L: Layout): Shape {
   };
   const pos = new Float32Array(n * 3);
   animate(pos, 0);
-  return { pos, col, opacity: 0.95, animate };
+  return { pos, col, opacity: L.mobile ? 0.65 : 0.95, animate };
 }
 
 /** 6 · Contato: tudo converge em um anel — o "output". */
@@ -245,7 +273,7 @@ function ringShape(n: number, L: Layout): Shape {
   };
   const pos = new Float32Array(n * 3);
   animate(pos, 0);
-  return { pos, col, opacity: 0.9, animate };
+  return { pos, col, opacity: L.mobile ? 0.65 : 0.9, animate };
 }
 
 export type ShapeKey = SceneId | 'intro';

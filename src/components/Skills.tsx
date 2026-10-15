@@ -8,7 +8,7 @@ export const Skills: React.FC = () => {
     <section 
       id="stack" 
       data-scene="stack" 
-      className="py-32 px-6 md:px-12 max-w-7xl mx-auto"
+      className="py-16 sm:py-24 md:py-32 px-5 sm:px-6 md:px-12 max-w-7xl mx-auto"
     >
       <SectionHeading 
         index="04" 
@@ -16,11 +16,11 @@ export const Skills: React.FC = () => {
         title="O pipeline de tecnologias" 
       />
 
-      <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mt-10 sm:mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         {skillGroups.map((group, idx) => (
           <div
             key={idx}
-            className={`p-7 rounded-3xl bg-ink-900/60 border backdrop-blur-md flex flex-col justify-between transition-all ${
+            className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-ink-900/60 border backdrop-blur-md flex flex-col justify-between transition-all ${
               group.stage === '05'
                 ? 'border-signal/40 bg-signal/[0.02] shadow-[0_0_30px_rgba(198,255,61,0.06)]'
                 : 'border-white/[0.08] hover:border-white/20'

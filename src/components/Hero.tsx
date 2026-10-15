@@ -11,10 +11,10 @@ export const Hero: React.FC = () => {
     <section 
       id="hero" 
       data-scene="hero" 
-      className="min-h-screen relative flex flex-col justify-between pt-36 pb-12 px-6 md:px-12 max-w-7xl mx-auto"
+      className="min-h-screen relative flex flex-col justify-between pt-24 sm:pt-32 md:pt-36 pb-8 sm:pb-12 px-5 sm:px-6 md:px-12 max-w-7xl mx-auto"
     >
       {/* Top Tag & Status */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md">
           <span className="w-2 h-2 rounded-full bg-signal animate-ping" />
           <span className="font-mono text-xs text-signal font-medium">
@@ -22,32 +22,32 @@ export const Hero: React.FC = () => {
           </span>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-muted">
+        <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-muted">
           <Terminal className="w-3.5 h-3.5 text-signal" />
           <span>{personalInfo.university} · {personalInfo.semester}</span>
         </div>
       </div>
 
       {/* Center Narrative Statement */}
-      <div className="my-auto py-12 max-w-4xl">
-        <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-signal/90 mb-4 flex items-center gap-2">
+      <div className="my-auto py-6 sm:py-12 max-w-4xl relative z-10">
+        <p className="font-mono text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.16em] sm:tracking-[0.2em] text-signal/90 mb-3 sm:mb-4 flex items-center gap-2">
           <Sparkles className="w-3.5 h-3.5" />
           Estudante de Ciência da Computação
         </p>
 
-        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-paper leading-[1.05] mb-8">
+        <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-paper leading-[1.12] sm:leading-[1.05] mb-6 sm:mb-8">
           Transformando dados brutos e modelos de IA em soluções reais.
         </h1>
 
-        <p className="text-base sm:text-lg md:text-xl text-paper/70 font-sans max-w-2xl leading-relaxed mb-10">
+        <p className="text-sm sm:text-base md:text-xl text-paper/75 font-sans max-w-2xl leading-relaxed mb-8 sm:mb-10">
           Olá, sou o <strong className="text-paper font-semibold">{personalInfo.name}</strong>. Crio automações inteligentes, conecto LLMs à rotina de negócios e exploro a engenharia e análise de dados de ponta a ponta.
         </p>
 
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
           <Magnetic strength={0.3}>
             <button
               onClick={() => scrollToId('projetos')}
-              className="px-7 py-3.5 rounded-full bg-signal text-ink-950 font-mono text-xs md:text-sm font-bold tracking-wider hover:bg-white transition-all shadow-[0_0_20px_rgba(198,255,61,0.25)]"
+              className="w-full sm:w-auto text-center justify-center px-7 py-3.5 rounded-full bg-signal text-ink-950 font-mono text-xs md:text-sm font-bold tracking-wider hover:bg-white transition-all shadow-[0_0_20px_rgba(198,255,61,0.25)] flex items-center gap-2"
               data-cursor="Explorar"
             >
               Ver Projetos Reais
@@ -57,7 +57,7 @@ export const Hero: React.FC = () => {
           <Magnetic strength={0.25}>
             <button
               onClick={() => setCvModalOpen(true)}
-              className="px-6 py-3.5 rounded-full border border-signal/40 bg-signal/10 hover:bg-signal hover:text-ink-950 text-signal font-mono text-xs md:text-sm font-semibold tracking-wider transition-all flex items-center gap-2"
+              className="w-full sm:w-auto text-center justify-center px-6 py-3.5 rounded-full border border-signal/40 bg-signal/10 hover:bg-signal hover:text-ink-950 text-signal font-mono text-xs md:text-sm font-semibold tracking-wider transition-all flex items-center gap-2"
               data-cursor="Currículo"
             >
               <FileText className="w-4 h-4" />
@@ -68,7 +68,7 @@ export const Hero: React.FC = () => {
           <Magnetic strength={0.2}>
             <button
               onClick={() => scrollToId('sobre')}
-              className="px-6 py-3.5 rounded-full border border-white/15 bg-white/[0.02] hover:bg-white/10 text-paper font-mono text-xs md:text-sm tracking-wider transition-all"
+              className="w-full sm:w-auto text-center justify-center px-6 py-3.5 rounded-full border border-white/15 bg-white/[0.02] hover:bg-white/10 text-paper font-mono text-xs md:text-sm tracking-wider transition-all"
               data-cursor="Conhecer"
             >
               Sobre Mim

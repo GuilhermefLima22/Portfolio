@@ -81,7 +81,7 @@ export function ParticleField({ count }: { count: number }) {
     () =>
       new ShaderMaterial({
         uniforms: {
-          uSize: { value: size.width < 768 ? 2.6 : 3.1 },
+          uSize: { value: size.width < 768 ? 1.85 : 3.1 },
           uPixelRatio: { value: 1 },
           uOpacity: { value: 0 },
         },

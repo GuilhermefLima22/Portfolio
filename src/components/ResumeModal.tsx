@@ -20,11 +20,11 @@ export const ResumeModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[120] flex items-center justify-center p-2 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
       onClick={() => setCvModalOpen(false)}
     >
       <div 
-        className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#080B12] border border-white/10 shadow-2xl p-6 sm:p-10 text-paper"
+        className="relative w-full max-w-5xl max-h-[94vh] sm:max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-[#080B12] border border-white/10 shadow-2xl p-4 sm:p-8 md:p-10 text-paper"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Barra Superior de Ações */}

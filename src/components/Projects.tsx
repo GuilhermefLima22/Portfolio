@@ -19,7 +19,7 @@ export const Projects: React.FC = () => {
     <section 
       id="projetos" 
       data-scene="projetos" 
-      className="py-32 px-6 md:px-12 max-w-7xl mx-auto"
+      className="py-16 sm:py-24 md:py-32 px-5 sm:px-6 md:px-12 max-w-7xl mx-auto"
     >
       <SectionHeading 
         index="02" 
@@ -28,10 +28,10 @@ export const Projects: React.FC = () => {
       />
 
       {/* Category Filter Pills */}
-      <div className="flex flex-wrap items-center gap-2.5 mt-10 mb-14">
+      <div className="flex flex-wrap items-center gap-2 mt-8 mb-10 sm:mt-10 sm:mb-14">
         <button
           onClick={() => setSelectedCategory('all')}
-          className={`px-4 py-2 rounded-full font-mono text-xs transition-all ${
+          className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full font-mono text-xs transition-all ${
             selectedCategory === 'all'
               ? 'bg-signal text-ink-950 font-bold'
               : 'border border-white/10 bg-white/[0.02] text-paper/70 hover:text-paper hover:border-white/20'
@@ -47,7 +47,7 @@ export const Projects: React.FC = () => {
             <button
               key={key}
               onClick={() => setSelectedCategory(key)}
-              className={`px-4 py-2 rounded-full font-mono text-xs transition-all ${
+              className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full font-mono text-xs transition-all ${
                 selectedCategory === key
                   ? 'bg-signal text-ink-950 font-bold'
                   : 'border border-white/10 bg-white/[0.02] text-paper/70 hover:text-paper hover:border-white/20'
@@ -60,7 +60,7 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         {filteredProjects.map((project) => (
           <ProjectCard 
             key={project.id} 
@@ -92,7 +92,7 @@ const ProjectCard: React.FC<{
       onClick={onClick}
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
-      className="group relative flex flex-col justify-between p-7 rounded-3xl bg-ink-900/70 border border-white/[0.08] hover:border-signal/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 cursor-pointer"
+      className="group relative flex flex-col justify-between p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-ink-900/70 border border-white/[0.08] hover:border-signal/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 cursor-pointer"
       data-cursor="Abrir"
     >
       {/* Top Header */}

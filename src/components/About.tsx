@@ -7,7 +7,7 @@ export const About: React.FC = () => {
     <section 
       id="sobre" 
       data-scene="sobre" 
-      className="py-32 px-6 md:px-12 max-w-7xl mx-auto"
+      className="py-16 sm:py-24 md:py-32 px-5 sm:px-6 md:px-12 max-w-7xl mx-auto"
     >
       <SectionHeading 
         index="01" 
@@ -15,11 +15,11 @@ export const About: React.FC = () => {
         title="Quem sou eu e onde quero chegar" 
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mt-10 sm:mt-16 items-start">
         {/* Left Column: Quem Sou Eu & Onde Quero Chegar */}
-        <div className="lg:col-span-7 space-y-8 text-paper/80 font-sans text-base md:text-lg leading-relaxed">
+        <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-paper/80 font-sans text-base md:text-lg leading-relaxed">
           {/* Card: Quem sou eu */}
-          <div className="p-7 rounded-3xl bg-ink-900/60 border border-white/[0.08] backdrop-blur-sm space-y-4">
+          <div className="p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-ink-900/60 border border-white/[0.08] backdrop-blur-sm space-y-4">
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-signal font-semibold">
               <Sparkles className="w-4 h-4" />
               <span>Quem sou eu</span>
@@ -33,7 +33,7 @@ export const About: React.FC = () => {
           </div>
 
           {/* Card: Onde quero chegar */}
-          <div className="p-7 rounded-3xl bg-signal/[0.03] border border-signal/25 backdrop-blur-sm space-y-4">
+          <div className="p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-signal/[0.03] border border-signal/25 backdrop-blur-sm space-y-4">
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-signal font-bold">
               <Target className="w-4 h-4" />
               <span>Onde quero chegar</span>
@@ -44,7 +44,7 @@ export const About: React.FC = () => {
           </div>
 
           {/* Certificações de Produtividade */}
-          <div className="p-6 rounded-3xl bg-ink-900/50 border border-white/[0.06]">
+          <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-ink-900/50 border border-white/[0.06]">
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-muted mb-4">
               <Award className="w-4 h-4 text-signal" />
               <span>Certificações de Ambiente & Produtividade</span>
@@ -66,7 +66,7 @@ export const About: React.FC = () => {
         {/* Right Column: Formação & Trilhas de Cursos */}
         <div className="lg:col-span-5 space-y-6">
           {/* Formação Acadêmica */}
-          <div className="p-7 rounded-3xl bg-ink-900/80 border border-white/10 backdrop-blur-md">
+          <div className="p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-ink-900/80 border border-white/10 backdrop-blur-md">
             <div className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-signal mb-6">
               <GraduationCap className="w-4 h-4" />
               <span>Formação Acadêmica</span>
@@ -98,7 +98,7 @@ export const About: React.FC = () => {
           </div>
 
           {/* Cursos & Trilhas em Andamento (Google Cloud / GenAI) */}
-          <div className="p-7 rounded-3xl bg-ink-900/80 border border-white/10 backdrop-blur-md">
+          <div className="p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-ink-900/80 border border-white/10 backdrop-blur-md">
             <div className="flex items-center justify-between gap-2 mb-4">
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-signal">
                 <BookOpen className="w-4 h-4" />
