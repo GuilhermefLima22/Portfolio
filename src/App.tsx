@@ -1,4 +1,4 @@
-import { useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -18,6 +18,18 @@ const Scene3D = lazy(() => import('./three/Scene'));
 
 export function App() {
   const webgl = useAppStore((s) => s.webgl);
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return window.innerWidth >= 768;
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     // Inicializa o smooth scroll (Lenis) e o observador de seções 3D
@@ -38,11 +50,11 @@ export function App() {
       {/* Cursor Contextual Customizado */}
       <Cursor />
 
-      {/* Céu Cósmico Estrelado, Parallax ao Rolar, Meteoros & Constelações Exclusivo para Mobile */}
-      <MobileCosmos />
+      {/* Céu Cósmico: Cruzeiro do Sul conectando com scroll & Meteoros (Exclusivo Mobile) */}
+      {!isDesktop && <MobileCosmos />}
 
-      {/* Fundo 3D Interativo: Three.js + React Three Fiber com Física de Molas (Desktop) */}
-      {webgl && (
+      {/* Fundo 3D Interativo: Three.js + React Three Fiber (Exclusivo Desktop) */}
+      {isDesktop && webgl && (
         <Suspense fallback={null}>
           <Scene3D />
         </Suspense>
