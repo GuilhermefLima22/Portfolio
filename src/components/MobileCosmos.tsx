@@ -34,6 +34,17 @@ interface StardustParticle {
   seed: number;
 }
 
+interface MilkyWayStar {
+  t: number;
+  offsetNorm: number;
+  radius: number;
+  baseAlpha: number;
+  twinkleSpeed: number;
+  phase: number;
+  speed: number;
+  color: string;
+}
+
 /**
  * Constelação Cruzeiro do Sul (Símbolo do Brasil 🇧🇷):
  * 5 estrelas principais, agora em escala maior, centralizadas e com tons neutros equilibrados:
@@ -110,8 +121,44 @@ export const MobileCosmos: React.FC = () => {
       });
     }
 
-    // 2. Partículas Elementais para o Grand Finale (dispersão orgânica e fluida)
-    const particlePoolCount = 65;
+    // 2. Faixa da Via Láctea (Rio de poeira cósmica e micro-estrelas que desce preenchendo a metade de baixo)
+    const milkyWayStarCount = 150;
+    const milkyWayStars: MilkyWayStar[] = [];
+    const mwColors = ['#FFFFFF', '#F8FAFC', '#E2E8F0', '#DCFCE7', '#FEF3C7', '#C6FF3D'];
+
+    for (let i = 0; i < milkyWayStarCount; i++) {
+      // 68% das estrelas posicionadas na metade inferior (t de 0.35 a 1.0) para enriquecer a área antes vazia!
+      const t = Math.random() < 0.68 ? 0.35 + Math.random() * 0.65 : Math.random() * 0.35;
+      const offsetNorm = (Math.random() - 0.5) + (Math.random() - 0.5);
+
+      const isMint = Math.random() < 0.16;
+      const color = isMint ? '#C6FF3D' : mwColors[Math.floor(Math.random() * mwColors.length)];
+      const radius = 0.45 + Math.random() * 0.8;
+      const baseAlpha = 0.16 + Math.random() * 0.48;
+      const twinkleSpeed = 0.014 + Math.random() * 0.032;
+      const phase = Math.random() * Math.PI * 2;
+      const speed = 0.07 + Math.random() * 0.24;
+
+      milkyWayStars.push({
+        t,
+        offsetNorm,
+        radius,
+        baseAlpha,
+        twinkleSpeed,
+        phase,
+        speed,
+        color,
+      });
+    }
+
+    const getMilkyWayCenter = (tNorm: number, w: number) => {
+      // Trajetória diagonal suave: nasce no topo direito (~0.82w),
+      // passa pelo Cruzeiro do Sul (~0.60w) e desce pela metade inferior cobrindo o centro (~0.44w a 0.36w)
+      return w * (0.82 - 0.78 * tNorm + 0.32 * (tNorm * tNorm));
+    };
+
+    // 3. Partículas Elementais para o Grand Finale (dispersão orgânica pelo Cruzeiro e pela Via Láctea)
+    const particlePoolCount = 75;
     const particles: StardustParticle[] = [];
     const particleColors = ['#FFFFFF', '#F8FAFC', '#C6FF3D', '#E2FAD0', '#FEF08A'];
 
@@ -129,19 +176,19 @@ export const MobileCosmos: React.FC = () => {
       });
     }
 
-    // 3. Meteoros (Estrelas Cadentes & Chuva de Meteoros no Clímax)
+    // 4. Meteoros (Estrelas Cadentes & Chuva de Meteoros no Clímax)
     const meteors: Meteor[] = [];
 
     const spawnMeteor = (isShower = false) => {
       if (prefersReducedMotion) return;
 
-      // Posição de origem: na chuva cobre uma área mais ampla do céu
+      // Posição de origem: na chuva cobre uma área ampla do céu, incluindo início no meio
       const startX = isShower
-        ? Math.random() * (width * 1.3) - width * 0.15
+        ? Math.random() * (width * 1.4) - width * 0.2
         : Math.random() * (width * 1.1) - width * 0.05;
 
       const startY = isShower
-        ? Math.random() * (height * 0.55) - 40
+        ? Math.random() * (height * 0.65) - 40
         : Math.random() * (height * 0.3) - 20;
 
       // Velocidade: na chuva há meteoros rápidos e dinâmicos cortando a atmosfera
@@ -281,7 +328,57 @@ export const MobileCosmos: React.FC = () => {
       });
       ctx.globalAlpha = 1;
 
-      // --- 2. CRUZEIRO DO SUL: CENTRALIZADO, MAIOR, EM SEGUNDO PLANO ---
+      // --- 2. FAIXA DA VIA LÁCTEA (NEBULAR HAZE & RIO ESTELAR NO FUNDO) ---
+      // Preenche toda a tela, especialmente a metade inferior, com atmosfera cósmica profunda
+      const mwBandWidth = width * 0.52;
+      const mwNodes = [
+        { t: 0.15, r: 160, alpha: 0.04 },
+        { t: 0.35, r: 190, alpha: 0.05 },
+        { t: 0.55, r: 210, alpha: 0.065 }, // Meio da tela
+        { t: 0.72, r: 235, alpha: 0.075 }, // Região dos botões de contato
+        { t: 0.92, r: 250, alpha: 0.065 }, // Base da tela
+      ];
+
+      mwNodes.forEach((node) => {
+        const cx = getMilkyWayCenter(node.t, width);
+        const cy = node.t * height;
+        const currentAlpha = (node.alpha + finaleBloom * 0.035) * (0.85 + 0.15 * Math.sin(time * 0.9 + node.t * 3));
+
+        const nebGrad = ctx.createRadialGradient(cx, cy, 10, cx, cy, node.r);
+        nebGrad.addColorStop(0, `rgba(44, 107, 90, ${currentAlpha * 0.85})`);
+        nebGrad.addColorStop(0.35, `rgba(198, 255, 61, ${currentAlpha * 0.4})`);
+        nebGrad.addColorStop(0.7, `rgba(255, 255, 255, ${currentAlpha * 0.18})`);
+        nebGrad.addColorStop(1, 'rgba(6, 7, 9, 0)');
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, node.r, 0, Math.PI * 2);
+        ctx.fillStyle = nebGrad;
+        ctx.fill();
+      });
+
+      // Micro-estrelas densas da Via Láctea com cintilação e parallax
+      milkyWayStars.forEach((star) => {
+        star.phase += star.twinkleSpeed;
+        const twinkle = 0.65 + 0.35 * Math.sin(star.phase);
+        const alpha = star.baseAlpha * twinkle * (1 + finaleBloom * 0.25);
+
+        const scrollOffset = currentScrollY * star.speed;
+        let y = (star.t * height - scrollOffset) % height;
+        if (y < 0) y += height;
+
+        const tNorm = y / height;
+        const cx = getMilkyWayCenter(tNorm, width);
+        const x = cx + star.offsetNorm * (mwBandWidth * 0.5);
+
+        ctx.beginPath();
+        ctx.arc(x, y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = star.color;
+        ctx.globalAlpha = Math.max(0.08, Math.min(0.85, alpha));
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      // --- 3. CRUZEIRO DO SUL: CENTRALIZADO, MAIOR, EM SEGUNDO PLANO ---
       // Centralizado horizontalmente no meio da tela (width * 0.5)
       const cruxCenterX = width * 0.5;
       // Posicionado de forma equilibrada no terço superior, com suave parallax
@@ -366,15 +463,25 @@ export const MobileCosmos: React.FC = () => {
         ctx.fillStyle = nebulaGrad;
         ctx.fill();
 
-        // 2. Partículas Elementais Flutuantes & Poeira Cósmica
+        // 2. Partículas Elementais Flutuantes & Poeira Cósmica (Topo e Meio/Base)
         particles.forEach((p, idx) => {
-          // Movimento fluido e orgânico baseado em ruído harmônico
-          const angle = time * 0.3 + idx * 0.35 + p.seed;
-          const distVariation = Math.sin(time * 0.5 + idx) * 20;
-          const targetDist = (cruxSpan * 0.35) + (idx % 4) * (cruxSpan * 0.18) + distVariation;
-
-          p.x = cruxCenterX + Math.cos(angle) * targetDist;
-          p.y = cruxCenterY + Math.sin(angle) * (targetDist * 1.1);
+          const isLower = idx >= 34;
+          if (!isLower) {
+            // Em volta do Cruzeiro do Sul (topo)
+            const angle = time * 0.3 + idx * 0.35 + p.seed;
+            const distVariation = Math.sin(time * 0.5 + idx) * 20;
+            const targetDist = cruxSpan * 0.35 + (idx % 4) * (cruxSpan * 0.18) + distVariation;
+            p.x = cruxCenterX + Math.cos(angle) * targetDist;
+            p.y = cruxCenterY + Math.sin(angle) * (targetDist * 1.1);
+          } else {
+            // Flutuando organicamente ao longo da Via Láctea na metade inferior
+            const lowerT = 0.42 + ((idx - 34) / 41) * 0.52; // de 42% a 94% da altura da tela!
+            const baseCx = getMilkyWayCenter(lowerT, width);
+            const driftX = Math.sin(time * 0.35 + p.seed) * (width * 0.22);
+            const driftY = Math.cos(time * 0.28 + p.seed) * 25;
+            p.x = baseCx + driftX;
+            p.y = lowerT * height + driftY;
+          }
 
           const pAlpha = p.alpha * finaleBloom * (0.6 + 0.4 * Math.sin(time * 2 + p.seed));
 
