@@ -129,33 +129,44 @@ export const MobileCosmos: React.FC = () => {
       });
     }
 
-    // 3. Meteoros Suaves (Estrelas Cadentes)
+    // 3. Meteoros (Estrelas Cadentes & Chuva de Meteoros no Clímax)
     const meteors: Meteor[] = [];
 
-    const spawnMeteor = () => {
+    const spawnMeteor = (isShower = false) => {
       if (prefersReducedMotion) return;
-      const startX = Math.random() * (width * 1.2) - width * 0.1;
-      const startY = Math.random() * (height * 0.35) - 30;
-      const speed = 11 + Math.random() * 6;
-      const angle = (Math.PI / 180) * (36 + Math.random() * 12);
+
+      // Posição de origem: na chuva cobre uma área mais ampla do céu
+      const startX = isShower
+        ? Math.random() * (width * 1.3) - width * 0.15
+        : Math.random() * (width * 1.1) - width * 0.05;
+
+      const startY = isShower
+        ? Math.random() * (height * 0.55) - 40
+        : Math.random() * (height * 0.3) - 20;
+
+      // Velocidade: na chuva há meteoros rápidos e dinâmicos cortando a atmosfera
+      const speed = isShower ? 13 + Math.random() * 9 : 10 + Math.random() * 5;
+
+      // Ângulo convergente do radiante (entre 33° e 49°)
+      const angleDeg = isShower ? 33 + Math.random() * 16 : 36 + Math.random() * 12;
+      const angle = (Math.PI / 180) * angleDeg;
+
+      const length = isShower ? 85 + Math.random() * 95 : 65 + Math.random() * 55;
+      const alpha = isShower ? 0.75 + Math.random() * 0.25 : 0.8;
+      const decay = isShower ? 0.012 + Math.random() * 0.014 : 0.016 + Math.random() * 0.01;
+      const size = isShower ? 1.0 + Math.random() * 1.3 : 1.3 + Math.random() * 0.8;
 
       meteors.push({
         x: startX,
         y: startY,
         vx: -Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
-        length: 70 + Math.random() * 60,
-        alpha: 0.85,
-        decay: 0.016 + Math.random() * 0.01,
-        size: 1.4 + Math.random() * 1.0,
+        length,
+        alpha,
+        decay,
+        size,
       });
     };
-
-    let meteorTimer = setInterval(() => {
-      if (Math.random() < 0.75) {
-        spawnMeteor();
-      }
-    }, 3200);
 
     // 4. Scroll Tracking: 100% ao atingir o início da seção de Contato
     let currentScrollY = window.scrollY || 0;
@@ -240,6 +251,8 @@ export const MobileCosmos: React.FC = () => {
     // Loop de Renderização Principal 60fps
     let animationId: number;
     let time = 0;
+    let showerCooldown = 0;
+    let normalMeteorCooldown = 60;
 
     const render = () => {
       time += 0.02;
@@ -303,6 +316,34 @@ export const MobileCosmos: React.FC = () => {
 
       // Fator de Grand Finale ao entrar na seção de Contato (0.85 a 1.0)
       const finaleBloom = Math.min(Math.max((currentProgress - 0.85) / 0.15, 0), 1);
+
+      // --- CHUVA DE METEOROS NO GRAND FINALE (AO CHEGAR NO CONTATO) ---
+      if (!prefersReducedMotion) {
+        if (finaleBloom > 0.08) {
+          showerCooldown--;
+          if (showerCooldown <= 0) {
+            // Cadência intensa de chuva de meteoros: novos meteoros velozes a cada 5 a 14 frames
+            const cadence = Math.max(5, Math.floor(17 - finaleBloom * 11 + Math.random() * 4));
+            showerCooldown = cadence;
+
+            // No ápice do clímax, disparamos até 2 meteoros quase simultâneos
+            const count = finaleBloom > 0.45 && Math.random() < 0.5 ? 2 : 1;
+            for (let c = 0; c < count; c++) {
+              if (meteors.length < 22) {
+                spawnMeteor(true);
+              }
+            }
+          }
+        } else {
+          normalMeteorCooldown--;
+          if (normalMeteorCooldown <= 0) {
+            normalMeteorCooldown = 180 + Math.floor(Math.random() * 120); // a cada ~3 a 5s
+            if (meteors.length < 3) {
+              spawnMeteor(false);
+            }
+          }
+        }
+      }
 
       // --- EFEITO FINAL ELEMENTAL PROFISSIONAL (PARTÍCULAS & NÉVOA CÓSMICA) ---
       if (finaleBloom > 0.01) {
@@ -394,14 +435,14 @@ export const MobileCosmos: React.FC = () => {
         }
       });
 
-      // --- 3. METEOROS SUAVES NO FUNDO ---
+      // --- 3. METEOROS & CHUVA DE METEOROS NO FUNDO ---
       for (let i = meteors.length - 1; i >= 0; i--) {
         const m = meteors[i];
         m.x += m.vx;
         m.y += m.vy;
         m.alpha -= m.decay;
 
-        if (m.alpha <= 0 || m.x < -100 || m.y > height + 100) {
+        if (m.alpha <= 0 || m.x < -120 || m.y > height + 120) {
           meteors.splice(i, 1);
           continue;
         }
@@ -410,9 +451,9 @@ export const MobileCosmos: React.FC = () => {
         const tailY = m.y - (m.vy / Math.hypot(m.vx, m.vy)) * m.length;
 
         const grad = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
-        grad.addColorStop(0, `rgba(255, 255, 255, ${m.alpha * 0.85})`);
-        grad.addColorStop(0.25, `rgba(198, 255, 61, ${m.alpha * 0.7})`);
-        grad.addColorStop(0.75, `rgba(44, 107, 90, ${m.alpha * 0.3})`);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${m.alpha * 0.95})`);
+        grad.addColorStop(0.2, `rgba(198, 255, 61, ${m.alpha * 0.75})`);
+        grad.addColorStop(0.7, `rgba(44, 107, 90, ${m.alpha * 0.25})`);
         grad.addColorStop(1, 'rgba(198, 255, 61, 0)');
 
         ctx.beginPath();
@@ -422,6 +463,12 @@ export const MobileCosmos: React.FC = () => {
         ctx.lineWidth = m.size;
         ctx.lineCap = 'round';
         ctx.stroke();
+
+        // Ponto brilhante na cabeça do meteoro
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.size * 0.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${m.alpha})`;
+        ctx.fill();
       }
 
       animationId = requestAnimationFrame(render);
@@ -440,7 +487,6 @@ export const MobileCosmos: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(animationId);
-      clearInterval(meteorTimer);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', handleVisibility);
