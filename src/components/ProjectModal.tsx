@@ -11,7 +11,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   const isDentinho = project.id === 'dentinho';
   const isPortuguinha = project.id === 'portuguinha';
   const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'dashboard' | 'media' | 'image' | 'workflow'>(
-    isDentinho ? 'terminal' : isPortuguinha ? 'dashboard' : 'overview'
+    isDentinho ? 'terminal' : isPortuguinha ? 'workflow' : 'overview'
   );
 
   // Estados interativos para simular o Terminal do Dentinho
@@ -133,6 +133,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         ) : isPortuguinha ? (
           <div className="flex flex-wrap items-center gap-2 mb-6 border-b border-white/[0.08] pb-4">
             <button
+              onClick={() => setActiveTab('workflow')}
+              className={`px-4 py-2.5 rounded-xl font-mono text-xs flex items-center gap-2 transition-all ${
+                activeTab === 'workflow'
+                  ? 'bg-signal text-ink-950 font-bold shadow-[0_0_15px_rgba(198,255,61,0.25)]'
+                  : 'bg-white/[0.03] text-paper/70 hover:text-paper border border-white/[0.05]'
+              }`}
+            >
+              <Workflow className="w-4 h-4" />
+              Workflow n8n & IA (4 Fluxos)
+            </button>
+
+            <button
               onClick={() => setActiveTab('dashboard')}
               className={`px-4 py-2.5 rounded-xl font-mono text-xs flex items-center gap-2 transition-all ${
                 activeTab === 'dashboard'
@@ -142,18 +154,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             >
               <Activity className="w-4 h-4" />
               Painel Evolution API (Conectado)
-            </button>
-
-            <button
-              onClick={() => setActiveTab('workflow')}
-              className={`px-4 py-2.5 rounded-xl font-mono text-xs flex items-center gap-2 transition-all ${
-                activeTab === 'workflow'
-                  ? 'bg-signal text-ink-950 font-bold shadow-[0_0_15px_rgba(198,255,61,0.25)]'
-                  : 'bg-white/[0.03] text-paper/70 hover:text-paper border border-white/[0.05]'
-              }`}
-            >
-              <Workflow className="w-4 h-4" />
-              Workflow n8n & IA (Print Real)
             </button>
 
             <button
@@ -556,76 +556,88 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           <div className="space-y-6 animate-in fade-in duration-200">
             {/* Imagem Real do Workflow n8n */}
             <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#06080F] shadow-2xl">
-              <div className="px-4 py-3 bg-ink-950 border-b border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-muted">
+              <div className="px-4 py-3 bg-ink-950 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-muted">
                 <span className="flex items-center gap-2">
                   <Workflow className="w-3.5 h-3.5 text-signal" />
-                  Captura de Tela Real • n8n Editor: Agente de IA Simples - Evolution API
+                  Captura de Tela Real • n8n Editor: Arquitetura Completa (4 Fluxos Integrados)
                 </span>
                 <span className="text-signal flex items-center gap-1.5 font-medium">
                   <span className="w-2 h-2 rounded-full bg-signal animate-pulse" />
-                  Status: Published (Ativo 24/7)
+                  Em Produção • 99% da Operação
                 </span>
               </div>
 
               <div className="p-2 sm:p-4 bg-[#0d1117] flex justify-center">
                 <img
                   src="/portuguinha/n8n_workflow.png"
-                  alt="Workflow no n8n do Portuguinha com Evolution API e IA"
+                  alt="Workflow no n8n do Portuguinha com Visão Computacional, Comando OK, Agente de IA e Controles de Admin"
                   className="w-full rounded-xl object-contain border border-white/5 hover:scale-[1.01] transition-transform duration-300"
                 />
               </div>
 
               <div className="px-4 py-3 bg-ink-950/90 border-t border-white/[0.06] text-xs font-mono text-muted flex flex-wrap items-center justify-between gap-2">
-                <span>Orquestração: n8n Community Node • Google Gemini • Evolution API</span>
-                <span className="text-paper/80 font-semibold">Túnel Seguro via VPN Dedicada</span>
+                <span>Stack: n8n • Gemini 3.1 Flash + Vision OCR • Evolution API • Google Sheets</span>
+                <span className="text-paper/80 font-semibold">Docker Compose (Postgres + Redis)</span>
               </div>
             </div>
 
-            {/* Explicação detalhada dos nós do workflow */}
+            {/* Os 4 Fluxos da Arquitetura (Correspondentes aos blocos da imagem) */}
             <div className="space-y-3">
               <h4 className="font-mono text-xs uppercase tracking-wider text-signal font-semibold flex items-center gap-2">
                 <Sparkles className="w-4 h-4" />
-                Como funciona cada etapa do fluxo no n8n:
+                Os 4 Módulos do Sistema no n8n (Visão Executiva):
               </h4>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <div className="p-4 rounded-xl bg-ink-950/70 border border-white/[0.06] space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs font-mono text-paper font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-rose-500" />
-                    <span>1. Webhook & Switch</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="p-4 rounded-xl bg-ink-950/80 border border-violet-500/25 space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
+                    <span className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(167,139,250,0.6)]" />
+                      <span>1. Modo Pátio por Foto (Visão Computacional)</span>
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30">Números Admin</span>
                   </div>
-                  <p className="text-[11px] text-muted leading-relaxed">
-                    Recebe requisições POST instantâneas da Evolution API quando o cliente envia mensagem no WhatsApp, e filtra os tipos de mídia via Switch.
+                  <p className="text-xs text-muted leading-relaxed">
+                    Para registrar carros presenciais em segundos, os administradores enviam apenas uma <strong>foto do veículo + valor</strong> (ex: <code className="text-paper">&quot;60&quot;</code>). O <strong>Gemini Vision</strong> faz OCR da placa (Mercosul/antiga), identifica marca, modelo e porte, deduz o serviço pela tabela de preços, recupera o histórico do cliente na planilha e bloqueia duplicidades no mesmo dia.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-ink-950/70 border border-white/[0.06] space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs font-mono text-paper font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-amber-500" />
-                    <span>2. Gemini & Memória</span>
+                <div className="p-4 rounded-xl bg-ink-950/80 border border-emerald-500/25 space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
+                    <span className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+                      <span>2. Aviso de &quot;Carro Pronto&quot; (Comando &quot;ok&quot;)</span>
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">1 Toque</span>
                   </div>
-                  <p className="text-[11px] text-muted leading-relaxed">
-                    O Agente de IA usa o Google Gemini Chat Model com prompt especializado e nó de Memória de Chats para reter o contexto da conversa.
+                  <p className="text-xs text-muted leading-relaxed">
+                    Quando a lavagem termina, o administrador apenas responde (cita) a mensagem do pedido com <code className="text-emerald-300 font-bold">&quot;ok&quot;</code>. O fluxo identifica a placa na mensagem citada, atualiza o status na planilha para <strong>&quot;Pronto&quot;</strong> e dispara uma mensagem automática no WhatsApp privado do cliente avisando que o veículo já pode ser retirado.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-ink-950/70 border border-white/[0.06] space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs font-mono text-paper font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" />
-                    <span>3. Ferramentas (Tools)</span>
+                <div className="p-4 rounded-xl bg-ink-950/80 border border-cyan-500/25 space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
+                    <span className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                      <span>3. Recepcionista IA 24/7 (Atendimento Clientes)</span>
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">Gemini + Tools</span>
                   </div>
-                  <p className="text-[11px] text-muted leading-relaxed">
-                    Grava o agendamento no Google Sheets (<code className="text-paper">PedidoLava_Rapido</code>) e aciona alerta para a equipe (<code className="text-paper">Notificar_Portuga</code>).
+                  <p className="text-xs text-muted leading-relaxed">
+                    Atende clientes no WhatsApp com <strong>Google Gemini Chat Model</strong> e memória de contexto. Informa preços por porte, coleta dados passo a passo ou de uma só vez, grava na planilha (<code className="text-paper">PedidoLava_Rapido</code>) com status <em>&quot;Em lavagem&quot;</em> e notifica o dono instantaneamente.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-ink-950/70 border border-white/[0.06] space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs font-mono text-paper font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <span>4. Envio no WhatsApp</span>
+                <div className="p-4 rounded-xl bg-ink-950/80 border border-amber-500/25 space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
+                    <span className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
+                      <span>4. Governança Remota & Blindagens</span>
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">Controle Total</span>
                   </div>
-                  <p className="text-[11px] text-muted leading-relaxed">
-                    O nó final dispara a resposta formatada pelo agente diretamente para a conversa do cliente via Evolution API.
+                  <p className="text-xs text-muted leading-relaxed">
+                    Números de Admin controlam o estado global do bot pelo próprio WhatsApp (<code className="text-amber-300">ativar</code>, <code className="text-amber-300">desativar</code> e <code className="text-amber-300">status</code>) caso precisem pausar a recepcionista. Inclui filtro que descarta mensagens com mais de 5 min em reconexões e alerta automático quando o servidor fica online.
                   </p>
                 </div>
               </div>
