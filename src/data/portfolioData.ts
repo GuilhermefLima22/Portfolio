@@ -110,13 +110,13 @@ export const projects: Project[] = [
   {
     id: 'portuguinha',
     title: 'Portuguinha Lava-Rápido',
-    tagline: 'Automação Completa de Operação · IA, Visão Computacional & n8n',
+    tagline: 'Em Uso em Lava-Rápido Real · IA, Visão Computacional & n8n',
     category: 'automacao',
     status: 'Finalizado',
     description:
-      'Sistema completo de atendimento e gestão de pátio via WhatsApp: une recepcionista com IA para clientes, registro presencial de veículos por foto (OCR de placa e modelo via Gemini Vision), aviso automático de "Carro Pronto" e controle remoto para administradores.',
+      'Sistema desenvolvido para um lava-rápido real e utilizado no dia a dia da operação via WhatsApp: une recepcionista com IA para clientes, registro presencial de veículos no pátio por foto (OCR de placa e modelo via Gemini Vision), aviso automático de "Carro Pronto" e controle remoto para administradores.',
     longDescription:
-      'Desenvolvido para automatizar de ponta a ponta a rotina real do Lava-Rápido do Portuga, o projeto unifica 4 fluxos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende os clientes automaticamente, conta com números de Admin para gestão rápida de pátio: basta enviar uma foto do carro com o valor na legenda para a Visão Computacional (Gemini Vision) ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e recuperar o histórico do cliente na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente no privado. Os administradores também controlam o estado do bot em tempo real pelo WhatsApp (ativar, desativar e status).',
+      'Criado e implementado para resolver de ponta a ponta a rotina de um estabelecimento real (Lava-Rápido do Portuga), o projeto unifica 4 fluxos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende clientes reais no WhatsApp, conta com números de Admin para gestão rápida de pátio: basta enviar uma foto do carro com o valor na legenda para a Visão Computacional (Gemini Vision) ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e recuperar o histórico do cliente na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente no privado. Os administradores também controlam o estado do bot em tempo real pelo WhatsApp (ativar, desativar e status).',
     highlights: [
       'Modo Pátio (Admin): foto do carro + valor aciona OCR da placa, identifica modelo/porte, deduz o serviço e puxa histórico do cliente',
       'Comando "ok" (Carro Pronto): responder à mensagem do pedido atualiza a planilha e notifica o cliente automaticamente no WhatsApp',
@@ -135,10 +135,10 @@ export const projects: Project[] = [
       'JavaScript',
     ],
     facts: [
-      { label: 'Arquitetura n8n', value: '4 Fluxos + Vision OCR' },
+      { label: 'Aplicação Prática', value: 'Lava-Rápido Real em Operação' },
       { label: 'Volume Real', value: '1.167+ msgs · 321 contatos' },
+      { label: 'Arquitetura n8n', value: '4 Fluxos + Vision OCR' },
       { label: 'Modo Pátio (Admin)', value: 'Foto + Valor → Registro' },
-      { label: 'IA & Visão Computacional', value: 'Gemini Flash + OCR de Placa' },
       { label: 'Persistência & CRM', value: 'Google Sheets em Tempo Real' },
       { label: 'Infraestrutura', value: 'Docker Compose + Evolution API' },
     ],
