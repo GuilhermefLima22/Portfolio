@@ -107,6 +107,26 @@ export const ResumeModal: React.FC = () => {
               <Phone className="w-3.5 h-3.5 text-emerald-400" />
               {personalInfo.whatsappDisplay}
             </a>
+            {personalInfo.github && (
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-paper/80 hover:text-signal transition-colors"
+              >
+                <span>🐙 GitHub</span>
+              </a>
+            )}
+            {personalInfo.linkedin && (
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-paper/80 hover:text-signal transition-colors"
+              >
+                <span>💼 LinkedIn</span>
+              </a>
+            )}
           </div>
         </header>
 
@@ -156,7 +176,7 @@ export const ResumeModal: React.FC = () => {
               </div>
             </section>
 
-            {/* O que eu sei usar (Sem JS, Sem C++) */}
+            {/* O que eu sei usar */}
             <section className="space-y-3.5">
               <h3 className="font-mono text-xs uppercase tracking-wider text-signal font-semibold flex items-center gap-2 border-b border-white/[0.06] pb-2">
                 <Code2 className="w-4 h-4" />
@@ -179,16 +199,16 @@ export const ResumeModal: React.FC = () => {
                 </div>
 
                 <div>
-                  <div className="font-mono text-xs font-semibold text-paper mb-0.5">Inteligência Artificial</div>
+                  <div className="font-mono text-xs font-semibold text-paper mb-0.5">Inteligência Artificial & Visão</div>
                   <p className="text-muted leading-relaxed">
-                    API do Gemini (Google), criação de instruções para bots e contexto de conversa.
+                    API do Gemini (Chat & Vision OCR para placas/veículos), engenharia de prompt e memória de contexto.
                   </p>
                 </div>
 
                 <div>
-                  <div className="font-mono text-xs font-semibold text-paper mb-0.5">Automação & Ferramentas</div>
+                  <div className="font-mono text-xs font-semibold text-paper mb-0.5">Automação & Infraestrutura</div>
                   <p className="text-muted leading-relaxed">
-                    n8n, Webhooks, APIs em FastAPI, Git/GitHub e servidores em nuvem.
+                    n8n, Evolution API, Docker Compose (Postgres/Redis), FastAPI e Git/GitHub.
                   </p>
                 </div>
 
@@ -238,7 +258,7 @@ export const ResumeModal: React.FC = () => {
                 <span>Sobre mim & Objetivo</span>
               </div>
               <p className="text-paper/85 text-sm leading-relaxed">
-                Estudo Ciência da Computação no Mackenzie e gosto de aprender construindo projetos práticos. Desenvolvi bots com IA para WhatsApp, automações que rodam 24h na nuvem e projetos em Python e linguagem C na faculdade. Busco uma oportunidade de <strong>estágio em Dados ou Inteligência Artificial</strong> para aprender com a equipe, colocar a mão na massa no dia a dia e evoluir profissionalmente.
+                Estudo Ciência da Computação no Mackenzie e gosto de aprender construindo projetos práticos. Desenvolvi bots com IA e Visão Computacional para WhatsApp, automações conteinerizadas em Docker e projetos em Python e linguagem C na faculdade. Busco uma oportunidade de <strong>estágio em Dados ou Inteligência Artificial</strong> para aprender com a equipe, colocar a mão na massa no dia a dia e evoluir profissionalmente.
               </p>
             </section>
 
@@ -278,21 +298,21 @@ export const ResumeModal: React.FC = () => {
                 <div className="space-y-1.5 pb-4 border-b border-white/[0.05]">
                   <div className="flex flex-wrap items-baseline justify-between gap-1">
                     <span className="font-display font-semibold text-paper text-sm sm:text-base">
-                      Portuguinha Lava-Rápido — Atendimento Automático
+                      Portuguinha Lava-Rápido — Operação & Visão Computacional
                     </span>
                     <span className="font-mono text-[11px] text-signal">
-                      n8n • Gemini • Evolution API • Planilhas
+                      n8n • Gemini Vision (OCR) • Evolution API • Docker
                     </span>
                   </div>
                   <ul className="text-xs text-paper/80 space-y-1 leading-relaxed list-disc list-inside">
                     <li>
-                      Fluxo no n8n rodando direto em servidor na nuvem 24 horas por dia para atender clientes no WhatsApp.
+                      <strong>Utilizado por um lava-rápido real no dia a dia</strong> (+1.160 mensagens e +320 contatos atendidos), unindo recepcionista IA, gestão de pátio e CRM no Google Sheets.
                     </li>
                     <li>
-                      Já atendeu mais de 320 contatos e processou mais de 1.100 mensagens reais.
+                      <strong>Modo Pátio (Admin):</strong> envio de foto do veículo + valor aciona OCR da placa, identifica modelo/porte, deduz o serviço e puxa histórico do cliente.
                     </li>
                     <li>
-                      Salva novos agendamentos automaticamente no Google Sheets e avisa a equipe no mesmo instante.
+                      <strong>Governança no WhatsApp:</strong> responder <code className="text-signal">&quot;ok&quot;</code> no pedido avisa o cliente que o carro está pronto; comandos de Admin (<code className="text-signal">ativar</code>/<code className="text-signal">desativar</code>/<code className="text-signal">status</code>) controlam o estado do bot em tempo real.
                     </li>
                   </ul>
                 </div>
