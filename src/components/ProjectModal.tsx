@@ -458,7 +458,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 </span>
                 <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 font-medium">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Status: Connected (Online 24/7)
+                  Status: Connected (Instância Ativa)
                 </span>
               </div>
 
@@ -472,7 +472,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               <div className="px-4 py-3 bg-ink-950/90 border-t border-white/[0.06] text-xs font-mono text-muted flex flex-wrap items-center justify-between gap-2">
                 <span>Webhook Destination: n8n Workflow Server</span>
-                <span className="text-paper/80 font-semibold">Túnel Seguro via VPN Dedicada</span>
+                <span className="text-paper/80 font-semibold">Ambiente Conteinerizado em Docker Compose</span>
               </div>
             </div>
 
@@ -520,7 +520,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   </div>
                   <div>
                     <div className="text-lg font-bold text-emerald-400">Connected</div>
-                    <div className="text-[11px] text-muted">Conexão 24/7 Ativa</div>
+                    <div className="text-[11px] text-muted">Sessão Sincronizada</div>
                   </div>
                 </div>
               </div>
@@ -542,7 +542,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-signal">•</span>
-                  <span><strong>Isolamento & Estabilidade:</strong> A instância opera em contêiner Docker dedicado com persistência de sessão e reconexão automática caso ocorra instabilidade de rede.</span>
+                  <span><strong>Isolamento & Estabilidade:</strong> A instância opera em contêiner Docker dedicado com persistência de sessão (PostgreSQL + Redis) e scripts locais de inicialização automática.</span>
                 </li>
               </ul>
             </div>
@@ -619,7 +619,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
                     <span className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
-                      <span>3. Recepcionista IA 24/7 (Atendimento Clientes)</span>
+                      <span>3. Recepcionista IA (Atendimento de Clientes)</span>
                     </span>
                     <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">Gemini + Tools</span>
                   </div>

@@ -17,7 +17,7 @@ export const personalInfo = {
   location: 'São Paulo, Brasil',
   bio: [
     'Estudo Ciência da Computação no Mackenzie (2º semestre) e concluí o ensino médio no Colégio Objetivo. Sempre fui curioso para entender como as coisas funcionam por trás dos panos, o que me levou a gostar de lógica, matemática e programação.',
-    'Gosto de construir coisas reais: já desenvolvi chatbots com IA para WhatsApp, criei automações em nuvem e, na faculdade (Mackenzie), desenvolvi projetos práticos como o monitoramento de estufa com Arduino e a recriação do Termo em C no terminal.',
+    'Gosto de construir coisas reais: já desenvolvi chatbots com IA e Visão Computacional para WhatsApp, criei automações com Docker e n8n e, na faculdade (Mackenzie), desenvolvi projetos práticos como o monitoramento de estufa com Arduino e a recriação do Termo em C no terminal.',
     'Hoje meu foco principal é a área de Dados e Inteligência Artificial. Busco um estágio onde eu possa aprender no dia a dia com a equipe, colocar a mão na massa e ajudar a resolver problemas de verdade.',
   ],
   email: 'contato.gui2206@gmail.com',
@@ -116,14 +116,14 @@ export const projects: Project[] = [
     description:
       'Ecossistema em produção que atende 99% da operação do lava-rápido via WhatsApp: recepcionista IA para clientes, Modo Pátio para administradores (registro presencial por foto com OCR de placa e veículo), aviso automático de "Carro Pronto" e controle remoto do bot.',
     longDescription:
-      'Desenvolvido para resolver de ponta a ponta a rotina real do Lava-Rápido do Portuga, o sistema unifica 4 fluxos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende clientes 24/7, conta com números de Admin para gestão rápida de pátio: basta enviar uma foto do carro com o valor na legenda para a Visão Computacional (Gemini Vision) ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e recuperar o histórico do cliente na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente no privado. Os administradores também controlam o estado do bot em tempo real pelo WhatsApp (ativar, desativar e status).',
+      'Desenvolvido para resolver de ponta a ponta a rotina real do Lava-Rápido do Portuga, o sistema unifica 4 fluxos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende os clientes automaticamente, conta com números de Admin para gestão rápida de pátio: basta enviar uma foto do carro com o valor na legenda para a Visão Computacional (Gemini Vision) ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e recuperar o histórico do cliente na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente no privado. Os administradores também controlam o estado do bot em tempo real pelo WhatsApp (ativar, desativar e status).',
     highlights: [
       'Modo Pátio (Admin): foto do carro + valor aciona OCR da placa, identifica modelo/porte, deduz o serviço e puxa histórico do cliente',
       'Comando "ok" (Carro Pronto): responder à mensagem do pedido atualiza a planilha e notifica o cliente automaticamente no WhatsApp',
       'Controle de Estado Remoto: números de Admin ativam, desativam e consultam o status do bot direto na conversa',
       'Recepcionista IA (Gemini 3.1 Flash Lite) com memória de contexto, coleta em bloco e gravação automática no Google Sheets',
       'Blindagens de Produção: trava anti-duplicidade diária da mesma placa e descarte de mensagens antigas (> 5 min) pós-reconexão',
-      'Infraestrutura 24/7 em Docker (n8n, Evolution API, PostgreSQL e Redis) com mais de 1.160 mensagens reais processadas',
+      'Infraestrutura local conteinerizada em Docker Compose (n8n, Evolution API, PostgreSQL e Redis) com scripts .bat de inicialização automática',
     ],
     techStack: [
       'n8n',
@@ -278,12 +278,12 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     stage: '04',
-    title: 'Automação, Cloud & Integrações',
-    description: 'Pipelines autônomos, esteiras de dados e hospedagem.',
+    title: 'Automação, Docker & Integrações',
+    description: 'Pipelines autônomos, esteiras de dados e conteinerização local.',
     skills: [
       { name: 'Workflows, Webhooks & Tools no n8n', usedIn: ['portuguinha'] },
       { name: 'Docker Compose (Evolution API, Postgres & Redis)', usedIn: ['portuguinha'] },
-      { name: 'Servidor Cloud com VPN Dedicada', usedIn: ['portuguinha'] },
+      { name: 'Integração Google Sheets CRM & WhatsApp', usedIn: ['portuguinha'] },
       { name: 'Automação de Mídias & Afiliados', usedIn: ['dsky'] },
       { name: 'APIs RESTful (Python & FastAPI)', usedIn: ['dentinho'] },
     ],
