@@ -5,7 +5,7 @@ export interface Project {
   title: string;
   tagline: string;
   category: ProjectCategory;
-  status: 'Em produção' | 'Concluído' | 'Em evolução';
+  status: 'Em produção' | 'Concluído' | 'Finalizado' | 'Em evolução';
   description: string;
   longDescription: string;
   highlights: string[];

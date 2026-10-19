@@ -563,7 +563,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 </span>
                 <span className="text-signal flex items-center gap-1.5 font-medium">
                   <span className="w-2 h-2 rounded-full bg-signal animate-pulse" />
-                  Em Produção • 99% da Operação
+                  Projeto Finalizado • 4 Fluxos Ativos
                 </span>
               </div>
 

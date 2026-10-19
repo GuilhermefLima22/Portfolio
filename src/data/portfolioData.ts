@@ -112,11 +112,11 @@ export const projects: Project[] = [
     title: 'Portuguinha Lava-Rápido',
     tagline: 'Automação Completa de Operação · IA, Visão Computacional & n8n',
     category: 'automacao',
-    status: 'Em produção',
+    status: 'Finalizado',
     description:
-      'Ecossistema em produção que atende 99% da operação do lava-rápido via WhatsApp: recepcionista IA para clientes, Modo Pátio para administradores (registro presencial por foto com OCR de placa e veículo), aviso automático de "Carro Pronto" e controle remoto do bot.',
+      'Sistema completo de atendimento e gestão de pátio via WhatsApp: une recepcionista com IA para clientes, registro presencial de veículos por foto (OCR de placa e modelo via Gemini Vision), aviso automático de "Carro Pronto" e controle remoto para administradores.',
     longDescription:
-      'Desenvolvido para resolver de ponta a ponta a rotina real do Lava-Rápido do Portuga, o sistema unifica 4 fluxos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende os clientes automaticamente, conta com números de Admin para gestão rápida de pátio: basta enviar uma foto do carro com o valor na legenda para a Visão Computacional (Gemini Vision) ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e recuperar o histórico do cliente na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente no privado. Os administradores também controlam o estado do bot em tempo real pelo WhatsApp (ativar, desativar e status).',
+      'Desenvolvido para automatizar de ponta a ponta a rotina real do Lava-Rápido do Portuga, o projeto unifica 4 fluxos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende os clientes automaticamente, conta com números de Admin para gestão rápida de pátio: basta enviar uma foto do carro com o valor na legenda para a Visão Computacional (Gemini Vision) ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e recuperar o histórico do cliente na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente no privado. Os administradores também controlam o estado do bot em tempo real pelo WhatsApp (ativar, desativar e status).',
     highlights: [
       'Modo Pátio (Admin): foto do carro + valor aciona OCR da placa, identifica modelo/porte, deduz o serviço e puxa histórico do cliente',
       'Comando "ok" (Carro Pronto): responder à mensagem do pedido atualiza a planilha e notifica o cliente automaticamente no WhatsApp',
@@ -135,18 +135,18 @@ export const projects: Project[] = [
       'JavaScript',
     ],
     facts: [
-      { label: 'Cobertura Operacional', value: '99% da Operação Real' },
-      { label: 'IA & Visão Computacional', value: 'Gemini Flash + Vision OCR' },
+      { label: 'Arquitetura n8n', value: '4 Fluxos + Vision OCR' },
+      { label: 'Volume Real', value: '1.167+ msgs · 321 contatos' },
       { label: 'Modo Pátio (Admin)', value: 'Foto + Valor → Registro' },
-      { label: 'Mensagens Processadas', value: '1.167+ mensagens' },
-      { label: 'Contatos & Chats', value: '321 contatos / 101 chats' },
+      { label: 'IA & Visão Computacional', value: 'Gemini Flash + OCR de Placa' },
       { label: 'Persistência & CRM', value: 'Google Sheets em Tempo Real' },
+      { label: 'Infraestrutura', value: 'Docker Compose + Evolution API' },
     ],
     media: [
       {
         type: 'image',
         title: 'Arquitetura Completa no n8n (4 Fluxos Integrados)',
-        description: 'Workflow em produção no n8n unificando: (1) Aviso de Carro Pronto via comando "ok", (2) Modo Pátio por Foto com Gemini Vision OCR para números Admin, (3) Agente Recepcionista IA com Memória e Tools, e (4) Controle de Estado Remoto (ativar/desativar/status).',
+        description: 'Workflow finalizado no n8n unificando: (1) Aviso de Carro Pronto via comando "ok", (2) Modo Pátio por Foto com Gemini Vision OCR para números Admin, (3) Agente Recepcionista IA com Memória e Tools, e (4) Controle de Estado Remoto (ativar/desativar/status).',
         imageUrl: '/portuguinha/n8n_workflow.png'
       },
       {
