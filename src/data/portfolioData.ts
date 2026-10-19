@@ -120,6 +120,7 @@ export const projects: Project[] = [
     highlights: [
       'Modo Pátio (Vision OCR): foto do veículo aciona leitura de placa (Mercosul/antiga), modelo e porte com retry automático (4x) e puxa histórico do cliente',
       'Parceria B2B (Oficina Jcar): identifica "Jcar/Jeferson" na legenda, aplica tabela fixa por porte (R$ 50 / R$ 65) sem precisar digitar valor e separa em aba exclusiva no Sheets',
+      'Dashboard Financeiro Automático: aba de Resumo no Google Sheets com fórmulas dinâmicas que avançam de mês sozinhas todo dia 1º, consolidando receitas da Oficina Jcar, Lava-Rápido geral e histórico acumulado em tempo real',
       'Comando "ok" (Carro Pronto): responder à mensagem do pedido atualiza a planilha para "Pronto" e notifica o cliente automaticamente no WhatsApp',
       'Travas de Segurança & Anti-Spam: bloqueio de placa duplicada no mesmo dia, descarte de mensagens antigas (> 5 min) e trava diária que envia o aviso de "sistema online" apenas no 1º boot do dia',
       'Administração via WhatsApp: comandos exclusivos da gerência (ativar, desativar e status) controlam o estado global do bot em tempo real',
@@ -139,6 +140,7 @@ export const projects: Project[] = [
       { label: 'Volume Real', value: '1.167+ msgs · 321 contatos' },
       { label: 'Arquitetura n8n', value: '5 Módulos + Vision OCR' },
       { label: 'Regra B2B (Jcar)', value: 'Tabela Fixa + Aba Exclusiva' },
+      { label: 'Dashboard Financeiro', value: 'Resumo com Virada Mensal Automática' },
       { label: 'Travas de Segurança', value: 'Anti-Duplicidade & Anti-Spam' },
       { label: 'Infraestrutura', value: 'Docker Compose + Evolution API' },
     ],
