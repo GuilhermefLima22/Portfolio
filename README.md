@@ -23,8 +23,8 @@ Portfólio interativo de alta performance com Three.js / React Three Fiber, anim
 
 1. **Portuguinha Lava-Rápido (Em Produção Real):**
    - Automação completa no n8n conectada ao WhatsApp via Evolution API.
-   - Visão Computacional com **Gemini Vision (OCR de Placas)** para registro presencial no pátio.
-   - Comando inteligente `ok` para aviso automático de retirada ao cliente e CRM no Google Sheets.
+   - Visão Computacional com **Gemini Vision (OCR de Placas)** para registro presencial no pátio e roteamento B2B automático para a parceira **Oficina Jcar**.
+   - Comando inteligente `ok` para aviso automático de retirada ao cliente, travas de segurança (anti-duplicidade diária e anti-spam de inicialização) e CRM no Google Sheets.
    - [Repositório do Portuguinha](https://github.com/GuilhermefLima22/Portuguinha-)
 
 2. **Dentinho:**

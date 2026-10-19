@@ -309,10 +309,10 @@ export const ResumeModal: React.FC = () => {
                       <strong>Utilizado por um lava-rápido real no dia a dia</strong> (+1.160 mensagens e +320 contatos atendidos), unindo recepcionista IA, gestão de pátio e CRM no Google Sheets.
                     </li>
                     <li>
-                      <strong>Modo Pátio (Admin):</strong> envio de foto do veículo + valor aciona OCR da placa, identifica modelo/porte, deduz o serviço e puxa histórico do cliente.
+                      <strong>Modo Pátio & Parceria B2B (Oficina Jcar):</strong> foto do veículo aciona OCR da placa, identifica modelo/porte e puxa histórico; para a oficina parceira Jcar, aplica tabela fixa automática e separa em aba exclusiva na planilha.
                     </li>
                     <li>
-                      <strong>Administração via WhatsApp:</strong> responder <code className="text-signal">&quot;ok&quot;</code> no pedido avisa o cliente que o carro está pronto; comandos de Admin (<code className="text-signal">ativar</code>/<code className="text-signal">desativar</code>/<code className="text-signal">status</code>) controlam o estado do bot em tempo real.
+                      <strong>Administração via WhatsApp & Travas de Segurança:</strong> comando <code className="text-signal">&quot;ok&quot;</code> avisa o cliente que o carro está pronto; controle remoto (<code className="text-signal">ativar</code>/<code className="text-signal">desativar</code>/<code className="text-signal">status</code>), bloqueio de placa duplicada no dia e trava anti-spam de inicialização.
                     </li>
                   </ul>
                 </div>

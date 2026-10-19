@@ -143,7 +143,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               }`}
             >
               <Workflow className="w-4 h-4" />
-              Workflow n8n & IA (4 Fluxos)
+              Workflow n8n & IA (5 Módulos)
             </button>
 
             <button
@@ -586,7 +586,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <div className="px-4 py-3 bg-ink-950 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-muted">
                 <span className="flex items-center gap-2">
                   <Workflow className="w-3.5 h-3.5 text-signal" />
-                  Captura de Tela Real • n8n Editor: Arquitetura Completa (4 Fluxos Integrados)
+                  Captura de Tela Real • n8n Editor: Arquitetura Completa (5 Módulos Integrados)
                 </span>
                 <span className="text-signal flex items-center gap-1.5 font-medium">
                   <span className="w-2 h-2 rounded-full bg-signal animate-pulse" />
@@ -597,22 +597,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <div className="p-2 sm:p-4 bg-[#0d1117] flex justify-center">
                 <img
                   src="/portuguinha/n8n_workflow.png"
-                  alt="Workflow no n8n do Portuguinha com Visão Computacional, Comando OK, Agente de IA e Controles de Admin"
+                  alt="Workflow no n8n do Portuguinha com Visão Computacional, Oficina Jcar, Comando OK, Agente de IA e Travas de Segurança"
                   className="w-full rounded-xl object-contain border border-white/5 hover:scale-[1.01] transition-transform duration-300"
                 />
               </div>
 
               <div className="px-4 py-3 bg-ink-950/90 border-t border-white/[0.06] text-xs font-mono text-muted flex flex-wrap items-center justify-between gap-2">
-                <span>Stack: n8n • Gemini 3.1 Flash + Vision OCR • Evolution API • Google Sheets</span>
+                <span>Stack: n8n • Gemini Vision OCR + Flash Lite • Evolution API • Google Sheets</span>
                 <span className="text-paper/80 font-semibold">Docker Compose (Postgres + Redis)</span>
               </div>
             </div>
 
-            {/* Os 4 Fluxos da Arquitetura (Correspondentes aos blocos da imagem) */}
+            {/* Os Módulos da Arquitetura (Correspondentes aos blocos da imagem) */}
             <div className="space-y-3">
               <h4 className="font-mono text-xs uppercase tracking-wider text-signal font-semibold flex items-center gap-2">
                 <Sparkles className="w-4 h-4" />
-                Os 4 Módulos do Sistema no n8n (Visão Executiva):
+                Módulos & Regras de Negócio no n8n (Visão Executiva):
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -620,12 +620,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
                     <span className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(167,139,250,0.6)]" />
-                      <span>1. Modo Pátio por Foto (Visão Computacional)</span>
+                      <span>1. Modo Pátio & Parceria B2B (Oficina Jcar)</span>
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30">Números Admin</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30">Vision OCR + B2B</span>
                   </div>
                   <p className="text-xs text-muted leading-relaxed">
-                    Para registrar carros presenciais em segundos, os administradores enviam apenas uma <strong>foto do veículo + valor</strong> (ex: <code className="text-paper">&quot;60&quot;</code>). O <strong>Gemini Vision</strong> faz OCR da placa (Mercosul/antiga), identifica marca, modelo e porte, deduz o serviço pela tabela de preços, recupera o histórico do cliente na planilha e bloqueia duplicidades no mesmo dia.
+                    Os administradores enviam uma <strong>foto do veículo</strong> e o <strong>Gemini Vision</strong> (com <em>retry</em> automático 4x) faz OCR da placa, identifica modelo/porte, deduz o serviço e puxa o histórico. Se a legenda tiver <code className="text-violet-300 font-bold">&quot;Jcar&quot;</code> ou <code className="text-violet-300 font-bold">&quot;Jeferson&quot;</code>, aplica automaticamente a <strong>tabela fixa da oficina parceira</strong> (<code className="text-paper">R$ 50</code> Hatch/Sedan, <code className="text-paper">R$ 65</code> SUV/Picape) sem precisar digitar valor e grava em <strong>aba exclusiva</strong> no Google Sheets.
                   </p>
                 </div>
 
@@ -659,12 +659,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
                     <span className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
-                      <span>4. Administração via WhatsApp & Blindagens</span>
+                      <span>4. Administração via WhatsApp & Travas de Segurança</span>
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">Controle Total</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">Anti-Spam & Trava Diária</span>
                   </div>
                   <p className="text-xs text-muted leading-relaxed">
-                    Números de Admin controlam o estado global do bot pelo próprio WhatsApp (<code className="text-amber-300">ativar</code>, <code className="text-amber-300">desativar</code> e <code className="text-amber-300">status</code>) caso precisem pausar a recepcionista. Inclui filtro que descarta mensagens com mais de 5 min em reconexões e alerta automático quando o servidor fica online.
+                    Comandos de Admin (<code className="text-amber-300">ativar</code>, <code className="text-amber-300">desativar</code>, <code className="text-amber-300">status</code>) controlam o bot pelo WhatsApp. Conta com <strong>3 travas de segurança</strong>: (1) <strong>Trava Diária de Inicialização</strong> (<code className="text-paper">staticData</code>) que envia o alerta de sistema online apenas no 1º boot do dia, evitando spam em reinicializações; (2) <strong>Bloqueio de placa duplicada</strong> no mesmo dia; e (3) <strong>Descarte de mensagens antigas</strong> (&gt; 5 min).
                   </p>
                 </div>
               </div>

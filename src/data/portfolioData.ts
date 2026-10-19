@@ -114,21 +114,21 @@ export const projects: Project[] = [
     category: 'automacao',
     status: 'Finalizado',
     description:
-      'Sistema desenvolvido para um lava-rápido real e utilizado no dia a dia da operação via WhatsApp: une recepcionista com IA para clientes, registro presencial de veículos no pátio por foto (OCR de placa e modelo via Gemini Vision), aviso automático de "Carro Pronto" e controle remoto para administradores.',
+      'Sistema desenvolvido para um lava-rápido real e utilizado no dia a dia da operação via WhatsApp: une recepcionista com IA para clientes, registro presencial no pátio por foto (OCR de placa e modelo via Gemini Vision), roteamento B2B automático para a Oficina Jcar, aviso de "Carro Pronto" e travas de segurança.',
     longDescription:
-      'Criado e implementado para resolver de ponta a ponta a rotina de um estabelecimento real (Lava-Rápido do Portuga), o projeto unifica 4 fluxos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende clientes reais no WhatsApp, conta com números de Admin para gestão rápida de pátio: basta enviar uma foto do carro com o valor na legenda para a Visão Computacional (Gemini Vision) ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e recuperar o histórico do cliente na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente no privado. Os administradores também controlam o estado do bot em tempo real pelo WhatsApp (ativar, desativar e status).',
+      'Criado e implementado para resolver de ponta a ponta a rotina de um estabelecimento real (Lava-Rápido do Portuga), o projeto unifica 5 módulos inteligentes no n8n integrados à Evolution API e ao Google Sheets. Além do Agente Recepcionista que atende clientes no WhatsApp, conta com Modo Pátio para os administradores: basta enviar a foto do veículo para o Gemini Vision ler a placa (OCR), identificar modelo e porte, deduzir o serviço pela tabela de preços e puxar o histórico. Inclui regra B2B para a parceira Oficina Jcar (Jeferson): ao detectar "Jcar" ou "Jeferson" na legenda, aplica tabela fixa automática por porte (R$ 50 Hatch/Sedan, R$ 65 SUV/Picape) e grava em aba exclusiva na planilha. Quando o serviço termina, responder "ok" na mensagem do pedido atualiza o status para "Pronto" e avisa o cliente. Conta ainda com travas de segurança de produção: bloqueio de placa duplicada no dia, filtro anti-mensagens antigas (> 5 min) e trava diária de inicialização que envia o aviso de sistema online apenas no primeiro boot do dia.',
     highlights: [
-      'Modo Pátio (Admin): foto do carro + valor aciona OCR da placa, identifica modelo/porte, deduz o serviço e puxa histórico do cliente',
-      'Comando "ok" (Carro Pronto): responder à mensagem do pedido atualiza a planilha e notifica o cliente automaticamente no WhatsApp',
-      'Controle de Estado Remoto: números de Admin ativam, desativam e consultam o status do bot direto na conversa',
-      'Recepcionista IA (Gemini 3.1 Flash Lite) com memória de contexto, coleta em bloco e gravação automática no Google Sheets',
-      'Blindagens de Produção: trava anti-duplicidade diária da mesma placa e descarte de mensagens antigas (> 5 min) pós-reconexão',
-      'Infraestrutura local conteinerizada em Docker Compose (n8n, Evolution API, PostgreSQL e Redis) com scripts .bat de inicialização automática',
+      'Modo Pátio (Vision OCR): foto do veículo aciona leitura de placa (Mercosul/antiga), modelo e porte com retry automático (4x) e puxa histórico do cliente',
+      'Parceria B2B (Oficina Jcar): identifica "Jcar/Jeferson" na legenda, aplica tabela fixa por porte (R$ 50 / R$ 65) sem precisar digitar valor e separa em aba exclusiva no Sheets',
+      'Comando "ok" (Carro Pronto): responder à mensagem do pedido atualiza a planilha para "Pronto" e notifica o cliente automaticamente no WhatsApp',
+      'Travas de Segurança & Anti-Spam: bloqueio de placa duplicada no mesmo dia, descarte de mensagens antigas (> 5 min) e trava diária que envia o aviso de "sistema online" apenas no 1º boot do dia',
+      'Administração via WhatsApp: comandos exclusivos da gerência (ativar, desativar e status) controlam o estado global do bot em tempo real',
+      'Recepcionista IA (Gemini Flash Lite) com memória de contexto, coleta inteligente e infraestrutura local em Docker Compose (n8n, Evolution API, Postgres e Redis)',
     ],
     techStack: [
       'n8n',
       'Gemini Vision (OCR)',
-      'Gemini 3.1 Flash',
+      'Gemini Flash Lite',
       'Evolution API',
       'Google Sheets CRM',
       'Docker & Redis',
@@ -137,16 +137,16 @@ export const projects: Project[] = [
     facts: [
       { label: 'Aplicação Prática', value: 'Lava-Rápido Real em Operação' },
       { label: 'Volume Real', value: '1.167+ msgs · 321 contatos' },
-      { label: 'Arquitetura n8n', value: '4 Fluxos + Vision OCR' },
-      { label: 'Modo Pátio (Admin)', value: 'Foto + Valor → Registro' },
-      { label: 'Persistência & CRM', value: 'Google Sheets em Tempo Real' },
+      { label: 'Arquitetura n8n', value: '5 Módulos + Vision OCR' },
+      { label: 'Regra B2B (Jcar)', value: 'Tabela Fixa + Aba Exclusiva' },
+      { label: 'Travas de Segurança', value: 'Anti-Duplicidade & Anti-Spam' },
       { label: 'Infraestrutura', value: 'Docker Compose + Evolution API' },
     ],
     media: [
       {
         type: 'image',
-        title: 'Arquitetura Completa no n8n (4 Fluxos Integrados)',
-        description: 'Workflow finalizado no n8n unificando: (1) Aviso de Carro Pronto via comando "ok", (2) Modo Pátio por Foto com Gemini Vision OCR para números Admin, (3) Agente Recepcionista IA com Memória e Tools, e (4) Controle de Estado Remoto (ativar/desativar/status).',
+        title: 'Arquitetura Completa no n8n (5 Módulos & Travas de Segurança)',
+        description: 'Workflow em produção no n8n dividido em 5 módulos: (1) Recepção & Segurança, (2) Modo Pátio & Oficina Jcar com Gemini Vision OCR, (3) Aviso de Carro Pronto via comando "ok", (4) Atendimento Inteligente aos Clientes e (5) Comandos da Gerência & Trava Diária de Inicialização.',
         imageUrl: '/portuguinha/n8n_workflow.png'
       },
       {
