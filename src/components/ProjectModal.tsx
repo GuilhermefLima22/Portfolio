@@ -632,7 +632,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   <div className="flex items-center justify-between gap-2 text-xs font-mono text-paper font-semibold">
                     <span className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
-                      <span>4. Governança Remota & Blindagens</span>
+                      <span>4. Administração via WhatsApp & Blindagens</span>
                     </span>
                     <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">Controle Total</span>
                   </div>

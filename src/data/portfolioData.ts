@@ -272,7 +272,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Google Gemini (API, SDK & Chat Models)', usedIn: ['dentinho', 'portuguinha'] },
       { name: 'Visão Computacional & OCR de Placas (Gemini Vision)', usedIn: ['portuguinha'] },
       { name: 'Engenharia de Prompt & Context Window', usedIn: ['dentinho', 'portuguinha'] },
-      { name: 'Orquestração de Intenções & Governança Remota', usedIn: ['dentinho', 'portuguinha'] },
+      { name: 'Orquestração de Intenções & Administração via WhatsApp', usedIn: ['dentinho', 'portuguinha'] },
       { name: 'Terminal de Monitoramento de IA', usedIn: ['dentinho'] },
     ],
   },

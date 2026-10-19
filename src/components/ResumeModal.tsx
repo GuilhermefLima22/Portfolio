@@ -312,7 +312,7 @@ export const ResumeModal: React.FC = () => {
                       <strong>Modo Pátio (Admin):</strong> envio de foto do veículo + valor aciona OCR da placa, identifica modelo/porte, deduz o serviço e puxa histórico do cliente.
                     </li>
                     <li>
-                      <strong>Governança no WhatsApp:</strong> responder <code className="text-signal">&quot;ok&quot;</code> no pedido avisa o cliente que o carro está pronto; comandos de Admin (<code className="text-signal">ativar</code>/<code className="text-signal">desativar</code>/<code className="text-signal">status</code>) controlam o estado do bot em tempo real.
+                      <strong>Administração via WhatsApp:</strong> responder <code className="text-signal">&quot;ok&quot;</code> no pedido avisa o cliente que o carro está pronto; comandos de Admin (<code className="text-signal">ativar</code>/<code className="text-signal">desativar</code>/<code className="text-signal">status</code>) controlam o estado do bot em tempo real.
                     </li>
                   </ul>
                 </div>
