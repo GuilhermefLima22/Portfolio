@@ -1,75 +1,62 @@
-# 🚀 Portfólio Profissional - Guilherme | Full Stack Developer
+# 🌌 Portfólio Pessoal · Guilherme Lima Freitas
 
-Um site de portfólio moderno, criativo, de alta performance e interativo, construído com foco em **Engenharia de Software Full Stack, Automações e Inteligência Artificial**.
-
----
-
-## ✨ Tecnologias Utilizadas
-
-- **React 18 / 19** com **TypeScript**
-- **Vite 6 / 8** (Build ultra-rápido com HMR)
-- **Tailwind CSS 3.4** (Dark Tech theme, Glassmorphism, Gradientes)
-- **Lucide Icons** (Ícones modernos e leves)
-- **Canvas Confetti** (Micro-interações de feedback)
-- **HTML5 Canvas Particles** (Efeito dinâmico no background sensível ao mouse e acessível com `prefers-reduced-motion`)
+Portfólio interativo de alta performance com Three.js / React Three Fiber, animações espaciais e apresentação técnica de projetos reais de **Inteligência Artificial, Automação de Processos e Ciência de Dados**.
 
 ---
 
-## 📂 Estrutura do Projeto
+## 🚀 Live Demo
+🔗 **[guilhermelima-portfolio.vercel.app](https://guilhermelima-portfolio.vercel.app)**
 
-```plaintext
-portfolio/
-├── src/
-│   ├── components/
-│   │   ├── Navbar.tsx             # Menu de navegação fixo com status e gaveta mobile
-│   │   ├── Hero.tsx               # Seção principal com terminal interativo e botões de ação
-│   │   ├── About.tsx              # Pilares de engenharia e linha do tempo de experiência
-│   │   ├── Projects.tsx           # Grid de projetos com filtros dinâmicos
-│   │   ├── ProjectModal.tsx       # Modal de detalhes com arquitetura e métricas
-│   │   ├── Skills.tsx             # Habilidades técnicas categorizadas
-│   │   ├── ApiPlayground.tsx      # Simulador de API ao vivo (requisições e respostas JSON)
-│   │   ├── Contact.tsx            # Formulário com integração direta ao WhatsApp e e-mail
-│   │   ├── Footer.tsx             # Rodapé com status do sistema e botão de topo
-│   │   ├── InteractiveCanvas.tsx  # Fundo dinâmico com constelação de partículas
-│   │   └── BrandIcons.tsx         # Ícones vetoriais customizados
-│   ├── data/
-│   │   └── portfolioData.ts       # ⚙️ ARQUIVO CENTRAL DE CONFIGURAÇÃO (edite seus dados aqui)
-│   ├── types/
-│   │   └── index.ts               # Tipagens estritas do TypeScript
-│   ├── App.tsx                    # Orquestrador da aplicação
-│   └── index.css                  # Estilos globais e utilitários modernos
-├── index.html                     # Metadados, SEO e fontes (Inter & JetBrains Mono)
-└── package.json
+---
+
+## 🛠️ Stack Tecnológica
+
+- **Frontend & Core:** React 19, TypeScript, Vite
+- **3D & Visual Experience:** Three.js, React Three Fiber (`@react-three/fiber`), `@react-three/drei`
+- **Estilização & Design System:** Tailwind CSS, Glassmorphism, Dark Tech Theme
+- **Animações & Scroll:** Lenis Smooth Scroll, Canvas 2D Particles, Lucide Icons
+- **Hospedagem & CI/CD:** Vercel
+
+---
+
+## 📂 Principais Projetos em Destaque
+
+1. **Portuguinha Lava-Rápido (Em Produção Real):**
+   - Automação completa no n8n conectada ao WhatsApp via Evolution API.
+   - Visão Computacional com **Gemini Vision (OCR de Placas)** para registro presencial no pátio.
+   - Comando inteligente `ok` para aviso automático de retirada ao cliente e CRM no Google Sheets.
+   - [Repositório do Portuguinha](https://github.com/GuilhermefLima22/Portuguinha-)
+
+2. **Dentinho:**
+   - Bot conversacional com Gemini 3.8 Flash, terminal de monitoramento em tempo real e API com painel administrativo de pedidos.
+
+3. **Termo em C (Mackenzie):**
+   - Recriação completa do Wordle em C puro no terminal, com leitura de dicionário em arquivo, busca sequencial e validação de letras em 2 passagens.
+
+---
+
+## 💻 Executando Localmente
+
+```bash
+# Clone o repositório
+git clone https://github.com/GuilhermefLima22/Portfolio.git
+
+# Acesse a pasta
+cd Portfolio
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
+npm run dev
 ```
 
 ---
 
-## 🛠️ Como Personalizar Seus Dados
+## 👨‍💻 Autor
 
-Para alterar suas informações (nome, WhatsApp, e-mail, links do GitHub/LinkedIn, projetos e habilidades), basta editar o arquivo:
-
-👉 **[`src/data/portfolioData.ts`](./src/data/portfolioData.ts)**
-
-- **WhatsApp**: Altere `whatsapp: "5511999999999"` para o seu número com DDD.
-- **E-mail**: Atualize para seu e-mail profissional.
-- **Projetos**: Adicione novos projetos ou altere descrições, tags e links.
-
----
-
-## ⚡ Comandos Disponíveis
-
-| Comando | Descrição |
-| --- | --- |
-| `npm run dev` | Inicia o servidor local de desenvolvimento (ex: `http://localhost:5173`) |
-| `npm run build` | Compila o projeto em arquivos estáticos otimizados na pasta `dist/` |
-| `npm run preview` | Pré-visualiza a build de produção localmente |
-
----
-
-## 🌐 Como Fazer Deploy Gratuito (Vercel ou Netlify)
-
-1. Crie um repositório no seu GitHub e envie o código da pasta `portfolio`.
-2. Acesse [vercel.com](https://vercel.com) ou [netlify.com](https://netlify.com).
-3. Conecte com o GitHub e selecione o repositório.
-4. O framework **Vite** será detectado automaticamente.
-5. Clique em **Deploy**! O site estará no ar em menos de 1 minuto com certificado SSL gratuito.
+**Guilherme Lima Freitas**  
+Estudante de Ciência da Computação · Universidade Presbiteriana Mackenzie  
+- **LinkedIn:** [linkedin.com/in/guilherme-freitas-3b8883381](https://www.linkedin.com/in/guilherme-freitas-3b8883381)  
+- **GitHub:** [github.com/GuilhermefLima22](https://github.com/GuilhermefLima22)  
+- **E-mail:** [contato.gui2206@gmail.com](mailto:contato.gui2206@gmail.com)
