@@ -156,7 +156,7 @@ export const projects: Project[] = [
         imageUrl: '/portuguinha/evolution_dashboard.png'
       }
     ],
-    githubUrl: '',
+    githubUrl: 'https://github.com/GuilhermefLima22/Portuguinha-',
     featured: true,
     color: '#45D4FF',
   },
