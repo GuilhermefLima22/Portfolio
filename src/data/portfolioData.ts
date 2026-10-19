@@ -187,24 +187,157 @@ export const projects: Project[] = [
   {
     id: 'termo',
     title: 'Termo em C',
-    tagline: 'Projeto acadêmico no Mackenzie · Algoritmos & Memória',
+    tagline: 'Projeto acadêmico no Mackenzie · Algoritmos, Busca & Manipulação de Arquivos',
     category: 'algoritmos',
     status: 'Concluído',
     description:
-      'Projeto desenvolvido na faculdade (Mackenzie): recriação do jogo Termo em linguagem C para o terminal, com manipulação de ponteiros, alocação de memória e arquivos.',
+      'Projeto desenvolvido na faculdade (Mackenzie): recriação do jogo Termo (Wordle) em linguagem C para o terminal, com leitura de dicionário em arquivo, busca sequencial, validação em duas passagens e cronometragem.',
     longDescription:
-      'Desenvolvido na faculdade (Universidade Presbiteriana Mackenzie) como projeto prático de ciência da computação. Toda a lógica do jogo foi programada em C puro para o terminal: leitura de dicionário em arquivo, sorteio de palavra secreta, validação de tentativas, manipulação de ponteiros e feedback visual letra a letra (correta, deslocada ou ausente).',
+      'Desenvolvido na faculdade (Universidade Presbiteriana Mackenzie) como projeto prático de algoritmos e programação em C. O programa carrega um dicionário externo (sem_acentos.txt) filtrando palavras de 5 letras em uma matriz em memória, sorteia a palavra secreta com semente aleatória e valida cada palpite com Busca Sequencial. O algoritmo de verificação em duas passagens utiliza um vetor de controle (letras_usadas) para sinalizar letras na posição exata (^), letras existentes na posição errada (!) e letras ausentes (X) sem falsos positivos em letras repetidas, além de medir o tempo total da partida com time_t.',
     highlights: [
-      'Desenvolvido na faculdade (Universidade Presbiteriana Mackenzie)',
-      'Lógica completa do jogo em C puro rodando no terminal',
-      'Manipulação de ponteiros, alocação de memória e arquivos',
-      'Feedback visual letra a letra com coloração no terminal',
+      'Código-fonte completo em C ANSI disponível para inspeção direto no portfólio',
+      'Leitura e filtragem de dicionário em arquivo (sem_acentos.txt) para matriz de até 10.000 palavras',
+      'Validação de palpites existentes usando algoritmo de Busca Sequencial e normalização (tolower)',
+      'Algoritmo de dicas em 2 passagens (^ posição certa, ! deslocada, X ausente) com controle de letras repetidas',
+      'Cronometragem de partida com <time.h> e geração de log estruturado do jogador',
     ],
-    techStack: ['C Puro', 'Ponteiros & Memória', 'Terminal', 'Algoritmos', 'Mackenzie'],
+    techStack: ['Linguagem C', 'Busca Sequencial', 'Manipulação de Arquivos', 'Strings & Matrizes', 'Mackenzie'],
     facts: [
       { label: 'Contexto', value: 'Faculdade (Mackenzie)' },
-      { label: 'Linguagem', value: 'C (ANSI/ISO)' },
+      { label: 'Algoritmo de Validação', value: 'Busca Sequencial + 2 Passagens' },
+      { label: 'Capacidade Dicionário', value: 'Até 10.000 palavras (FILE*)' },
+      { label: 'Bibliotecas C', value: 'stdio, string, stdlib, time, ctype' },
     ],
+    codeSnippet: {
+      filename: 'termo.c',
+      language: 'c',
+      code: `#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <ctype.h>
+
+#define MAX_PALAVRAS 10000 
+#define MAX_LETRAS 10 
+
+int buscaSequencial(char dicionario[][MAX_LETRAS], int tamanho, char *palavra) {
+    for (int i = 0; i < tamanho; i++) {
+        if (strcmp(dicionario[i], palavra) == 0) {
+            return i;
+        }
+    }
+    return -1; 
+}
+
+int main(void) {
+    char dicionario[MAX_PALAVRAS][MAX_LETRAS]; 
+    int total_palavras = 0;
+    char linha_arquivo[100]; 
+    
+    char palavra_secreta[MAX_LETRAS]; 
+    char palpite[MAX_LETRAS];
+
+    FILE *arq = fopen("sem_acentos.txt", "r");
+    if (arq == NULL) {
+        printf("Erro ao abrir o arquivo txt.\\n"); 
+        return 1;
+    }
+
+    while (fgets(linha_arquivo, sizeof(linha_arquivo), arq) != NULL) {
+        linha_arquivo[strcspn(linha_arquivo, "\\n")] = '\\0';
+        
+        if (strlen(linha_arquivo) == 5) {
+            strcpy(dicionario[total_palavras], linha_arquivo); 
+            total_palavras++;
+        }
+    }
+    fclose(arq);
+
+    srand(time(NULL)); 
+    int indice_sorteado = rand() % total_palavras; 
+    strcpy(palavra_secreta, dicionario[indice_sorteado]); 
+    
+    time_t tempo_inicio = time(NULL); 
+
+    int tentativas = 0;
+    int ganhou = 0; 
+
+    printf("\\nBEM-VINDO AO WORDLE (TERMO)!\\n");
+    printf("Tente adivinhar a palavra de 5 letras.\\n\\n");
+
+    while (tentativas < 6 && ganhou == 0) {
+        printf("Tentativa %d/6. Digite seu palpite: ", tentativas + 1);
+        scanf("%s", palpite);
+
+        for (int i = 0; palpite[i] != '\\0'; i++) {
+            palpite[i] = tolower(palpite[i]);
+        }
+
+        int posicao = buscaSequencial(dicionario, total_palavras, palpite);
+
+        if (posicao == -1) {
+            printf("Palavra invalida! Tente novamente com uma palavra que exista.\\n");
+            continue; 
+        }
+
+        tentativas++; 
+
+        printf("\\n+-----------+\\n| ");
+        for (int i = 0; i < 5; i++) {
+            printf("%c ", palpite[i]);
+        }
+        printf("|\\n| ");
+        
+        int letras_usadas[5] = {0, 0, 0, 0, 0}; 
+        char dicas[5] = {'X', 'X', 'X', 'X', 'X'}; 
+        
+        for (int i = 0; i < 5; i++) {
+            if (palpite[i] == palavra_secreta[i]) {
+                dicas[i] = '^';
+                letras_usadas[i] = 1; 
+            }
+        }
+        
+        for (int i = 0; i < 5; i++) {
+            if (dicas[i] == 'X') { 
+                for (int j = 0; j < 5; j++) {
+                    if (palpite[i] == palavra_secreta[j] && letras_usadas[j] == 0) {
+                        dicas[i] = '!';
+                        letras_usadas[j] = 1; 
+                        break; 
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < 5; i++) {
+            printf("%c ", dicas[i]);
+        }
+        printf("|\\n+-----------+\\n\\n");
+
+        if (strcmp(palpite, palavra_secreta) == 0) {
+            ganhou = 1;
+            printf("Parabens! Voce acertou a palavra!\\n");
+        }
+    }
+
+    if (ganhou == 0) {
+        printf("Que pena! Voce esgotou suas 6 tentativas.\\n");
+        printf("A palavra secreta era: %s\\n\\n", palavra_secreta);
+    }
+
+    char nome_jogador[50];
+    printf("Digite seu primeiro nome: ");
+    scanf("%s", nome_jogador);
+
+    time_t tempo_fim = time(NULL);
+    int tempo_total = (int)(tempo_fim - tempo_inicio);
+
+    printf("\\n%s; %s; %d; %d\\n", nome_jogador, palavra_secreta, tentativas, tempo_total);
+
+    return 0;
+}`,
+    },
     githubUrl: '',
     featured: false,
     color: '#FFD23D',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Project } from '../types';
-import { X, Terminal, BarChart3, CheckCircle2, Send, Workflow, Sparkles, Activity, ShieldCheck, MessageSquare, Users } from 'lucide-react';
+import { X, Terminal, BarChart3, CheckCircle2, Send, Workflow, Sparkles, Activity, ShieldCheck, MessageSquare, Users, Code2, Copy, Check } from 'lucide-react';
 
 interface ProjectModalProps {
   project: Project;
@@ -10,9 +10,11 @@ interface ProjectModalProps {
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const isDentinho = project.id === 'dentinho';
   const isPortuguinha = project.id === 'portuguinha';
-  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'dashboard' | 'media' | 'image' | 'workflow'>(
-    isDentinho ? 'terminal' : isPortuguinha ? 'workflow' : 'overview'
+  const hasCode = Boolean(project.codeSnippet);
+  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'dashboard' | 'media' | 'image' | 'workflow' | 'code'>(
+    isDentinho ? 'terminal' : isPortuguinha ? 'workflow' : hasCode ? 'code' : 'overview'
   );
+  const [copiedCode, setCopiedCode] = useState(false);
 
   // Estados interativos para simular o Terminal do Dentinho
   const [terminalTab, setTerminalTab] = useState<'treinar' | 'teste'>('treinar');
@@ -154,6 +156,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             >
               <Activity className="w-4 h-4" />
               Painel Evolution API (Conectado)
+            </button>
+
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`px-4 py-2.5 rounded-xl font-mono text-xs transition-all ${
+                activeTab === 'overview'
+                  ? 'bg-signal text-ink-950 font-bold'
+                  : 'bg-white/[0.03] text-paper/70 hover:text-paper border border-white/[0.05]'
+              }`}
+            >
+              Arquitetura & Detalhes
+            </button>
+          </div>
+        ) : hasCode && project.codeSnippet ? (
+          <div className="flex flex-wrap items-center gap-2 mb-6 border-b border-white/[0.08] pb-4">
+            <button
+              onClick={() => setActiveTab('code')}
+              className={`px-4 py-2.5 rounded-xl font-mono text-xs flex items-center gap-2 transition-all ${
+                activeTab === 'code'
+                  ? 'bg-signal text-ink-950 font-bold shadow-[0_0_15px_rgba(198,255,61,0.25)]'
+                  : 'bg-white/[0.03] text-paper/70 hover:text-paper border border-white/[0.05]'
+              }`}
+            >
+              <Code2 className="w-4 h-4" />
+              Código-Fonte ({project.codeSnippet.filename})
             </button>
 
             <button
@@ -640,6 +667,113 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     Números de Admin controlam o estado global do bot pelo próprio WhatsApp (<code className="text-amber-300">ativar</code>, <code className="text-amber-300">desativar</code> e <code className="text-amber-300">status</code>) caso precisem pausar a recepcionista. Inclui filtro que descarta mensagens com mais de 5 min em reconexões e alerta automático quando o servidor fica online.
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* ABA: CÓDIGO-FONTE REAL (EX: TERMO EM C)                                   */}
+        {/* ========================================================================= */}
+        {activeTab === 'code' && project.codeSnippet && (
+          <div className="space-y-6 animate-in fade-in duration-200">
+            {/* Simulação Visual da Saída no Terminal + Legenda do Algoritmo */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+              <div className="lg:col-span-6 p-4 sm:p-5 rounded-2xl bg-[#06080F] border border-white/10 font-mono text-xs space-y-2">
+                <div className="flex items-center justify-between text-[11px] text-muted border-b border-white/[0.06] pb-2 mb-2">
+                  <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
+                    <Terminal className="w-3.5 h-3.5" />
+                    Saída no Terminal (Execução Real)
+                  </span>
+                  <span>gcc termo.c -o termo</span>
+                </div>
+                <pre className="text-paper/90 leading-relaxed overflow-x-auto text-[11.5px]">
+{`BEM-VINDO AO WORDLE (TERMO)!
+Tente adivinhar a palavra de 5 letras.
+
+Tentativa 1/6. Digite seu palpite: termo
+
++-----------+
+| t e r m o |
+| ^ ! X X ^ |
++-----------+`}
+                </pre>
+              </div>
+
+              <div className="lg:col-span-6 p-4 sm:p-5 rounded-2xl bg-ink-950/70 border border-white/[0.06] font-mono text-xs flex flex-col justify-between space-y-3">
+                <div className="text-paper font-semibold flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-signal" />
+                  <span>Lógica de Verificação em 2 Passagens:</span>
+                </div>
+                <div className="space-y-2 text-[11.5px] text-muted">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-bold">^</span>
+                    <span><strong>1ª Passagem:</strong> Letra na posição exata (<code className="text-paper">palpite[i] == palavra_secreta[i]</code>)</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 border border-amber-500/30 font-bold">!</span>
+                    <span><strong>2ª Passagem:</strong> Letra existe na palavra em outra posição (controlada por <code className="text-paper">letras_usadas[5]</code>)</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2 py-0.5 rounded bg-rose-500/15 text-rose-400 border border-rose-500/30 font-bold">X</span>
+                    <span><strong>Ausente:</strong> Letra não pertence à palavra secreta sorteada</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bloco do Código-Fonte Completo */}
+            <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#06080F] shadow-2xl">
+              <div className="px-4 py-3 bg-ink-950 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                  </div>
+                  <span className="text-paper font-semibold ml-1">{project.codeSnippet.filename}</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-white/[0.05] text-muted border border-white/10">
+                    C ANSI • {project.codeSnippet.code.split('\n').length} linhas
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(project.codeSnippet!.code);
+                    setCopiedCode(true);
+                    setTimeout(() => setCopiedCode(false), 2000);
+                  }}
+                  className="px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-signal hover:text-ink-950 text-paper/90 border border-white/10 font-mono text-[11px] font-semibold flex items-center gap-1.5 transition-all"
+                >
+                  {copiedCode ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Copiado!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copiar Código</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <div className="p-4 sm:p-5 overflow-x-auto max-h-[460px] overflow-y-auto font-mono text-xs leading-relaxed">
+                <table className="w-full border-collapse">
+                  <tbody>
+                    {project.codeSnippet.code.split('\n').map((line, i) => (
+                      <tr key={i} className="hover:bg-white/[0.02]">
+                        <td className="select-none pr-4 text-right text-muted/40 text-[11px] w-8 align-top">
+                          {i + 1}
+                        </td>
+                        <td className="text-paper/90 whitespace-pre">
+                          {line || ' '}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

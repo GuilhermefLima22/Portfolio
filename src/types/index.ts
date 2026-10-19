@@ -19,6 +19,12 @@ export interface Project {
     description: string;
     imageUrl?: string;
   }[];
+  /** Código-fonte real do projeto para exibição no modal */
+  codeSnippet?: {
+    filename: string;
+    language: string;
+    code: string;
+  };
   githubUrl?: string;
   demoUrl?: string;
   featured: boolean;
