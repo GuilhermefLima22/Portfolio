@@ -201,7 +201,7 @@ export const ResumeModal: React.FC = () => {
                 <div>
                   <div className="font-mono text-xs font-semibold text-paper mb-0.5">Inteligência Artificial & Visão</div>
                   <p className="text-muted leading-relaxed">
-                    API do Gemini (Chat & Vision OCR para placas/veículos), engenharia de prompt e memória de contexto.
+                    API do Gemini (Chat & Vision OCR), engenharia de prompt e memória de contexto.
                   </p>
                 </div>
 
