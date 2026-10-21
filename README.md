@@ -31,7 +31,12 @@ PortfÃ³lio interativo de alta performance com Three.js / React Three Fiber, anim
    - Bot conversacional com Gemini 3.8 Flash, terminal de monitoramento em tempo real e API com painel administrativo de pedidos.
 
 3. **Termo em C (Mackenzie):**
-   - RecriaÃ§Ã£o completa do Wordle em C puro no terminal, com leitura de dicionÃ¡rio em arquivo, busca sequencial e validaÃ§Ã£o de letras em 2 passagens.
+   - Recriação completa do Wordle em C puro no terminal, com leitura de dicionário em arquivo, busca sequencial e validação de letras em 2 passagens.
+
+4. **Decodificador para Display de 7 Segmentos (Mackenzie):**
+   - Decodificador BCD de 4 bits para display de 7 segmentos (0 a 9) projetado e simulado no Logisim.
+   - Otimização lógica por Mapas de Karnaugh com condições Don't Care (x), tabela-verdade e simulador em Python.
+   - [Repositório do Decodificador](https://github.com/GuilhermefLima22/decodificador-display-7-segmentos)
 
 ---
 

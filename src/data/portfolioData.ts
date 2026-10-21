@@ -381,7 +381,7 @@ int main(void) {
         imageUrl: '/display7seg/tabela_verdade.png',
       },
     ],
-    githubUrl: '',
+    githubUrl: 'https://github.com/GuilhermefLima22/decodificador-display-7-segmentos',
     featured: false,
     color: '#38BDF8',
   },
