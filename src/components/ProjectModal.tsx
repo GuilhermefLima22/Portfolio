@@ -10,9 +10,10 @@ interface ProjectModalProps {
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const isDentinho = project.id === 'dentinho';
   const isPortuguinha = project.id === 'portuguinha';
+  const isDisplay7Seg = project.id === 'display7seg';
   const hasCode = Boolean(project.codeSnippet);
-  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'dashboard' | 'media' | 'image' | 'workflow' | 'code'>(
-    isDentinho ? 'terminal' : isPortuguinha ? 'workflow' : hasCode ? 'code' : 'overview'
+  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'dashboard' | 'media' | 'image' | 'workflow' | 'code' | 'circuit'>(
+    isDentinho ? 'terminal' : isPortuguinha ? 'workflow' : isDisplay7Seg ? 'circuit' : hasCode ? 'code' : 'overview'
   );
   const [copiedCode, setCopiedCode] = useState(false);
 
@@ -156,6 +157,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             >
               <Activity className="w-4 h-4" />
               Painel Evolution API (Conectado)
+            </button>
+
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`px-4 py-2.5 rounded-xl font-mono text-xs transition-all ${
+                activeTab === 'overview'
+                  ? 'bg-signal text-ink-950 font-bold'
+                  : 'bg-white/[0.03] text-paper/70 hover:text-paper border border-white/[0.05]'
+              }`}
+            >
+              Arquitetura & Detalhes
+            </button>
+          </div>
+        ) : isDisplay7Seg ? (
+          <div className="flex flex-wrap items-center gap-2 mb-6 border-b border-white/[0.08] pb-4">
+            <button
+              onClick={() => setActiveTab('circuit')}
+              className={`px-4 py-2.5 rounded-xl font-mono text-xs flex items-center gap-2 transition-all ${
+                activeTab === 'circuit'
+                  ? 'bg-signal text-ink-950 font-bold shadow-[0_0_15px_rgba(198,255,61,0.25)]'
+                  : 'bg-white/[0.03] text-paper/70 hover:text-paper border border-white/[0.05]'
+              }`}
+            >
+              <Workflow className="w-4 h-4" />
+              Circuito Logisim & Tabela-Verdade
             </button>
 
             <button
@@ -673,6 +699,93 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         )}
 
         {/* ========================================================================= */}
+        {/* ========================================================================= */}
+        {/* ABA: CIRCUITO LOGISIM & TABELA-VERDADE (DISPLAY DE 7 SEGMENTOS)           */}
+        {/* ========================================================================= */}
+        {activeTab === 'circuit' && isDisplay7Seg && (
+          <div className="space-y-6 animate-in fade-in duration-200">
+            {/* Grid com as duas capturas reais do Logisim */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+              {/* Print 1: Circuito Completo no Logisim */}
+              <div className="lg:col-span-7 rounded-2xl overflow-hidden border border-white/10 bg-[#06080F] shadow-2xl flex flex-col justify-between">
+                <div className="px-4 py-3 bg-ink-950 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-muted">
+                  <span className="flex items-center gap-2">
+                    <Workflow className="w-3.5 h-3.5 text-sky-400" />
+                    Circuito Combinacional no Logisim
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
+                    Entrada: 1001₂ → Display: 9
+                  </span>
+                </div>
+
+                <div className="p-3 sm:p-5 bg-white flex items-center justify-center">
+                  <img
+                    src="/display7seg/circuito_logisim.png"
+                    alt="Circuito Decodificador BCD para Display de 7 Segmentos no Logisim"
+                    className="max-h-[480px] w-auto object-contain rounded-lg hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </div>
+
+                <div className="px-4 py-3 bg-ink-950/90 border-t border-white/[0.06] text-xs font-mono text-muted">
+                  <span className="text-paper font-semibold">Barramento ABCD + Portas NOT/AND/OR: </span>
+                  <span>Cada bloco lógico horizontal alimenta um segmento individual (<code className="text-sky-300">a</code> até <code className="text-sky-300">g</code>) do display.</span>
+                </div>
+              </div>
+
+              {/* Print 2: Tabela-Verdade com Don't Care (x) */}
+              <div className="lg:col-span-5 rounded-2xl overflow-hidden border border-white/10 bg-[#06080F] shadow-2xl flex flex-col justify-between">
+                <div className="px-4 py-3 bg-ink-950 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-muted">
+                  <span className="flex items-center gap-2">
+                    <Sparkles className="w-3.5 h-3.5 text-signal" />
+                    Tabela-Verdade (Análise Combinacional)
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
+                    0 a 9 + Don&apos;t Care (x)
+                  </span>
+                </div>
+
+                <div className="p-3 sm:p-5 bg-[#EBEBEB] flex items-center justify-center flex-1">
+                  <img
+                    src="/display7seg/tabela_verdade.png"
+                    alt="Tabela-Verdade BCD para Display de 7 Segmentos no Logisim"
+                    className="max-h-[420px] w-auto object-contain rounded-lg hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </div>
+
+                <div className="px-4 py-3 bg-ink-950/90 border-t border-white/[0.06] text-xs font-mono text-muted">
+                  <span className="text-paper font-semibold">Otimização com &quot;x&quot; (Don&apos;t Care): </span>
+                  <span>As entradas <code className="text-paper">1010</code> a <code className="text-paper">1111</code> (10–15) não ocorrem em BCD e foram usadas como curingas no Mapa de Karnaugh.</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Explicação Didática da Engenharia do Circuito */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 font-mono text-xs">
+              <div className="p-4 rounded-xl bg-ink-950/80 border border-white/[0.06] space-y-1.5">
+                <div className="text-sky-400 font-semibold">1. Entradas Binárias (A, B, C, D)</div>
+                <p className="text-muted leading-relaxed">
+                  Representam um dígito decimal codificado em binário de 4 bits (de <code className="text-paper">0000</code> = 0 até <code className="text-paper">1001</code> = 9), com trilhas verticais diretas e invertidas (<code className="text-paper">NOT</code>).
+                </p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-ink-950/80 border border-white/[0.06] space-y-1.5">
+                <div className="text-signal font-semibold">2. Mapas de Karnaugh & Don&apos;t Care</div>
+                <p className="text-muted leading-relaxed">
+                  Ao marcar os estados <code className="text-paper">1010</code>–<code className="text-paper">1111</code> como <code className="text-signal font-bold">x</code>, formamos grupos maiores nos 7 mapas, reduzindo drasticamente o custo de portas lógicas.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-ink-950/80 border border-white/[0.06] space-y-1.5">
+                <div className="text-emerald-400 font-semibold">3. Acionamento dos 7 Segmentos</div>
+                <p className="text-muted leading-relaxed">
+                  Na captura acima, a entrada <code className="text-emerald-300">1001</code> (9) ativa as saídas <code className="text-paper">a=1, b=1, c=1, d=1, e=0, f=1, g=1</code>, acendendo o número <strong>9</strong> no display.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
         {/* ABA: CÓDIGO-FONTE REAL (EX: TERMO EM C)                                   */}
         {/* ========================================================================= */}
         {activeTab === 'code' && project.codeSnippet && (
@@ -785,7 +898,7 @@ Tentativa 1/6. Digite seu palpite: termo
         {activeTab === 'overview' && (
           <div className="space-y-8 animate-in fade-in duration-150">
             {/* Visualização de Mídia (se houver e não for Dentinho) */}
-            {project.media && project.media.length > 0 && !isDentinho && (
+            {project.media && project.media.length > 0 && !isDentinho && !isPortuguinha && !isDisplay7Seg && (
               <div>
                 <h4 className="font-mono text-xs uppercase tracking-wider text-muted mb-3 flex items-center gap-2">
                   <Workflow className="w-4 h-4 text-signal" />

@@ -351,11 +351,11 @@ int main(void) {
     category: 'iot',
     status: 'Concluído',
     description:
-      'Projeto desenvolvido na faculdade (Mackenzie): decodificador BCD para display de 7 segmentos de 0 a 9, com tabela-verdade, simplificação por Mapa de Karnaugh e circuito no Logisim.',
+      'Projeto desenvolvido na faculdade (Mackenzie): decodificador BCD de 4 bits (A, B, C, D) para display de 7 segmentos (0 a 9), com tabela-verdade, condições Don\'t Care (x), simplificação por Mapa de Karnaugh e simulação no Logisim.',
     longDescription:
-      'Desenvolvido na disciplina de Circuitos Digitais na Universidade Presbiteriana Mackenzie. O projeto consistiu em projetar e implementar um decodificador BCD (Binary Coded Decimal) de 4 bits para acionar um display de 7 segmentos e representar os números de 0 a 9. Para cada um dos 7 segmentos (a até g), foi construída a tabela-verdade e aplicado o Mapa de Karnaugh para simplificação das expressões booleanas, minimizando o número de portas lógicas antes da montagem e simulação funcional no Logisim.',
+      'Desenvolvido na disciplina de Circuitos Digitais na Universidade Presbiteriana Mackenzie. O projeto consistiu em projetar e implementar um decodificador BCD (Binary Coded Decimal) de 4 bits (entradas A, B, C, D) capaz de acionar individualmente os 7 segmentos luminosos (a até g) para representar os algarismos de 0 (0000) a 9 (1001). Na construção da tabela-verdade, os estados binários de 10 (1010) a 15 (1111) foram definidos como condições irrelevantes (Don\'t Care — "x"), permitindo agrupar laços maiores nos 7 Mapas de Karnaugh e reduzir significativamente a quantidade de portas lógicas (NOT, AND e OR) necessárias no circuito final simulado no Logisim.',
     highlights: [
-      'Desenvolvido na disciplina de Circuitos Digitais (Universidade Presbiteriana Mackenzie)',
+      'Circuito digital completo e Tabela-Verdade real do Logisim disponíveis para visualização no portfólio',
       'Conversão de 4 bits de entrada BCD para controle individual dos 7 segmentos (a até g)',
       'Simplificação lógica de expressões booleanas usando Mapa de Karnaugh para cada segmento',
       'Montagem, otimização e simulação do circuito digital completo no Logisim',
@@ -365,7 +365,21 @@ int main(void) {
       { label: 'Contexto', value: 'Faculdade (Mackenzie)' },
       { label: 'Disciplina', value: 'Circuitos Digitais' },
       { label: 'Ambiente', value: 'Logisim Simulator' },
-      { label: 'Entradas / Saídas', value: '4 bits BCD → 7 Segmentos (0-9)' },
+      { label: 'Entradas / Saídas', value: '4 bits (ABCD) → 7 Seg (a-g)' },
+    ],
+    media: [
+      {
+        type: 'image',
+        title: 'Circuito Combinacional Completo no Logisim (Simulando 1001₂ = 9)',
+        description: 'Barramento de 4 entradas (A=1, B=0, C=0, D=1) com inversores NOT e arranjos soma-de-produtos (AND/OR) otimizados por Karnaugh, acionando o display de 7 segmentos com o número 9.',
+        imageUrl: '/display7seg/circuito_logisim.png',
+      },
+      {
+        type: 'image',
+        title: 'Tabela-Verdade BCD (0 a 9) com Estados Don\'t Care (x)',
+        description: 'Mapeamento binário das entradas A, B, C, D para as 7 saídas (a até g), utilizando "x" (Don\'t Care) nas combinações 1010 a 1111 para simplificar as expressões booleanas.',
+        imageUrl: '/display7seg/tabela_verdade.png',
+      },
     ],
     githubUrl: '',
     featured: false,
