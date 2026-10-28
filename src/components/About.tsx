@@ -25,10 +25,10 @@ export const About: React.FC = () => {
               <span>Quem sou eu</span>
             </div>
             <p className="text-paper text-sm md:text-base leading-relaxed">
-              Estudo <strong>Ciência da Computação no Mackenzie</strong> (2º semestre) e fiz o ensino médio no <strong>Colégio Objetivo</strong>. Sempre tive curiosidade por tecnologia e raciocínio lógico, o que me fez querer entender como as coisas realmente funcionam por baixo dos panos.
+              Estudo <strong>Ciência da Computação no Mackenzie</strong> (2º semestre) e sou desenvolvedor focado em <strong>Backend & Engenharia de IA</strong>. Sempre tive curiosidade por arquitetura de software, o que me levou a aprofundar em lógica, Python e sistemas.
             </p>
             <p className="text-paper/75 text-sm md:text-base leading-relaxed">
-              Em vez de ficar só na teoria, gosto de testar as coisas na prática: desenvolvi chatbots inteligentes com IA e Visão Computacional (Gemini), criei automações com Docker e n8n e, na faculdade (Mackenzie), desenvolvi projetos práticos como o decodificador para display de 7 segmentos no Logisim (otimizado com Mapa de Karnaugh), a estufa com Arduino e a versão do jogo Termo em C no terminal para exercitar estruturas de dados, ponteiros e controle de memória.
+              Em vez de ficar só na teoria, construo soluções reais: desenvolvi APIs REST com FastAPI, integrei Large Language Models (Gemini) com memória de contexto e tools de banco de dados, implantei pipelines conteinerizados com Docker Compose (PostgreSQL e Redis) e, na faculdade (Mackenzie), desenvolvi o decodificador para display de 7 segmentos no Logisim e o Termo em C no terminal para exercitar estruturas de dados e controle de memória.
             </p>
           </div>
 
@@ -39,7 +39,7 @@ export const About: React.FC = () => {
               <span>Onde quero chegar</span>
             </div>
             <p className="text-paper text-sm md:text-base leading-relaxed">
-              Procuro uma oportunidade de <strong>estágio em Dados ou Inteligência Artificial</strong>. Quero fazer parte de um time onde eu possa aprender com quem tem mais experiência, botar a mão na massa com Python, análise de dados e APIs, e contribuir de verdade com o dia a dia da empresa.
+              Procuro uma oportunidade de <strong>estágio em Desenvolvimento Backend ou Engenharia de IA</strong>. Quero fazer parte de um time onde eu possa aprender com quem tem mais experiência, botar a mão na massa com Python, APIs, microsserviços e LLMs, e contribuir de verdade com código sólido no dia a dia da empresa.
             </p>
           </div>
 

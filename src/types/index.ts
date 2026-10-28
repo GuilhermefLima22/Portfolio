@@ -26,6 +26,8 @@ export interface Project {
     code: string;
   };
   githubUrl?: string;
+  codeAccess?: 'public' | 'private_nda' | 'embedded';
+  privateReason?: string;
   demoUrl?: string;
   featured: boolean;
   /** Cor do cluster na cena 3D e do acento do card. */

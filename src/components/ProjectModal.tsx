@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Project } from '../types';
-import { X, Terminal, BarChart3, CheckCircle2, Send, Workflow, Sparkles, Activity, ShieldCheck, MessageSquare, Users, Code2, Copy, Check } from 'lucide-react';
+import { X, Terminal, BarChart3, CheckCircle2, Send, Workflow, Sparkles, Activity, ShieldCheck, MessageSquare, Users, Code2, Copy, Check, Lock, ExternalLink } from 'lucide-react';
+import { GithubIcon } from './BrandIcons';
 
 interface ProjectModalProps {
   project: Project;
@@ -68,7 +69,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-white/[0.08] pb-5 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-5 mb-6">
           <div>
             <div className="flex items-center gap-3 mb-1">
               <span className="font-mono text-xs px-2.5 py-0.5 rounded-full bg-signal/10 text-signal border border-signal/30 font-medium">
@@ -86,13 +87,45 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </p>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-2.5 rounded-full bg-white/[0.05] hover:bg-white/15 text-paper/80 hover:text-white transition-colors"
-            aria-label="Fechar"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2.5 self-start sm:self-center">
+            {project.githubUrl ? (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.06] hover:bg-signal hover:text-ink-950 text-paper border border-white/10 font-mono text-xs font-semibold transition-all shadow-md group"
+                title="Acessar repositório público no GitHub"
+              >
+                <GithubIcon className="w-3.5 h-3.5 text-paper group-hover:text-ink-950 transition-colors" />
+                <span>Ver no GitHub</span>
+                <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+              </a>
+            ) : project.codeAccess === 'private_nda' ? (
+              <div 
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs font-semibold"
+                title="Código-fonte comercial sob termo de confidencialidade (NDA). Telas e fluxos demonstrados no portfólio."
+              >
+                <Lock className="w-3.5 h-3.5" />
+                <span>Código Privado (NDA)</span>
+              </div>
+            ) : project.codeSnippet ? (
+              <div 
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-semibold"
+                title="Código-fonte disponível no modal"
+              >
+                <Code2 className="w-3.5 h-3.5" />
+                <span>Código no Portfólio</span>
+              </div>
+            ) : null}
+
+            <button
+              onClick={onClose}
+              className="p-2.5 rounded-full bg-white/[0.05] hover:bg-white/15 text-paper/80 hover:text-white transition-colors"
+              aria-label="Fechar"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Modal Tabs */}
@@ -897,6 +930,16 @@ Tentativa 1/6. Digite seu palpite: termo
         {/* ========================================================================= */}
         {activeTab === 'overview' && (
           <div className="space-y-8 animate-in fade-in duration-150">
+            {/* Aviso de Confidencialidade (NDA) */}
+            {project.codeAccess === 'private_nda' && (
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-xs font-mono text-paper/90">
+                <ShieldCheck className="w-5 h-5 text-amber-400 shrink-0" />
+                <div>
+                  <span className="font-bold text-amber-400">Código-Fonte sob Termo de Confidencialidade (NDA): </span>
+                  <span>Esta solução opera comercialmente em ambiente de cliente. O código-fonte backend é proprietário sob sigilo, com toda a arquitetura de dados, telas, simulações e endpoints expostos neste portfólio.</span>
+                </div>
+              </div>
+            )}
             {/* Visualização de Mídia (se houver e não for Dentinho) */}
             {project.media && project.media.length > 0 && !isDentinho && !isPortuguinha && !isDisplay7Seg && (
               <div>

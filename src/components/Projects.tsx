@@ -4,7 +4,8 @@ import type { Project } from '../types';
 import { SectionHeading } from './Reveal';
 import { ProjectModal } from './ProjectModal';
 import { useAppStore } from '../store';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Lock, Code2 } from 'lucide-react';
+import { GithubIcon } from './BrandIcons';
 
 export const Projects: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -144,7 +145,7 @@ const ProjectCard: React.FC<{
           </div>
         )}
 
-        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
+        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.06] mb-3">
           {project.techStack.map((tech, idx) => (
             <span
               key={idx}
@@ -153,6 +154,46 @@ const ProjectCard: React.FC<{
               {tech}
             </span>
           ))}
+        </div>
+
+        {/* Status do Código / GitHub */}
+        <div className="flex items-center justify-between pt-2.5 border-t border-white/[0.04] text-xs font-mono">
+          <span className="text-[11px] text-muted">Acesso ao código:</span>
+          {project.githubUrl ? (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.05] hover:bg-signal hover:text-ink-950 text-paper/90 border border-white/10 font-mono text-[11px] font-semibold transition-all group"
+              title="Acessar repositório público no GitHub"
+            >
+              <GithubIcon className="w-3.5 h-3.5 text-paper/80 group-hover:text-ink-950 transition-colors" />
+              <span>GitHub Público</span>
+            </a>
+          ) : project.codeAccess === 'private_nda' ? (
+            <span 
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-300 font-mono text-[11px] font-semibold"
+              title="Código comercial confidencial sob termo de sigilo (NDA)"
+            >
+              <Lock className="w-3 h-3" />
+              <span>Código Privado (NDA)</span>
+            </span>
+          ) : project.codeSnippet ? (
+            <span 
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-mono text-[11px] font-semibold"
+              title="Código-fonte completo exibido no modal do portfólio"
+            >
+              <Code2 className="w-3 h-3" />
+              <span>Ver Código (Modal)</span>
+            </span>
+          ) : (
+            <span 
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-paper/60 font-mono text-[11px]"
+            >
+              <span>Acadêmico</span>
+            </span>
+          )}
         </div>
       </div>
     </div>

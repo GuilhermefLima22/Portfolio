@@ -83,7 +83,7 @@ export const ResumeModal: React.FC = () => {
             {personalInfo.fullName}
           </h1>
           <p className="font-mono text-xs sm:text-sm text-paper/80 mt-1">
-            Estudante de Ciência da Computação · Universidade Presbiteriana Mackenzie
+            Estudante de Ciência da Computação @ Mackenzie | Desenvolvedor Backend & Engenharia de IA (Python, LLMs, APIs)
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-5 mt-4 font-mono text-xs text-muted">
@@ -258,7 +258,7 @@ export const ResumeModal: React.FC = () => {
                 <span>Sobre mim & Objetivo</span>
               </div>
               <p className="text-paper/85 text-sm leading-relaxed">
-                Estudo Ciência da Computação no Mackenzie e gosto de aprender construindo projetos práticos. Desenvolvi bots com IA e Visão Computacional para WhatsApp, automações conteinerizadas em Docker e projetos em Python e linguagem C na faculdade. Busco uma oportunidade de <strong>estágio em Dados ou Inteligência Artificial</strong> para aprender com a equipe, colocar a mão na massa no dia a dia e evoluir profissionalmente.
+                Estudo Ciência da Computação no Mackenzie e desenvolvo soluções práticas focadas em <strong>Backend e Engenharia de IA</strong>. Construo APIs REST em Python (FastAPI), conecto modelos de linguagem (Gemini) com memória de contexto e tools de banco de dados, e implanto pipelines conteinerizados com Docker Compose (PostgreSQL e Redis). Busco uma oportunidade de <strong>estágio em Desenvolvimento Backend ou Engenharia de IA</strong> para aprender com o time, colocar a mão na massa e contribuir com código de qualidade.
               </p>
             </section>
 
@@ -274,8 +274,9 @@ export const ResumeModal: React.FC = () => {
                 {/* Dentinho */}
                 <div className="space-y-1.5 pb-4 border-b border-white/[0.05]">
                   <div className="flex flex-wrap items-baseline justify-between gap-1">
-                    <span className="font-display font-semibold text-paper text-sm sm:text-base">
-                      Dentinho — Bot de WhatsApp com IA & Painel
+                    <span className="font-display font-semibold text-paper text-sm sm:text-base flex items-center gap-2">
+                      <span>Dentinho — Bot de WhatsApp com IA & Painel</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/25">Código Privado (NDA)</span>
                     </span>
                     <span className="font-mono text-[11px] text-signal">
                       Python • Gemini • FastAPI • SQLite
@@ -320,8 +321,9 @@ export const ResumeModal: React.FC = () => {
                 {/* D&SKY */}
                 <div className="space-y-1.5 pb-4 border-b border-white/[0.05]">
                   <div className="flex flex-wrap items-baseline justify-between gap-1">
-                    <span className="font-display font-semibold text-paper text-sm sm:text-base">
-                      D&SKY — Automação de Postagens & Afiliados
+                    <span className="font-display font-semibold text-paper text-sm sm:text-base flex items-center gap-2">
+                      <span>D&SKY — Automação de Postagens & Afiliados</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/25">Código Privado (NDA)</span>
                     </span>
                     <span className="font-mono text-[11px] text-signal">
                       Python • Automação

@@ -32,15 +32,15 @@ export const Hero: React.FC = () => {
       <div className="my-auto py-6 sm:py-12 max-w-4xl relative z-10">
         <p className="font-mono text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.16em] sm:tracking-[0.2em] text-signal/90 mb-3 sm:mb-4 flex items-center gap-2">
           <Sparkles className="w-3.5 h-3.5" />
-          Estudante de Ciência da Computação
+          Estudante de Ciência da Computação @ Mackenzie
         </p>
 
         <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-paper leading-[1.12] sm:leading-[1.05] mb-6 sm:mb-8">
-          Transformando dados brutos e modelos de IA em soluções reais.
+          Desenvolvedor Backend & Engenharia de IA.
         </h1>
 
         <p className="text-sm sm:text-base md:text-xl text-paper/75 font-sans max-w-2xl leading-relaxed mb-8 sm:mb-10">
-          Olá, sou o <strong className="text-paper font-semibold">{personalInfo.name}</strong>. Crio automações inteligentes, conecto LLMs à rotina de negócios e exploro a engenharia e análise de dados de ponta a ponta.
+          Olá, sou o <strong className="text-paper font-semibold">{personalInfo.name}</strong>. Construo APIs em Python (FastAPI), conecto modelos de linguagem (LLMs) à operação real de empresas e implanto infraestruturas conteinerizadas em Docker.
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
