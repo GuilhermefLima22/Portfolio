@@ -99,6 +99,8 @@ export const Navbar: React.FC = () => {
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         className="md:hidden flex flex-col gap-1.5 p-2 text-paper focus:outline-none"
         aria-label="Menu"
+        aria-expanded={mobileMenuOpen}
+        aria-controls="mobile-navigation"
       >
         <span className={`w-6 h-[2px] bg-paper transition-transform ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
         <span className={`w-6 h-[2px] bg-paper transition-opacity ${mobileMenuOpen ? 'opacity-0' : ''}`} />
@@ -107,7 +109,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-ink-900 border-b border-white/10 px-6 py-6 flex flex-col gap-3.5 md:hidden shadow-2xl animate-in slide-in-from-top-2">
+        <div id="mobile-navigation" className="absolute top-full left-0 right-0 bg-ink-900 border-b border-white/10 px-6 py-6 flex flex-col gap-3.5 md:hidden shadow-2xl animate-in slide-in-from-top-2">
           {SCENES.map((item) => (
             <button
               key={item.id}
@@ -115,6 +117,7 @@ export const Navbar: React.FC = () => {
                 scrollToId(item.id);
                 setMobileMenuOpen(false);
               }}
+              aria-current={currentScene === item.id ? 'page' : undefined}
               className="text-left py-1.5 font-mono text-sm tracking-wider text-paper/80 hover:text-signal"
             >
               {item.label}

@@ -1,0 +1,122 @@
+/* Mobile presentation only. The desktop starts at Tailwind's md breakpoint. */
+@media (max-width: 767px) {
+  main > section {
+    padding-inline: clamp(20px, 5.5vw, 36px);
+    padding-block: 72px;
+    scroll-margin-top: 76px;
+  }
+
+  header.fixed {
+    padding: 14px clamp(20px, 5.5vw, 36px);
+    background: rgb(6 7 9 / 90%);
+  }
+
+  header > .hidden.sm\:flex { display: none; }
+  header > button:last-of-type { min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+  header > button:focus-visible { outline: 2px solid #c6ff3d; }
+  #mobile-navigation {
+    max-height: calc(100dvh - 76px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 20px clamp(20px, 5.5vw, 36px) 28px;
+    gap: 10px;
+    background: rgb(12 14 18 / 98%);
+    border-radius: 0 0 24px 24px;
+  }
+  #mobile-navigation > button {
+    min-height: 48px;
+    padding: 12px 16px;
+    border-radius: 14px;
+  }
+  #mobile-navigation > button[aria-current='page'] {
+    color: #c6ff3d;
+    background: rgb(198 255 61 / 7%);
+    box-shadow: inset 2px 0 #c6ff3d;
+  }
+  #mobile-navigation a { min-height: 44px; }
+
+  #hero {
+    min-height: 100svh;
+    padding-top: 104px;
+    padding-bottom: 28px;
+    gap: 36px;
+  }
+  #hero > div:first-child { align-items: flex-start; gap: 14px; }
+  #hero > div:first-child > div:first-child { padding: 8px 12px; }
+  #hero > div:first-child > div:last-child { font-size: 10px; line-height: 1.6; }
+  #hero > div:nth-child(2) { padding-block: 8px 16px; }
+  #hero > div:nth-child(2) > p:first-child {
+    font-size: 10px;
+    letter-spacing: .12em;
+    line-height: 1.8;
+    align-items: flex-start;
+    max-width: 32em;
+    margin-bottom: 20px;
+  }
+  #hero svg { flex-shrink: 0; }
+  #hero > div:nth-child(2) > p:first-child svg { margin-top: 3px; }
+  #hero h1 {
+    font-size: clamp(36px, 9.4vw, 62px);
+    line-height: 1.08;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+    margin-bottom: 24px;
+  }
+  #hero > div:nth-child(2) > p:nth-of-type(2) { font-size: 15px; line-height: 1.8; margin-bottom: 28px; }
+  #hero > div:nth-child(2) > div { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  #hero > div:nth-child(2) > div button { width: 100%; min-height: 50px; font-size: 12px; padding-inline: 16px; box-shadow: none; }
+  #hero > div:last-child { padding-top: 20px; }
+  #hero > div:last-child button { min-height: 44px; }
+
+  main h2 {
+    font-size: clamp(30px, 7.5vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+  }
+  main .label { line-height: 1.7; letter-spacing: .12em; }
+  main > section:not(#hero) { border-top: 1px solid rgb(255 255 255 / 6%); }
+  main > section > .grid { margin-top: 32px; gap: 20px; }
+  :is(#sobre, #stack, #contato) .rounded-2xl,
+  :is(#sobre, #stack, #contato) .rounded-3xl { border-radius: 22px; }
+  :is(#sobre, #stack) p { line-height: 1.8; }
+  #sobre .justify-between { flex-wrap: wrap; row-gap: 10px; }
+  #sobre svg { flex-shrink: 0; }
+  #sobre .text-xs.leading-relaxed,
+  #stack .text-xs.leading-relaxed { font-size: 13px; }
+
+  #projetos > div:nth-child(2) { gap: 8px; margin-block: 28px; }
+  #projetos > div:nth-child(2) button { min-height: 44px; padding: 10px 14px; line-height: 1.5; }
+  #projetos > .grid > .group { padding: 24px; border-radius: 24px; background: rgb(12 14 18 / 90%); }
+  #projetos h3 { font-size: 26px; line-height: 1.15; letter-spacing: -.025em; }
+  #projetos .truncate { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+  #projetos .group > div:last-child > div:last-child { flex-wrap: wrap; gap: 10px; }
+  #projetos .group > div:last-child > div:last-child a { min-height: 44px; padding-inline: 12px; }
+
+  #contato > .grid { gap: 32px; }
+  #contato .items-stretch { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  #contato .items-stretch :is(a, button) { width: 100%; min-height: 52px; font-size: 12px; padding-inline: 16px; box-shadow: none; }
+  #contato .flex-wrap > a { min-height: 44px; }
+  #contato .justify-between { gap: 12px; }
+  #contato .justify-between > div { min-width: 0; }
+  #contato svg { flex-shrink: 0; }
+
+  footer.border-t {
+    padding: 32px clamp(20px, 5.5vw, 36px);
+    align-items: flex-start;
+    gap: 20px;
+    line-height: 1.8;
+  }
+  footer > div:last-child { width: 100%; justify-content: space-between; }
+  footer :is(a, button) { min-height: 44px; }
+
+  main:has(.fixed.inset-0) { z-index: 100; }
+
+  /* Keep modal content usable above mobile browser controls. */
+  .fixed.inset-0 > .overflow-y-auto {
+    max-height: calc(100dvh - 24px);
+    overscroll-behavior: contain;
+    padding: 20px;
+    border-radius: 24px;
+  }
+}
