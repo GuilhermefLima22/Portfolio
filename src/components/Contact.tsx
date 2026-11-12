@@ -32,7 +32,7 @@ export const Contact: React.FC = () => {
         {/* Left Column: Direct Call to Action */}
         <div className="lg:col-span-7 space-y-6 sm:space-y-8">
           <p className="text-paper/80 text-base sm:text-lg md:text-xl font-sans max-w-xl leading-relaxed">
-            Estou em busca de um <strong>estágio na área de Dados ou Inteligência Artificial</strong>. Se a sua empresa busca alguém dedicado, curioso e que já coloca projetos no ar, meu e-mail e canais estão abertos.
+            Estou em busca de um <strong>estágio na área de Tecnologia da Informação (T.I.)</strong>. Se a sua empresa busca alguém dedicado, curioso e com vontade de aprender e colocar a mão na massa, meus canais estão abertos.
           </p>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">

@@ -36,11 +36,11 @@ export const Hero: React.FC = () => {
         </p>
 
         <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-paper leading-[1.12] sm:leading-[1.05] mb-6 sm:mb-8">
-          Desenvolvedor Backend & Engenharia de IA.
+          Desenvolvendo soluções práticas com tecnologia e software.
         </h1>
 
         <p className="text-sm sm:text-base md:text-xl text-paper/75 font-sans max-w-2xl leading-relaxed mb-8 sm:mb-10">
-          Olá, sou o <strong className="text-paper font-semibold">{personalInfo.name}</strong>. Construo APIs em Python (FastAPI), conecto modelos de linguagem (LLMs) à operação real de empresas e implanto infraestruturas conteinerizadas em Docker.
+          Olá, sou o <strong className="text-paper font-semibold">{personalInfo.name}</strong>. Crio soluções com Python, APIs, automação e lógica de programação, unindo a base sólida de Ciência da Computação no Mackenzie com aplicações práticas.
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">

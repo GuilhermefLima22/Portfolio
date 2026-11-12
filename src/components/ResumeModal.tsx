@@ -83,7 +83,7 @@ export const ResumeModal: React.FC = () => {
             {personalInfo.fullName}
           </h1>
           <p className="font-mono text-xs sm:text-sm text-paper/80 mt-1">
-            Estudante de Ciência da Computação @ Mackenzie | Desenvolvedor Backend & Engenharia de IA (Python, LLMs, APIs)
+            Estudante de Ciência da Computação @ Mackenzie | Buscando Estágio em T.I.
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-5 mt-4 font-mono text-xs text-muted">
@@ -258,7 +258,7 @@ export const ResumeModal: React.FC = () => {
                 <span>Sobre mim & Objetivo</span>
               </div>
               <p className="text-paper/85 text-sm leading-relaxed">
-                Estudo Ciência da Computação no Mackenzie e desenvolvo soluções práticas focadas em <strong>Backend e Engenharia de IA</strong>. Construo APIs REST em Python (FastAPI), conecto modelos de linguagem (Gemini) com memória de contexto e tools de banco de dados, e implanto pipelines conteinerizados com Docker Compose (PostgreSQL e Redis). Busco uma oportunidade de <strong>estágio em Desenvolvimento Backend ou Engenharia de IA</strong> para aprender com o time, colocar a mão na massa e contribuir com código de qualidade.
+                Estudante de Ciência da Computação no Mackenzie em busca de oportunidade de <strong>estágio na área de Tecnologia da Informação (T.I.)</strong>. Perfil dedicado e proativo, com sólida base em lógica de programação, Python, APIs REST, automação de processos, bancos de dados e linguagem C. Facilidade para aprender novas linguagens e ferramentas, trabalhar em equipe e contribuir na resolução prática de problemas e demandas do dia a dia da empresa.
               </p>
             </section>
 
